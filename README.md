@@ -58,4 +58,4 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 |__package-lock.json
 |__package.json
 |__README.md
-|__vue.config.js
+|__vue.config.js(配置代理)
