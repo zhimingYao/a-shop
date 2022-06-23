@@ -8,7 +8,7 @@ const routes = [
   //   // path: '/',
   //   // redirect: '/home',
   // },
-   {
+  {
     path: '/about',
     name: 'About',
     component: () => import('../components/botNav/about'),
@@ -40,7 +40,7 @@ const routes = [
     path: '/world',
     name: 'World',
     component: () => import('../components/botNav/world'),
-  }, 
+  },
 ];
 
 const router = new VueRouter({

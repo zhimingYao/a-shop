@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <nav-bar></nav-bar>
     <router-view></router-view>
     <bot-nav></bot-nav>
   </div>
@@ -7,10 +8,12 @@
 
 <script>
 import BotNav from '@/components/botNav/index.vue'
+import NavBar from './components/NavBar/NavBar.vue'
 export default{
   components:{
     BotNav,
-  }
+    NavBar
+}
 }
 </script>
 

@@ -41,7 +41,7 @@ export default {
   width: 100%;
   padding-top: 90px;
   .content {
-    width: 1263px;
+
     height: 60px;
     background-color: #848484;
     margin: 0 auto;
