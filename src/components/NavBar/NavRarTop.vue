@@ -6,14 +6,28 @@
         <li>
           <router-link to="/shoplist">服饰</router-link>
         </li>
-        <li><router-link to="/shoplist">鞋类</router-link></li>
-        <li><router-link to="/shoplist">配件</router-link></li>
-        <li><router-link to="/shoplist">儿童专区</router-link></li>
-
-        <li><router-link to="/shoplist">POP</router-link></li>
-        <li><router-link to="/shoplist">EXCLUSIVE</router-link></li>
-        <li><router-link to="/shoplist">EVENT</router-link></li>
-        <li><router-link to="/shoplist">BEST</router-link></li>
+        <li>
+          <router-link to="/shoplist">鞋类</router-link>
+        </li>
+        <li>
+          <router-link to="/shoplist">配件</router-link>
+        </li>
+        <li>
+          <router-link to="/shoplist">儿童专区</router-link>
+        </li>
+        <li></li>
+        <li>
+          <router-link to="/shoplist">POP</router-link>
+        </li>
+        <li>
+          <router-link to="/shoplist">EXCLUSIVE</router-link>
+        </li>
+        <li>
+          <router-link to="/shoplist">EVENT</router-link>
+        </li>
+        <li>
+          <router-link to="/shoplist">BEST</router-link>
+        </li>
       </ul>
       <ul class="member" v-show="isShow">
         <li>
@@ -48,7 +62,7 @@ export default {
     let H = h + p + pb;
     window.addEventListener("scroll", () => {
       console.log(H);
-      if (scrollY > H-10) {
+      if (scrollY > H - 10) {
         this.isFixed = true;
         this.isShow = true
       } else {
@@ -67,6 +81,11 @@ a {
 
 li {
   display: inline-block;
+
+  a {
+    font-size: 14px;
+  }
+
 }
 
 nav {
@@ -74,11 +93,13 @@ nav {
   margin: 0;
   padding: 0;
   z-index: 999;
+  min-width: 1500px;
 
   .nav {
     width: 100%;
     height: 60px;
     background-color: black;
+    min-width: 1500px;
 
     .img {
       width: 96px;
@@ -103,7 +124,7 @@ nav {
       }
 
       li:hover a {
-        color: rgb(0, 255, 0);
+        color: rgb(70, 163, 129);
       }
     }
 

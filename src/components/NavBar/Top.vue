@@ -19,8 +19,8 @@
       </div>
       <div class="top3">
         <div id="top3">
-          <img src="../../assets/image/join.png" alt="" class="img1" @click="">
-          <img src="../../assets/image/login.png" alt="" @click="$router.push">
+          <img src="../../assets/image/join.png" alt="" class="img1" @click="$router.push('/register')">
+          <img src="../../assets/image/login.png" alt="" @click="$router.push('/login')">
           <img src="../../assets/image/shopCar.png" alt="">
         </div>
       </div>

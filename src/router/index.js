@@ -4,10 +4,31 @@ import VueRouter from "vue-router";
 Vue.use(VueRouter);
 
 const routes = [
-  // {
-  //   // path: '/',
-  //   // redirect: '/home',
-  // },
+  {
+
+    path: '/',
+    redirect: '/home'
+  },
+  {
+    path: '/home',
+    name: 'HOME',
+    component: () => import('@/views/Home.vue')
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: () => import('@/views/login/index.vue'),
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    component: () => import('@/views/register/index.vue'),
+  },
+  {
+    path: '/changePassword',
+    name: 'CPD',
+    component: () => import('../views/login/Forgotpassword/idnex.vue')
+  },
   {
     path: '/about',
     name: 'About',
@@ -42,6 +63,7 @@ const routes = [
     component: () => import('../components/botNav/world'),
   },
 ];
+
 
 const router = new VueRouter({
   routes,

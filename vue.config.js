@@ -1,5 +1,17 @@
-const { defineConfig } = require('@vue/cli-service');
-module.exports = defineConfig({
+
+module.exports ={
   transpileDependencies: true,
-  lintOnSave: false // 修改成false 就是不检查了
-});
+  lintOnSave:false,
+  devServer:{
+    proxy:{
+      '^/':{
+         target:'http://192.168.205.165:3000',
+         changeOrigin:true,
+         ws:false,
+         pathRewrite:{
+           '^/':''
+         }
+      }
+    }
+  }
+}
