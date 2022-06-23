@@ -27,11 +27,15 @@
         <router-link to="/world">全球的</router-link>
       </div>
     </div>
+    <btn-nav></btn-nav>
   </div>
 </template>
 
 <script>
+import BtnNav from './BtnNav.vue';
+
 export default {
+  components: { BtnNav },
   name: "BotNav",
 };
 </script>
