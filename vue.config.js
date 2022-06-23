@@ -1,4 +1,15 @@
-const { defineConfig } = require('@vue/cli-service')
-module.exports = defineConfig({
-  transpileDependencies: true
-})
+module.exports ={
+  transpileDependencies: true,
+  lintOnSave:false,
+  devServer:{
+    proxy:{
+      '^/':{
+         target:'http://192.168.205.165:3000',
+         changeOrigin:true,
+         pathRewrite:{
+           '^/':''
+         }
+      }
+    }
+  }
+}
