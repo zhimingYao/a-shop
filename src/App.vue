@@ -1,8 +1,18 @@
 <template>
   <div id="app">
     <router-view></router-view>
+    <bot-nav></bot-nav>
   </div>
 </template>
+
+<script>
+import BotNav from '@/components/botNav/index.vue'
+export default{
+  components:{
+    BotNav,
+  }
+}
+</script>
 
 <style lang="scss">
 #app {
