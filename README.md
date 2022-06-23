@@ -59,3 +59,5 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 |__package.json
 |__README.md
 |__vue.config.js(配置代理)
+
+合并测试
