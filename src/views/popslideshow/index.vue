@@ -23,8 +23,12 @@
       </figure>
     </div>
     <el-row>
-      <el-col :span="12" class="el-col-left"><div class="grid-content" @click="popright"></div></el-col>
-      <el-col :span="12" class="el-col-rigth"><div class="grid-content" @click="popleft"></div></el-col>
+      <el-col :span="12" class="el-col-left">
+        <div class="grid-content" @click="popright"></div>
+      </el-col>
+      <el-col :span="12" class="el-col-rigth">
+        <div class="grid-content" @click="popleft"></div>
+      </el-col>
     </el-row>
   </section>
 </template>
@@ -122,19 +126,26 @@ img {
   transition: transform 1.5s ease-in-out;
 }
 
-article {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
+// article {
+//   position: absolute;
+//   top: 50%;
+//   left: 50%;
+//   transform: translate(-50%, -50%);
+// }
 
 .el-col-left,
 .el-col-rigth {
+  position: absolute;
+  top: 0;
   width: 50%;
 }
+.el-col-left{
+  left:0;
+}
+.el-col-rigth{
+  right:0;
+}
 .grid-content {
-  min-height: 36px;
-  height: 100vh;
+  min-height: 591px;
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <nav ref="nav">
     <div class="nav" :class="{ navFixed: isFixed }">
-      <img class="img" src="" alt="图片logo" v-show="isShow" />
+      <img class="img" src alt="图片logo" v-show="isShow" />
       <ul class="classify">
         <li>
           <router-link to="/popslideshow">服饰</router-link>
@@ -31,7 +31,7 @@
       </ul>
       <ul class="member" v-show="isShow">
         <li>
-          <a href="">搜索</a>
+          <a href>搜索</a>
         </li>
         <li>
           <a>MY</a>
@@ -92,7 +92,7 @@ nav {
   padding: 0;
   z-index: 999;
   min-width: 1500px;
-
+height: 60;
   .nav {
     width: 100%;
     height: 60px;
