@@ -48,7 +48,7 @@ export default {
       var scrollHeight = document.documentElement.scrollHeight;
       // var badyHeiget = document.bady.scrollHeight
 
-      console.log(clientHeight);
+      // console.log(clientHeight);
       var height = scrollHeight - clientHeight; //超出窗口上界的值就是底部的scrolTop的值
       document.documentElement.scrollTop += i;
       if (document.documentElement.scrollTop < height) {

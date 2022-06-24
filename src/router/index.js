@@ -12,7 +12,7 @@ const routes = [
   {
     path: '/home',
     name: 'HOME',
-    component: () => import('@/views/Home.vue')
+    component: () => import('@/views/home/Home.vue')
   },
   {
     path: '/login',
@@ -29,6 +29,7 @@ const routes = [
     name: 'CPD',
     component: () => import('../views/login/Forgotpassword/idnex.vue')
   },
+  //底部路由跳转
   {
     path: '/about',
     name: 'About',
@@ -62,6 +63,7 @@ const routes = [
     name: 'World',
     component: () => import('../components/botNav/world'),
   },
+  // 底部路由跳转结束
 ];
 
 

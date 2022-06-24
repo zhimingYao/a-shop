@@ -1,5 +1,5 @@
 <template>
-  <nav ref="nav">
+  <nav ref="nav" >
     <div class="nav" :class="{ navFixed: isFixed }">
       <img class="img" src="" alt="图片logo" v-show="isShow">
       <ul class="classify">
@@ -94,7 +94,7 @@ nav {
   padding: 0;
   z-index: 999;
   min-width: 1500px;
-
+  height: 60px;
   .nav {
     width: 100%;
     height: 60px;

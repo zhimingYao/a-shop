@@ -2,10 +2,7 @@
 <div class="tops">
   <div class="top">
     <div class="top1">
-      <span>S</span>
-        <span class="trl"></span><em></em>
-        <span>K</span>
-        <span>R</span>
+      <img src="../../assets/image/toplogo.png" alt="" srcset="" @click="$router.push('/home')">
       </div>
       <div class="top2">
         <div class="site-search">
@@ -40,14 +37,15 @@ export default {
 .tops{
   background-color: #fff(230, 230, 235);
   width: 100%px;
-  height: 60px;
+  height: 65px;
   margin: 0 auto;
-  line-height: 60px;
+  line-height: 65px;
   .top{
-    width:1200px ;
+    width:1500px ;
     margin: 0 auto;
     .top1{
   float: left;
+  cursor: pointer;
 }
 .trl{
   position: relative;
@@ -60,7 +58,7 @@ export default {
     }
   span{
     font-weight: 750;
-    font-size: 20px;
+    font-size: 25px;
     
   }
   } 
@@ -68,7 +66,7 @@ export default {
     margin: 0 auto;
     .site-search{
     	margin: 0 auto;
-    	width:250px;
+    	width:300px;
       height: 60px;
       line-height: 60px;
 }
@@ -76,29 +74,31 @@ export default {
 	position:relative;
 }
 #search input{
-  height: 27px;
-  width: 220px;
+  height: 32px;
+  width: 300px;
 	padding-right:30px;
+  outline: none;
+  background-color: rgba(32, 74, 102, 0);
+ 
+        
+
 }
 .ipt{
-  
-  height: 43px;
-  width: 250px;
+  height: 46px;
+  width: 328px;
   border-bottom: 2px solid #000;
 }
 img{
+  cursor: pointer;
   position: relative;
   top: -38px;
-  width: 24px;
-  height: 24px;
-  margin-left: 222px;
-}
-#search button{
-	direction:ltr;
-	text-indent:-9999em;
+  width: 28px;
+  height: 28px;
+  margin-left: 300px;
 }
   }
   .top3{
+    cursor: pointer;
     float: right;
     width: 200px;
     img{
@@ -107,14 +107,24 @@ img{
       position: relative;
       top: -49px;
     }
+    p{
+      position: relative;
+      top: -116px;
+      padding-left: 78%;
+    }
     .img1{
       margin-right: 25px;
+    }
+    .img3{
+      width: 25px;
+      height: 24px;
+      position: relative;
+      right: -30px;
+      top: -65px;
     }
     #tops{
       float: left;
     }
   }
 }
-
-
 </style>
