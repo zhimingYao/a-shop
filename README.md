@@ -68,3 +68,5 @@ shopitem 全局组件
  width 宽 
  pshop:是否显示p标签
  shop 传入的数据
+
+11111

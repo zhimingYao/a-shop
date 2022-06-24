@@ -12,7 +12,6 @@
             </span>
             <span>
                 <img src="../../assets/image/sign1.png" alt="">
-
             </span>
         </div>
         <div>

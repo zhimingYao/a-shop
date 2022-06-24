@@ -5,8 +5,8 @@ Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/",
-    redirect: "/home",
+    path: '/',
+    redirect: '/home'
   },
   {
     path: '/home',
@@ -80,6 +80,12 @@ const routes = [
     component: () => import("../components/botNav/world"),
   },
   /**底部导航结束 botNav**/
+    // best
+    {
+    path: '/best',
+    name: 'Best',
+    component: () => import('../views/best/best.vue'),
+  },
 ];
 
 const router = new VueRouter({
