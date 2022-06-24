@@ -60,20 +60,22 @@ export default {
 
 <style lang="scss" scoped>
 img {
-  width: 122%;
-  height: 101%;
+  width: 105%;
+  height: 100%;
 }
 .cube-container {
-  height: 69vh;
+ width: 100vw;
+  height: 80vh;
   position: relative;
   perspective: 2000px;
   // background: rgb(247, 241, 241);
   background: #222;
+  overflow: hidden;
 }
 
 #cube {
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   position: absolute;
   transform-style: preserve-3d;
   z-index: -200;
@@ -81,24 +83,16 @@ img {
 
 #cube figure {
   margin: 0;
-  width: 100vw;
+  width: 80vw;
   height: 82vh;
   display: flex;
   position: absolute;
   color: white;
-  .col-md-4 {
-    color: #222;
-    .htmleaf-header {
-      h1 {
-        font-size: 30px;
-        letter-spacing: 30px;
-      }
-      p {
-        font-size: 16px;
-        letter-spacing: 20px;
-      }
-    }
-  }
+  min-width: 1500px;
+ .col-md-8{
+  width: 100%;
+  height: 100%;
+ }
 }
 
 #cube .front {
@@ -113,12 +107,7 @@ img {
 #cube .left {
   transform: rotateY(-90deg) translateZ(50vw);
 }
-#cube .top {
-  transform: rotateX(90deg) translateZ(50vw);
-}
-#cube .bottom {
-  transform: rotateX(-90deg) translateZ(50vw);
-}
+
 #cube {
   transform: translateZ(-50vw);
 }
@@ -146,6 +135,6 @@ img {
   right:0;
 }
 .grid-content {
-  min-height: 591px;
+  min-height: 100vh;
 }
 </style>
