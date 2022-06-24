@@ -1,3 +1,4 @@
+<!-- 招聘信息 -->
 <template>
   <div class="recruitment">
     recruitment

@@ -1,3 +1,4 @@
+<!-- 全球的 -->
 <template>
   <div class="world">
     world
