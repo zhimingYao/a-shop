@@ -1,9 +1,24 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+ <Top></Top>
+ <Lunbo></Lunbo>
+ <router-view></router-view> 
+    
   </div>
 </template>
-
+<script>
+// 导入顶部
+import Top from '@/views/Top.vue'
+import Lunbo from '@/components/Lunbo.vue'
+// 导出App
+export default {
+  name: "App",
+  components:{
+    Top,
+    Lunbo,
+  }
+};
+</script>
 <style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
