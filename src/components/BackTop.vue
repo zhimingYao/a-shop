@@ -1,10 +1,10 @@
 <template>
   <div class="backtop">
     <div class="scroll">
-      <div id="shopCar" >
+      <div id="shopCar" @click="drawer = true" type="primary">
         <img src="../assets/image/购物车.png" alt />
       </div>
-      <div id="service" >
+      <div id="service" @click="service = true" type="primary">
         <img src="../assets/image/客服优先.png" alt />
       </div>
       <div id="toTop" v-if="isToTop" @click="toTop(step)">
@@ -14,11 +14,18 @@
         <img src="../assets/image/方向-向下.png" alt />
       </div>
     </div>
+    <!-- 购物车 -->
+    <el-drawer title="我是标题" :visible.sync="drawer" :with-header="false" size="20%">
+      <span> 我是购物车我来啦!</span>
+    </el-drawer>
+    <el-drawer title="我是标题" :visible.sync="service" :with-header="false" size="20%">
+      <span> 我是客服我来啦!</span>
+    </el-drawer>
   </div>
 </template>
 <script>
 export default {
-  name:'BackTop',
+  name: 'BackTop',
   props: {
     step: {
       //此数据是控制动画快慢的
@@ -30,7 +37,9 @@ export default {
     return {
       // 向上向下
       isToTop: true,
-      isToBottom: true
+      isToBottom: true,
+      drawer: false, // 购物车
+      service: false //客服
     };
   },
   methods: {
@@ -80,7 +89,6 @@ export default {
 };
 </script>
 <style scoped lang="scss">
-
 .scroll {
   position: fixed;
   right: 20px;
