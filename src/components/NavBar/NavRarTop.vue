@@ -1,10 +1,10 @@
 <template>
   <nav ref="nav" >
     <div class="nav" :class="{ navFixed: isFixed }">
-      <img class="img" src="" alt="图片logo" v-show="isShow">
+      <img class="img" src alt="图片logo" v-show="isShow" />
       <ul class="classify">
         <li>
-          <router-link to="/shoplist">服饰</router-link>
+          <router-link to="/popslideshow">服饰</router-link>
         </li>
         <li>
           <router-link to="/shoplist">鞋类</router-link>
@@ -17,7 +17,7 @@
         </li>
         <li></li>
         <li>
-          <router-link to="/shoplist">POP</router-link>
+          <router-link to="/popslideshow">POP</router-link>
         </li>
         <li>
           <router-link to="/shoplist">EXCLUSIVE</router-link>
@@ -31,7 +31,7 @@
       </ul>
       <ul class="member" v-show="isShow">
         <li>
-          <a href="">搜索</a>
+          <a href>搜索</a>
         </li>
         <li>
           <a>MY</a>
@@ -42,35 +42,34 @@
       </ul>
     </div>
   </nav>
-
 </template>
 
 <script>
 export default {
-  name: "NavBarTop",
+  name: 'NavBarTop',
   data() {
     return {
       isShow: false,
       isFixed: false
-    }
+    };
   },
   mounted() {
-    let navTopDom = this.$refs["nav"];
-    let h = parseFloat(getComputedStyle(navTopDom)["height"]);
-    let p = parseFloat(getComputedStyle(navTopDom)["paddingTop"]);
-    let pb = parseFloat(getComputedStyle(navTopDom)["paddingBottom"]);
+    let navTopDom = this.$refs['nav'];
+    let h = parseFloat(getComputedStyle(navTopDom)['height']);
+    let p = parseFloat(getComputedStyle(navTopDom)['paddingTop']);
+    let pb = parseFloat(getComputedStyle(navTopDom)['paddingBottom']);
     let H = h + p + pb;
     window.addEventListener("scroll", () => {
       // console.log(H);
       if (scrollY > H - 10) {
         this.isFixed = true;
-        this.isShow = true
+        this.isShow = true;
       } else {
         this.isFixed = false;
-        this.isShow = false
+        this.isShow = false;
       }
     });
-  },
+  }
 };
 </script>
 
@@ -85,7 +84,6 @@ li {
   a {
     font-size: 14px;
   }
-
 }
 
 nav {
@@ -147,10 +145,8 @@ nav {
 
       li:hover {
         background-color: #999;
-
       }
     }
-
   }
 }
 
@@ -159,6 +155,6 @@ nav {
   top: 0;
   width: 100% !important;
   z-index: 10;
-  animation: backtop .5s;
+  animation: backtop 0.5s;
 }
 </style>

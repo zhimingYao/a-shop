@@ -1,5 +1,5 @@
-import Vue from "vue";
-import VueRouter from "vue-router";
+import Vue from 'vue';
+import VueRouter from 'vue-router';
 
 Vue.use(VueRouter);
 
@@ -14,15 +14,16 @@ const routes = [
     component: () => import('@/views/home/Home.vue')
   },
   {
-    path: "/login",
-    name: "Login",
-    component: () => import("@/views/login/index.vue"),
+    path: '/login',
+    name: 'Login',
+    component: () => import('@/views/login/index.vue')
   },
   {
-    path: "/register",
-    name: "Register",
-    component: () => import("@/views/register/index.vue"),
+    path: '/register',
+    name: 'Register',
+    component: () => import('@/views/register/index.vue')
   },
+  /* 底部导航栏nav跳转 */
   {
     path: "/changePassword",
     name: "CPD",
@@ -86,10 +87,17 @@ const routes = [
     name: 'Best',
     component: () => import('../views/best/best.vue'),
   },
+  /* 跳转结束 */
+  /* 点击头部导航栏跳转 */
+  {
+    path: '/popslideshow',
+    name: 'Popslideshow',
+    component: () => import('@/views/popslideshow/index')
+  }
 ];
 
 const router = new VueRouter({
-  routes,
+  routes
 });
 
 export default router;
