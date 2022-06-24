@@ -19,7 +19,7 @@
         <div id="top3">
           <img src="../../assets/image/join.png" alt="" class="img1" @click="$router.push('/register')" />
           <img src="../../assets/image/login.png" alt="" @click="$router.push('/login')" />
-          <img src="../../assets/image/shopCar.png" alt="" />
+          <img src="../../assets/image/shopCar.png" alt="" @click="$router.push('/shopCar')" />
         </div>
       </div>
     </div>

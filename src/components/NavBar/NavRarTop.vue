@@ -4,7 +4,7 @@
       <img class="img" src alt="图片logo" v-show="isShow" />
       <ul class="classify">
         <li>
-          <router-link to="/popslideshow">服饰</router-link>
+          <router-link to="/">服饰</router-link>
         </li>
         <li>
           <router-link to="/shoplist">鞋类</router-link>
@@ -37,7 +37,7 @@
           <a>MY</a>
         </li>
         <li>
-          <a>购物车</a>
+          <router-link to="/shopCar">购物车</router-link>
         </li>
       </ul>
     </div>

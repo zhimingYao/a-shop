@@ -23,11 +23,16 @@ const routes = [
     name: 'Register',
     component: () => import('@/views/register/index.vue')
   },
-  /* 底部导航栏nav跳转 */
+  /* 更改密码 */
   {
-    path: "/changePassword",
-    name: "CPD",
-    component: () => import("../views/login/Forgotpassword/idnex.vue"),
+    path: '/changePassword',
+    name: 'CPD',
+    component: () => import('../views/login/Forgotpassword/idnex.vue')
+  }, 
+  {
+    path: '/shopCar',
+    name:'ShopCar',
+    component: () => import('../views/shopcar/index.vue')
   },
   /**底部导航 botNav**/
   {
