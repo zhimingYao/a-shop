@@ -5,7 +5,6 @@ Vue.use(VueRouter);
 
 const routes = [
   {
-
     path: '/',
     redirect: '/home'
   },
@@ -61,6 +60,12 @@ const routes = [
     path: '/world',
     name: 'World',
     component: () => import('../components/botNav/world'),
+  },
+  {
+    // best
+    path: '/best',
+    name: 'Best',
+    component: () => import('../views/best/best.vue'),
   },
 ];
 

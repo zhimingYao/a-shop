@@ -64,7 +64,7 @@ export default {
       let h = document.body.scrollHeight;
       let H = document.documentElement.scrollTop;
       let height = document.documentElement.clientHeight || document.body.clientHeight;
-      console.log(h, H, H + height);
+      // console.log(h, H, H + height);
       if (H < 60) {
         vm.isToTop = false;
         vm.isToBottom = true;

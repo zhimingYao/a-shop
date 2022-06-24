@@ -26,7 +26,7 @@
           <router-link to="/shoplist">EVENT</router-link>
         </li>
         <li>
-          <router-link to="/shoplist">BEST</router-link>
+          <router-link to="/best">BEST</router-link>
         </li>
       </ul>
       <ul class="member" v-show="isShow">
@@ -61,7 +61,7 @@ export default {
     let pb = parseFloat(getComputedStyle(navTopDom)["paddingBottom"]);
     let H = h + p + pb;
     window.addEventListener("scroll", () => {
-      console.log(H);
+      // console.log(H);
       if (scrollY > H - 10) {
         this.isFixed = true;
         this.isShow = true

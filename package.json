@@ -29,5 +29,13 @@
     "sass": "^1.32.7",
     "sass-loader": "^12.0.0",
     "vue-template-compiler": "^2.6.14"
-  }
+  },
+  "description": "```\r npm install\r ```",
+  "main": ".eslintrc.js",
+  "repository": {
+    "type": "git",
+    "url": "https://codeup.aliyun.com/62947ccc11fc0f0c9e2a2351/skr.git"
+  },
+  "author": "",
+  "license": "ISC"
 }
