@@ -126,10 +126,46 @@
     </div>
     <div class="ministry-problem">
       <div class="problem-left">
-        <div class="left-title">十大常见问题</div>
-        <span>+</span>
+        <div class="problem-left-top">
+          <div class="left-title">十大常见问题</div>
+          <span>+</span>
+        </div>
+        <div>
+          <p>Q1 [开具证明文件]如何申请开具现金收据？</p>
+          <p>Q1 [开具证明文件]如何申请开具现金收据？</p>
+          <p>Q1 [开具证明文件]如何申请开具现金收据？</p>
+          <p>Q1 [开具证明文件]如何申请开具现金收据？</p>
+          <p>Q1 [开具证明文件]如何申请开具现金收据？</p>
+          <p>Q1 [开具证明文件]如何申请开具现金收据？</p>
+          <p>Q1 [开具证明文件]如何申请开具现金收据？</p>
+          <p>Q1 [开具证明文件]如何申请开具现金收据？</p>
+        </div>
       </div>
-      <div class="problem-right"></div>
+      <div class="problem-right">
+        <div class="problem-right1">
+          <div class="problem-left-top">
+            <div class="left-title">活动获奖者公告</div>
+            <span>+</span>
+          </div>
+          <div>
+            <p>Q1 [开具证明文件]如何申请开具现金收据？</p>
+            <p>Q1 [开具证明文件]如何申请开具现金收据？</p>
+            <p>Q1 [开具证明文件]如何申请开具现金收据？</p>
+            <p>Q1 [开具证明文件]如何申请开具现金收据？</p>
+          </div>
+        </div>
+        <div class="problem-right2">
+          <div class="problem-left-top">
+            <div class="left-title">消息</div>
+            <span>+</span>
+          </div>
+          <div>
+            <p>Q1 [开具证明文件]如何申请开具现金收据？</p>
+            <p>Q1 [开具证明文件]如何申请开具现金收据？</p>
+            <p>Q1 [开具证明文件]如何申请开具现金收据？</p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -260,6 +296,7 @@ export default {
         margin: 0;
         padding: 0;
         font-size: 18px;
+        border: none !important;
       }
       .tel {
         text-align: center;
@@ -268,6 +305,7 @@ export default {
         padding: 0;
         font-size: 40px;
         color: #f2f2f2;
+        border: none !important;
       }
       .timer {
         text-align: center;
@@ -276,6 +314,7 @@ export default {
         margin: 0;
         padding: 0;
         font-size: 12px;
+        border: none !important;
       }
     }
   }
@@ -390,34 +429,48 @@ export default {
       width: 561px;
       height: 405px;
       padding: 10px;
-      display: flex;
-      justify-content: space-between;
-      .left-title {
-        width: 100%;
-        height: 65px;
-        text-align: left;
-        line-height: 65px;
-        box-sizing: border-box;
-        color: rgba(0, 0, 0, 0.85);
-        font-weight: 500;
-        margin: 0;
-        padding: 0;
-        font-size: 26px;
-        border-bottom: 1px solid #000;
-      }
-      span {
-        height: 65px;
-        line-height: 65px;
-        font-size: 26px;
-        text-align: right;
-        margin-right: -30px;
-      }
     }
     .problem-right {
       width: 561px;
       height: 430px;
       padding: 10px;
+      .problem-right1 {
+      }
     }
   }
+}
+.problem-left-top {
+  display: flex;
+  justify-content: space-between;
+  .left-title {
+    width: 100%;
+    height: 65px;
+    text-align: left;
+    line-height: 65px;
+    box-sizing: border-box;
+    color: rgba(0, 0, 0, 0.85);
+    font-weight: 500;
+    margin: 0;
+    padding: 0;
+    font-size: 26px;
+    border-bottom: 1px solid #000;
+  }
+  span {
+    height: 64px;
+    line-height: 65px;
+    font-size: 26px;
+    text-align: right;
+    margin-right: 30px;
+    border-bottom: 1px solid #000;
+  }
+}
+p {
+  display: block;
+  height: 40px;
+  line-height: 40px;
+  font-size: 14px;
+  border-bottom: 1px solid #ececec;
+  text-align: left;
+  color: #2c3e50;
 }
 </style>
