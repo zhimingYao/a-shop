@@ -9,7 +9,7 @@
         <div class="tabitem">
           <ul>
             <li v-for="(item, index) in sort" :key="index">
-              <!-- <span v-for="(items, index) in item" :key="index">{{ items }}</span> -->
+              <!-- <span v-for="(items, index) in item" :key="index">{{ items }}</span>  -->
             </li>
           </ul>
         </div>

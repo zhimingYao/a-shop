@@ -42,7 +42,7 @@
                 </el-form>
             </div>
             <div class="sinupbutton">
-                <button>取消</button><button>注册</button>
+                <button>取消</button><button @click="register">注册</button>
             </div>
 
         </div>
@@ -52,6 +52,7 @@
 </template>
 
 <script>
+import {getregister} from '@/api/register.js'
 export default {
     name: 'Register',
     data() {
@@ -62,7 +63,7 @@ export default {
             if (value) {
 
 
-                return callback(new Error('该用户名已经被注册'))
+                return callback()
 
             }
 
@@ -71,9 +72,9 @@ export default {
             if (value === '') {
                 callback(new Error('请输入密码'))
             } else {
-                if (this.ruleForm.checkPass !== '') {
+               /*  if (this.ruleForm.checkPass !== '') {
                     this.$refs.ruleForm.validateField('checkPass')
-                }
+                } */
                 callback()
             }
         }
@@ -136,7 +137,25 @@ export default {
         }
     },
     methods: {
-
+          register(){
+              let username=this.ruleForm.username
+              let password=this.ruleForm.password
+              let email=this.ruleForm.email
+              let data={
+                  username,
+                  password,
+                  email,
+              }
+              getregister(data).then(data=>{
+                  console.log(data)
+                  if(data.code==200){
+                      this.$router.push('/login')
+                      return this.$message.success('用户注册成功')
+                  }else{
+                      return this.$message.error('用户注册失败')
+                  }
+              })
+          }
     }
 }
 </script>

@@ -20,10 +20,10 @@
           <router-link to="/popslideshow">POP</router-link>
         </li>
         <li>
-          <router-link to="/shoplist">EXCLUSIVE</router-link>
+          <router-link to="/exclusive">EXCLUSIVE</router-link>
         </li>
         <li>
-          <router-link to="/shoplist">EVENT</router-link>
+          <router-link to="/event">EVENT</router-link>
         </li>
         <li>
           <router-link to="/best">BEST</router-link>

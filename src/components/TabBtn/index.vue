@@ -68,6 +68,6 @@ button {
     position: absolute;
     left: 0;
     bottom: -2px;
-  }
+  }  
 }
 </style>
