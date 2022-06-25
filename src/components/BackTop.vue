@@ -85,7 +85,7 @@ export default {
       isToTop: true,
       isToBottom: true,
       drawer: false, // 购物车
-      service: true, //客服
+      service: false, //客服
       shopCarList: [],
       carCount: 0,
       textarea: ''

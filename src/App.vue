@@ -7,18 +7,17 @@
   </div>
 </template>
 
-
 <script>
-import BotNav from '@/components/botNav/index.vue'
-import NavBar from './components/NavBar/NavBar.vue'
-import BackTop from './components/BackTop.vue'
-export default{
-  components:{
+import BotNav from '@/components/botNav/index.vue';
+import NavBar from './components/NavBar/NavBar.vue';
+import BackTop from './components/BackTop.vue';
+export default {
+  components: {
     BotNav,
     NavBar,
     BackTop
-}
-}
+  }
+};
 </script>
 
 <style lang="scss">
