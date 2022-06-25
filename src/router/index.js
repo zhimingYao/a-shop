@@ -86,6 +86,7 @@ const routes = [
     component: () => import("../components/botNav/world"),
   },
   /**底部导航结束 botNav**/
+<<<<<<< HEAD
     // best
     {
     path: '/best',
@@ -99,6 +100,8 @@ const routes = [
     name: 'Popslideshow',
     component: () => import('@/views/popslideshow/index')
   }
+=======
+>>>>>>> ee7ddddfcaf4dce2a9979097593f21cf2a269a38
 ];
 
 const router = new VueRouter({
