@@ -1,0 +1,87 @@
+<template>
+  <div class="tab-btn">
+    <ul>
+      <li v-for="(item, index) in tabData" :key="index">
+        <button :class="{ select: index == selected }" 
+        @click="select(item,index)">
+          {{ item }}
+        </button>
+      </li>
+    </ul>
+  </div>
+</template>
+<script>
+import { getParentName } from "@/api/shop.js";
+export default {
+  name: "TabBtn",
+  data() {
+    return {
+      tabData: ["服饰", "鞋类", "配件", "儿童专区"],
+      selected: 0,
+    };
+  },
+  created() {
+    this.getParentName();
+    this.tabData.unshift("All");
+  },
+  methods: {
+    select(item,index){
+      this.selected = index;
+      if (item =="All") {
+        item = "全部";
+      }
+      this.$emit("getShopList",item)
+    },
+    getParentName(){
+      getParentName().then((res)=>{
+        console.log(res);
+        this.tabData = res.data.data
+        this.tabData.unshift("All");
+      })
+    }
+  },
+};
+</script>
+
+<style lang="scss" scoped>
+* {
+  padding: 0;
+  margin: 0 auto;
+}
+.tab-btn {
+  width: 100%;
+  height: 60px;
+  background-color: #ccc;
+}
+ul {
+  padding: 0;
+  margin: 0 auto;
+  display: flex;
+  border-bottom: 1px solid #000;
+}
+li {
+  width: 20%;
+}
+button {
+  width: 100%;
+  height: 60px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  font-size: 18px;
+  font-weight: 800;
+  cursor: pointer;
+  position: relative;
+}
+.select {
+  border: 1px solid #000;
+  &::before {
+    content: "";
+    width: 100%;
+    height: 2px;
+    background-color: #fff;
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+  }
+}
+</style>

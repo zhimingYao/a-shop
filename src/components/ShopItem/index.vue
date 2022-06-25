@@ -1,0 +1,76 @@
+<template>
+  <div class="shop_item" :style="{ width: width, height: height }">
+    <div class="shop_img">
+      <img :src="shop.img" alt="" />
+    </div>
+    <div class="shop_item_details">
+      <div class="shop_title">{{ shop.title }}</div>
+      <div v-show="!pshow" class="shop_price">{{ shop.price }}</div>
+      <p v-show="pshow">www.stride.fun</p>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "ShopItem",
+  props: {
+    //渲染数据
+    shop: Object,
+    //是否显示p标签
+    pshow: {
+      type: Boolean,
+      default: false,
+    },
+    //宽度
+    width: String,
+    //高度
+    height: String,
+    //
+    interval: Number,
+    priceshow:Boolean,
+  },
+  data() {
+    return {};
+  },
+};
+</script>
+
+<style lang="scss" scoped>
+.shop_item {
+  margin: 4px;
+  width: 176px;
+  height: 280px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  cursor: pointer;
+  float: left;
+  &:hover {
+    transform: scale(1.25);
+    box-shadow: 0 0 4px 4px #eee;
+  }
+  img {
+    width: 80%;
+    height: 60%;
+  }
+  .shop_item_details {
+    padding: 24px;
+    text-align: center;
+    .shop_title {
+      color: #333;
+      margin-bottom: 8px;
+      line-height: 1.5;
+      list-style: none;
+      white-space: wrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+    .shop_price {
+      color: #666;
+      font-family: "yg740";
+      font-size: 12px;
+      word-break: keep-all;
+    }
+  }
+}
+</style>
