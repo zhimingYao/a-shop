@@ -37,7 +37,7 @@
           <a>MY</a>
         </li>
         <li>
-          <a>购物车</a>
+          <router-link to="/shopCar">购物车</router-link>
         </li>
       </ul>
     </div>
@@ -60,7 +60,7 @@ export default {
     let pb = parseFloat(getComputedStyle(navTopDom)['paddingBottom']);
     let H = h + p + pb;
     window.addEventListener('scroll', () => {
-      console.log(H);
+      // console.log(H);
       if (scrollY > H - 10) {
         this.isFixed = true;
         this.isShow = true;
@@ -92,7 +92,7 @@ nav {
   padding: 0;
   z-index: 999;
   min-width: 1500px;
-height: 60;
+  height: 60;
   .nav {
     width: 100%;
     height: 60px;

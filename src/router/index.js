@@ -30,6 +30,11 @@ const routes = [
     component: () => import('../views/login/Forgotpassword/idnex.vue')
   },
   {
+    path: '/shopCar',
+    name: 'ShopCar',
+    component: () => import('../views/shopcar/index.vue')
+  },
+  {
     path: '/about',
     name: 'About',
     component: () => import('../components/botNav/about')

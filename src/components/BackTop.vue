@@ -1,7 +1,7 @@
 <template>
   <div class="backtop">
     <div class="scroll">
-      <div id="shopCar" @click="drawer = true" type="primary">
+      <div id="carList" @click="drawer = true" type="primary">
         <img src="../assets/image/购物车.png" alt />
       </div>
       <div id="service" @click="service = true" type="primary">
@@ -23,22 +23,25 @@
 
         <div class="drawercontent">
           <span class="spanCard">
-            <span>共 {{ count }} 件宝贝</span>
-            <button>管理</button>
+            <span>共 {{ shopCarList.length || 0 }} 件宝贝</span>
+            <button>
+              <router-link to="/shopCar">管理</router-link>
+            </button>
           </span>
         </div>
-
         <!-- 购物车详情 -->
+        <h2 v-if="isShow">你还没有去登录呢!</h2>
+
         <div class="shopListCar" v-for="(item, index) in shopCarList" :key="index">
           <div class="shopImg">
-            <img src="../assets/image/logo.png" />
+            <img :src="item.img" />
           </div>
           <div class="details">
             <p class="showTitle">{{ item.title }}</p>
-            <p class="shopCount">数量: {{ item.count }}</p>
+            <p class="shopCount">数量: {{ item.num }}</p>
             <p class="detailsSpan">
-              <span>¥ {{ item.price }} </span>
-              <span class="discoun_price">¥ {{ item.discountPrice }}</span>
+              <span>¥ {{ item.special_price }} </span>
+              <span class="discoun_price">¥ {{ item.price }}</span>
             </p>
           </div>
         </div>
@@ -51,6 +54,7 @@
   </div>
 </template>
 <script>
+import { getShopCarList } from '@/api/shopCar';
 export default {
   name: 'BackTop',
   props: {
@@ -65,28 +69,15 @@ export default {
       // 向上向下
       isToTop: true,
       isToBottom: true,
-      drawer: true, // 购物车
+      drawer: false, // 购物车
       service: false, //客服
       count: 1, // 购物车商品数量
-      shopCarList: [
-        {
-          title: '安踏女鞋111111111111',
-          count: 1, // 数量
-          price: 219, //价格
-          discountPrice: 129
-          // img_scr_url: '../assets/image/logo.png'
-        },
-        {
-          title: '安踏女鞋111111111111',
-          count: 1, // 数量
-          price: 219, //价格
-          discountPrice: 129
-          // img_scr_url: '../assets/image/logo.png'
-        }
-      ]
+      shopCarList: [],
+      isShow: false
     };
   },
   methods: {
+    // 返回顶部
     toTop(i) {
       //参数i表示间隔的幅度大小，以此来控制速度
       document.documentElement.scrollTop -= i;
@@ -96,12 +87,13 @@ export default {
         clearTimeout(c);
       }
     },
+    // 返回底部
     toBottom(i) {
       var clientHeight = document.documentElement.clientHeight || document.body.clientHeight;
       var scrollHeight = document.documentElement.scrollHeight;
       // var badyHeiget = document.bady.scrollHeight
 
-      console.log(clientHeight);
+      // console.log(clientHeight);
       var height = scrollHeight - clientHeight; //超出窗口上界的值就是底部的scrolTop的值
       document.documentElement.scrollTop += i;
       if (document.documentElement.scrollTop < height) {
@@ -109,8 +101,20 @@ export default {
       } else {
         clearTimeout(c);
       }
+    },
+    // 购物车信息
+    getShopList() {
+      // console.log(this.$store.state.user.id);
+      getShopCarList(this.$store.state.user.id).then(data => {
+        if (!data.data.code === 200) return this.$message.error('你还没登录,请前往登录,获取购物车列表');
+        this.shopCarList = data.data.data;
+        return (this.isShow = false);
+        // console.log(this.shopCarList);
+      });
+      this.isShow = true;
     }
   },
+  // 返回顶/底部
   created() {
     var vm = this;
     window.onscroll = function () {
@@ -129,6 +133,10 @@ export default {
         vm.isToBottom = true;
       }
     };
+  },
+  // 解构调用
+  created() {
+    this.getShopList();
   }
 };
 </script>
@@ -210,13 +218,15 @@ img {
     text-align: left;
     .showTitle {
       height: 20px;
-      width: 100px;
+      width: 130px;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+      font-size: 16px;
     }
     .shopCount {
-      color: #c4c4c4;
+      color: rgb(51, 48, 48);
+      font-size: 14px;
     }
     .detailsSpan {
       .discoun_price {
