@@ -16,10 +16,37 @@
     </div>
     <!-- 购物车 -->
     <el-drawer title="我是标题" :visible.sync="drawer" :with-header="false" size="20%">
-      <span> 我是购物车我来啦!</span>
+      <div>
+        <div class="drawerHeader">
+          <span>购物车</span>
+        </div>
+
+        <div class="drawercontent">
+          <span class="spanCard">
+            <span>共 {{ count }} 件宝贝</span>
+            <button>管理</button>
+          </span>
+        </div>
+
+        <!-- 购物车详情 -->
+        <div class="shopListCar" v-for="(item, index) in shopCarList" :key="index">
+          <div class="shopImg">
+            <img src="../assets/image/logo.png" />
+          </div>
+          <div class="details">
+            <p class="showTitle">{{ item.title }}</p>
+            <p class="shopCount">数量: {{ item.count }}</p>
+            <p class="detailsSpan">
+              <span>¥ {{ item.price }} </span>
+              <span class="discoun_price">¥ {{ item.discountPrice }}</span>
+            </p>
+          </div>
+        </div>
+      </div>
     </el-drawer>
+    <!-- 客服 -->
     <el-drawer title="我是标题" :visible.sync="service" :with-header="false" size="20%">
-      <span> 我是客服我来啦!</span>
+      <span>我是客服我来啦!</span>
     </el-drawer>
   </div>
 </template>
@@ -38,8 +65,25 @@ export default {
       // 向上向下
       isToTop: true,
       isToBottom: true,
-      drawer: false, // 购物车
-      service: false //客服
+      drawer: true, // 购物车
+      service: false, //客服
+      count: 1, // 购物车商品数量
+      shopCarList: [
+        {
+          title: '安踏女鞋111111111111',
+          count: 1, // 数量
+          price: 219, //价格
+          discountPrice: 129
+          // img_scr_url: '../assets/image/logo.png'
+        },
+        {
+          title: '安踏女鞋111111111111',
+          count: 1, // 数量
+          price: 219, //价格
+          discountPrice: 129
+          // img_scr_url: '../assets/image/logo.png'
+        }
+      ]
     };
   },
   methods: {
@@ -117,5 +161,69 @@ export default {
 }
 img {
   width: 20px;
+}
+
+.drawerHeader {
+  width: 100%;
+  height: 60px;
+  line-height: 60px;
+  text-align: center;
+  background-color: #000;
+  color: #fff;
+}
+.drawercontent {
+  .spanCard {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 30px;
+    background-color: #ccc;
+    padding: 0 10px;
+    font-size: 12px;
+    button {
+      width: 50px;
+      height: 20px;
+      border: 0;
+      border-radius: 5px;
+      outline: none;
+      cursor: pointer;
+    }
+  }
+}
+.shopListCar {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  align-items: center;
+
+  .shopImg {
+    float: left;
+    margin-right: 15px;
+
+    img {
+      width: 70px;
+      margin-left: 20px;
+    }
+  }
+  .details {
+    float: left;
+    text-align: left;
+    .showTitle {
+      height: 20px;
+      width: 100px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .shopCount {
+      color: #c4c4c4;
+    }
+    .detailsSpan {
+      .discoun_price {
+        text-decoration-line: line-through;
+        color: #bdb6b3;
+      }
+    }
+  }
 }
 </style>
