@@ -23,7 +23,7 @@
 
         <div class="drawercontent">
           <span class="spanCard">
-            <span>共 {{ shopCarList.length || 0 }} 件宝贝</span>
+            <span>共 {{ carCount }} 件宝贝</span>
             <button>
               <router-link to="/shopCar">管理</router-link>
             </button>
@@ -71,9 +71,8 @@ export default {
       isToBottom: true,
       drawer: false, // 购物车
       service: false, //客服
-      count: 1, // 购物车商品数量
       shopCarList: [],
-      isShow: false
+      carCount: 0
     };
   },
   methods: {
@@ -103,11 +102,15 @@ export default {
       }
     },
     // 购物车信息
+    /**
+     * 用户登录后id存储于store中,获取用户id显示购物车列表
+     */
     getShopList() {
       // console.log(this.$store.state.user.id);
       getShopCarList(this.$store.state.user.id).then(data => {
         if (!data.data.code === 200) return this.$message.error('你还没登录,请前往登录,获取购物车列表');
         this.shopCarList = data.data.data;
+        this.carCount = this.shopCarList.length;
         return (this.isShow = false);
         // console.log(this.shopCarList);
       });

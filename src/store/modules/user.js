@@ -5,7 +5,7 @@ const getDefaultState = () => {
   return {
     token: getToken(),
     username: '',
-    id: ''
+    id: 0
   };
 };
 const state = getDefaultState();
