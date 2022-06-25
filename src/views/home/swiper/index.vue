@@ -3,8 +3,13 @@
         <el-carousel trigger="click" :height="height" :type="type" :loop="loop" :autoplay="autoplay"
             :interval="interval">
             <el-carousel-item v-for="(item, index) in shop.slice(start, end)" :key="index" :style="{ width: width }">
+                <!-- {{index}} -->
                 <div>
-                    <img :src="item.swiperImg || item.img" alt="" v-show="showhaden">
+                    <!-- <img v-if="index>start" :src="shop[index-1].img" alt=""> -->
+                    <img :src="item.swiperImg || item.img" alt="" v-show="showhaden"
+                        :style="{ width: imgwidth,}">
+                    <!-- <img v-if="index<index" :src="shop[index+1].img" alt=""> -->
+
                     <div v-show="showhaden && Obscuration" class="Obscuration" :style="{ height: height }">
                         <p>{{ item.title }}</p>
                     </div>
@@ -25,6 +30,8 @@ export default {
     props: {
         //宽度
         width: String,
+        imgwidth: String,
+
         //渲染列表
         shop: Array,
         //高度
@@ -58,7 +65,10 @@ export default {
             type: Number,
             default: 0,
         },
-        end: Number,
+        end: {
+            type: Number,
+
+        },
     }
 }
 </script>

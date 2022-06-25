@@ -42,28 +42,36 @@
           </div>
         </div>
       </div>
-       <swiper-vue :shop="swipers" height="700px"> </swiper-vue>
-       <div>
-        <div>
-          <div><h2>鞋类</h2><p>more<svg-icon iconClass="sanjiao3" size="40" className="svg-icon-box"/></p></div>
-          <div>
-            <shop-item v-for="(item, index) in list.anCard.slice(0, 12)" :key="index" :shop="item" :pshow="true"
-              height="240px" width="150px"></shop-item>
-          </div>
-          </div>
-       
-       </div>
+      <swiper-vue :shop="swipers" height="700px"> </swiper-vue>
+      <div>
+        <ancladlist v-for="(item, idex) in typeList" :key="idex" :shop="item" :type="idex"></ancladlist>
+
+      </div>
+      <p>Knapsack</p>
+      <div>
+        <ul>
+          <li></li>
+        </ul>
+        <switch-page :itemlist="swipers">
+            
+          </switch-page>
+        <!-- <swiper-vue :shop="swipers" height="700px" type="card" :Obscuration="true"  width="900px" imgwidth="600px" marginLeft="300px"
+          :loop="false" :autoplay="false"> </swiper-vue> -->
+
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import SwiperVue from "./swiper/index.vue";
-import { getSwiper, getSpu } from "@/api/home";
+import { getSwiper, getSpu, getproduct } from "@/api/home";
+import Ancladlist from "./swiper/ancladlist.vue";
+import SwitchPage from "./swiper/switch.vue";
 
 export default {
   name: "Home",
-  components: { SwiperVue },
+  components: { SwiperVue, Ancladlist, SwitchPage },
   data() {
     return {
       swipers: [],
@@ -72,11 +80,20 @@ export default {
         SwiperList: [],
         SwiperCarousel: [],
         SwiperColor: [],
+
       },
 
-      AnCard: [],
+      typeList: {
+        "服饰": [],
+        "鞋类": [],
+        "配件": [],
+        "儿童专区": [],
+      },
       SwiperAndList: [],
     };
+  },
+  mounted() {
+    console.log(this.typeList);
   },
   methods: {
     getSwiper() {
@@ -93,6 +110,14 @@ export default {
         console.log(this.list[list]);
       });
     },
+    getproduct(name) {
+      console.log({ name });
+      getproduct(name).then((data) => {
+        console.log(data.data);
+        this.typeList[name] = data.res;
+        console.log(this.typeList);
+      });
+    },
   },
   created() {
     this.getSwiper();
@@ -100,6 +125,10 @@ export default {
     this.getSpu("板鞋", 'SwiperList');
     this.getSpu("跑鞋", 'SwiperCarousel');
     this.getSpu("休闲鞋", 'SwiperColor');
+    this.getproduct("服饰");
+    this.getproduct("鞋类");
+    this.getproduct("配件");
+    this.getproduct("儿童专区");
 
   },
 };
@@ -122,14 +151,16 @@ export default {
   }
 
   .SwiperAndList {
-    
+
     .minlunb {
       width: 35%;
       float: left;
     }
-    .AndList{
+
+    .AndList {
       width: 65%;
       float: right;
+      margin-bottom: 50px;
     }
 
   }
@@ -140,10 +171,12 @@ export default {
     font-weight: 100;
     margin: 30px 0;
   }
+
 }
+
 .svg-icon-box {
-          width: 32px;
-          height: 32px;
-          color: #fff;
+  width: 32px;
+  height: 32px;
+  color: #fff;
 }
 </style>
