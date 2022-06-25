@@ -77,6 +77,7 @@ const routes = [
   /* 跳转结束 */
   /* 点击头部导航栏跳转 */
   {
+    // 3d轮播图
     path: '/popslideshow',
     name: 'Popslideshow',
     component: () => import('@/views/popslideshow/index')
