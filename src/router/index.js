@@ -3,8 +3,7 @@ import VueRouter from 'vue-router';
 
 Vue.use(VueRouter);
 
-const routes = [
-  {
+const routes = [{
     path: '/',
     redirect: '/home'
   },
@@ -28,10 +27,10 @@ const routes = [
     path: '/changePassword',
     name: 'CPD',
     component: () => import('../views/login/Forgotpassword/idnex.vue')
-  }, 
+  },
   {
     path: '/shopCar',
-    name:'ShopCar',
+    name: 'ShopCar',
     component: () => import('../views/shopcar/index.vue')
   },
   /**底部导航 botNav**/
@@ -85,10 +84,8 @@ const routes = [
     name: "World",
     component: () => import("../components/botNav/world"),
   },
-  /**底部导航结束 botNav**/
-<<<<<<< HEAD
+  {
     // best
-    {
     path: '/best',
     name: 'Best',
     component: () => import('../views/best/best.vue'),
@@ -100,8 +97,6 @@ const routes = [
     name: 'Popslideshow',
     component: () => import('@/views/popslideshow/index')
   }
-=======
->>>>>>> ee7ddddfcaf4dce2a9979097593f21cf2a269a38
 ];
 
 const router = new VueRouter({

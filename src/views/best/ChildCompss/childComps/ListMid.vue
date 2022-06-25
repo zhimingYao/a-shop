@@ -1,6 +1,5 @@
 <template>
   <div class="listMid">
-    listMid
     <ul>
       <li v-for="(item, index) in imgMiddleList" :key="index">
         <span class="icon_best">
@@ -11,12 +10,11 @@
         <div class="textMax">
           <div class="text_wrap">
             <div class="brand">vunque</div>
-            <div class="front">[댓글 이벤트] | [04/16 예약배송]</div>
-            <div class="product">Toque tote S (토크 토트 스몰) Light beige</div>
+            <div class="front">{{ item.title }}</div>
           </div>
           <div class="price">
-            <span class="discount_price">285,000</span>
-            <span class="base_price">42,000</span>
+            <span class="discount_price">{{ item.price }}</span>
+            <span class="base_price">{{ item.price + 500 }}</span>
             <span class="discount_rate">10%</span>
           </div>
           <p class="reservation">预定</p>
@@ -33,12 +31,12 @@
 </template>
 
 <script>
+import { getImg } from "../../getImg";
 export default {
   name: "ListMid",
   data() {
     return {
       imgMiddleList: [],
-      middleListAll: [],
     };
   },
   props: {
@@ -50,8 +48,8 @@ export default {
   methods: {
     async getImg_(parent_name, start, end) {
       const res = await getImg({ parent_name, start, end });
-      if (this.listMiddle == "All") {
-        this.middleListAll = res;
+      // console.log(res,this.listMiddle);
+      if (this.listMiddle == "All" || "配件") {
         this.imgMiddleList = res;
       } else {
         this.imgMiddleList = res;
@@ -68,6 +66,15 @@ export default {
       this.getImg_(this.listMiddle, 4, 7);
     }
   },
+  watch: {
+    listMiddle() {
+      if (this.listMiddle == "All") {
+        this.getImg_('配件', 4, 7, "price");
+      } else {
+        this.getImg_(this.listMiddle, 4, 7);
+      }
+    },
+  },
 };
 </script>
 
@@ -76,6 +83,10 @@ export default {
   background-color: #f2f2f2;
   padding: 0px 0 0 21px;
 }
+li:hover {
+  box-shadow: 0 0 4px 4px #ddd;
+  transform: scale(1.01);
+}
 ul {
   display: flex;
   justify-content: space-around;
@@ -83,6 +94,7 @@ ul {
   li {
     width: calc((100% / 4 - 4%));
     position: relative;
+    border: 1px solid #bbb;
     .icon_best {
       width: 50px;
       height: 50px;
@@ -106,10 +118,11 @@ ul {
       width: 100%;
     }
     .textMax {
-      width: 100%;
-      height: 186px;
+      height: 126px;
+      text-align: justify;
+      padding: 4%;
       .text_wrap {
-        height: 91px;
+        height: 61px;
         .brand {
           color: #000000;
           font-size: 13px;

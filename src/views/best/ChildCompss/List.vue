@@ -1,8 +1,14 @@
 <template>
   <div class="list">
-    <list-top :listTop="getmsg"></list-top>
-    <list-mid :listMiddle="getmsg"></list-mid>
-    <list-bottom></list-bottom>
+    <div class="list_12">
+      <list-top :listTop="getmsg"></list-top>
+      <list-mid :listMiddle="getmsg"></list-mid>
+    </div>
+    <div class="list_3">
+      <list-bottom :listBottom="getmsg"></list-bottom>
+    </div>
+    <el-pagination background layout="prev, pager, next" :total="10">
+    </el-pagination>
   </div>
 </template>
 
@@ -11,7 +17,7 @@ import ListTop from "./childComps/ListTop.vue";
 import ListBottom from "./childComps/ListBottom.vue";
 import ListMid from "./childComps/ListMid.vue";
 export default {
-  name: "List",
+  name: "BestList",
   components: {
     ListTop,
     ListMid,
@@ -26,5 +32,10 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
+.list_12 {
+  margin-top: 90px;
+  padding: 4% 20px 50px 20px;
+  background-color: #f2f2f2;
+}
 </style>
