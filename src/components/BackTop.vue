@@ -48,8 +48,23 @@
       </div>
     </el-drawer>
     <!-- 客服 -->
-    <el-drawer title="我是标题" :visible.sync="service" :with-header="false" size="20%">
-      <span>我是客服我来啦!</span>
+    <el-drawer title="我是标题" :visible.sync="service" :with-header="false" size="20%" class="bxo">
+      <div class="btnInput">
+        <div class="drawerHeader">skr线上</div>
+        <div class="drawerLogin">
+          <h3>客服将尽快回复您,请等待!</h3>
+          <el-input
+            type="textarea"
+            :rows="2"
+            placeholder="客服将尽快回复您"
+            v-model="textarea"
+            class="service_input"
+            clearable
+            @change="service_change"
+          >
+          </el-input>
+        </div>
+      </div>
     </el-drawer>
   </div>
 </template>
@@ -70,9 +85,10 @@ export default {
       isToTop: true,
       isToBottom: true,
       drawer: false, // 购物车
-      service: false, //客服
+      service: true, //客服
       shopCarList: [],
-      carCount: 0
+      carCount: 0,
+      textarea: ''
     };
   },
   methods: {
@@ -109,12 +125,16 @@ export default {
       // console.log(this.$store.state.user.id);
       getShopCarList(this.$store.state.user.id).then(data => {
         if (!data.data.code === 200) return this.$message.error('你还没登录,请前往登录,获取购物车列表');
+        this.carCount = data.data.data.length;
         this.shopCarList = data.data.data;
-        this.carCount = this.shopCarList.length;
-        return (this.isShow = false);
+        return (this.isShow = false); // 控制显示输出
         // console.log(this.shopCarList);
       });
       this.isShow = true;
+    },
+    service_change() {
+      this.textarea = '';
+      this.$message.success('您的留言小的已经收到,请等待小的与您练习');
     }
   },
   // 返回顶/底部
@@ -238,5 +258,17 @@ img {
       }
     }
   }
+}
+
+/* 备用 */
+.bxo {
+  height: 431px;
+  top: 40%;
+  line-height: 101px;
+  bottom: 0px;
+  text-align: center;
+}
+.service_input {
+  top: 180px;
 }
 </style>
