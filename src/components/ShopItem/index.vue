@@ -26,8 +26,7 @@ export default {
     width:String,
     //高度
     height:String,
-    //
-    interval:Number,
+
   },
   data() {
     return {};
