@@ -1,21 +1,17 @@
 <template>
-  <nav ref="nav" >
+ <div>
+    <nav ref="nav" >
     <div class="nav" :class="{ navFixed: isFixed }">
-      <img class="img" src="../../assets/image/logo.png" alt="图片logo" v-show="isShow" />
+      <img class="img" src alt="图片logo" v-show="isShow" />
       <ul class="classify">
-        <li>
-          <router-link to="/">服饰</router-link>
-        </li>
-        <li>
-          <router-link to="/shopmagnify">鞋类</router-link>
-        </li>
-        <li>
-          <router-link to="/shoplist">配件</router-link>
-        </li>
-        <li>
-          <router-link to="/shoplist">儿童专区</router-link>
-        </li>
-        <li></li>
+       <li v-for="(item,index) in parentName" :key="index"><router-link to="/proimary" @click.native="parentNamehandle(item)">{{item}}</router-link>
+       <div>
+        <suspension-vue :item="item" ></suspension-vue>
+       </div>
+      
+      </li>
+
+       <li></li>
         <li>
           <router-link to="/popslideshow">POP</router-link>
         </li>
@@ -42,16 +38,41 @@
       </ul>
     </div>
   </nav>
+  <div>
+  </div>
+ </div>
 </template>
 
 <script>
+import {getParentName} from '@/api/navraptop.js'
+import SuspensionVue from './SuspensionVue.vue';
 export default {
+  components: { SuspensionVue },
   name: 'NavBarTop',
   data() {
     return {
       isShow: false,
-      isFixed: false
+      isFixed: false,
+      parentName:[],
+      parentlist:[],
     };
+  
+  },
+  methods:{
+    getParentName(){
+     getParentName().then(data=>{
+       console.log(data)
+       this.parentName=data.data
+       this.parentlist=data.result
+     })
+    },
+ parentNamehandle(item){
+ console.log(item)
+ this.$router.push('/proimary?parentName='+item)
+ }
+  },
+  created(){
+  this.getParentName()
   },
   mounted() {
     let navTopDom = this.$refs['nav'];
@@ -80,11 +101,12 @@ a {
 
 li {
   display: inline-block;
-
+  
   a {
     font-size: 14px;
   }
 }
+  
 
 nav {
   background-color: wheat;
@@ -119,10 +141,14 @@ nav {
         text-align: center;
         font-size: 20px;
         color: white;
+        div{
+          display: none;
+        }
       }
 
       li:hover a {
         color: rgb(70, 163, 129);
+        
       }
     }
 
