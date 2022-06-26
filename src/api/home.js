@@ -16,3 +16,10 @@ export function getSpu(name){
         data:{name}
     })
 }
+export function getproduct(parent_name){
+    return request({
+        url:'/type/getproduct',
+        method:'post',
+        data:{parent_name}
+    })
+}

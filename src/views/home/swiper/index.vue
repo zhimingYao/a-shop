@@ -2,10 +2,17 @@
     <div class="block">
         <el-carousel trigger="click" :height="height" :type="type" :loop="loop" :autoplay="autoplay"
             :interval="interval">
-            <el-carousel-item v-for="(item, index) in shop.slice(0, end)" :key="index" :style="{ width: width }">
+            <el-carousel-item v-for="(item, index) in shop.slice(start, end)" :key="index" :style="{ width: width }">
+                <!-- {{index}} -->
                 <div>
-                    <img :src="item.swiperImg || item.img" alt="" v-show="showhaden">
-                    <div v-show="showhaden && Obscuration" class="Obscuration" :style="{ height: height }"><p>{{item.title}}</p></div>
+                    <!-- <img v-if="index>start" :src="shop[index-1].img" alt=""> -->
+                    <img :src="item.swiperImg || item.img" alt="" v-show="showhaden"
+                        :style="{ width: imgwidth,}">
+                    <!-- <img v-if="index<index" :src="shop[index+1].img" alt=""> -->
+
+                    <div v-show="showhaden && Obscuration" class="Obscuration" :style="{ height: height }">
+                        <p>{{ item.title }}</p>
+                    </div>
 
                 </div>
 
@@ -23,6 +30,8 @@ export default {
     props: {
         //宽度
         width: String,
+        imgwidth: String,
+
         //渲染列表
         shop: Array,
         //高度
@@ -52,7 +61,14 @@ export default {
             default: false,
         },
         //显示(轮播)数量
-        end: Number,
+        start: {
+            type: Number,
+            default: 0,
+        },
+        end: {
+            type: Number,
+
+        },
     }
 }
 </script>
@@ -64,7 +80,10 @@ export default {
     .el-carousel-item {
         position: relative;
 
-
+        img {
+            width: 100%;
+            height: 100%;
+        }
     }
 
     .Obscuration {
@@ -74,10 +93,11 @@ export default {
         z-index: 5;
         top: 0;
         left: 0;
-        
+
         // display: none;
         color: transparent;
-        p{
+
+        p {
             line-height: 600px;
         }
     }

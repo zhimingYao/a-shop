@@ -7,6 +7,8 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import ShopItem from './components/ShopItem/index.js'
 import TabBtn from '@/components/TabBtn/index.js'
+import '@/icons'
+
 
 Vue.config.productionTip = false;
 Vue.use(ElementUI);
