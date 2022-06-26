@@ -5,8 +5,9 @@
     </div>
     <div class="shop_item_details">
       <div class="shop_title">{{shop.title}}</div>
-      <div v-show='!pshow' class="shop_price">{{shop.price}}</div>
-      <p v-show='pshow'>www.stride.fun</p>
+      <div v-if="!pshow" class="shop_price">{{shop.price}}</div>
+      <div v-else class="shop_price">COST:￥{{shop.price}}</div>
+      <p v-show='pshows'>www.stride.fun</p>
     </div>
   </div>
 </template>
@@ -19,6 +20,10 @@ export default {
     shop:Object,
     //是否显示p标签
     pshow:{
+      type:Boolean,
+      default:false,
+    },
+     pshows:{
       type:Boolean,
       default:false,
     },
@@ -43,6 +48,7 @@ export default {
   background-color: #fff;
   cursor: pointer;
   float: left;
+  padding-bottom: 10px;
   &:hover{
     transform: scale(1.007);
     box-shadow: 0 0 4px 4px #eee;

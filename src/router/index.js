@@ -140,7 +140,18 @@ const routes = [{
   path: "/event",
   name: "Event",
   component: () => import("@/views/event")
-}
+},
+
+  /* 跳转结束 */
+  /* 点击头部导航栏跳转 */
+
+  
+  /* 一级导航分类 */
+   {
+    path:'/proimary',
+    name:'proimary',
+    component:()=> import ('@/views/proimary/index.vue')
+  } 
 ];
 
 const router = new VueRouter({
