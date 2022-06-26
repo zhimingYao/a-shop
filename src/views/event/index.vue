@@ -2,12 +2,7 @@
   <div class="event">
     <div class="ev-title">EVENT</div>
     <div class="ev-dragram">
-      <el-carousel
-        :interval="3000"
-        arrow="always"
-        indicator-position="none"
-        height="45vh"
-      >
+      <el-carousel :interval="3000" arrow="always" indicator-position="none" height="45vh">
         <el-carousel-item v-for="(item, index) in ev_dragram" :key="index">
           <div class="mask"></div>
           <div class="txt">
@@ -28,7 +23,9 @@
     <div class="senction">
       <div class="my_brand_cont">
         <div class="cont-title">
-          <h3><p>MY❤BRAND EVENT</p></h3>
+          <h3>
+            <p>MY❤BRAND EVENT</p>
+          </h3>
         </div>
         <div class="cont">
           <div class="cont-info">
@@ -44,15 +41,13 @@
       </div>
       <div class="benefit">
         <div class="benefit-title">
-          <h3><p>BENEFIT</p></h3>
+          <h3>
+            <p>BENEFIT</p>
+          </h3>
         </div>
         <div class="benefit-cont">
           <ul>
-            <li
-              class="ev_cont"
-              v-for="(item, index) in ev_senction"
-              :key="index"
-            >
+            <li class="ev_cont" v-for="(item, index) in ev_senction" :key="index">
               <img :src="item" alt="" />
             </li>
           </ul>
@@ -73,17 +68,14 @@
         </div>
         <div class="hot-search">
           <div class="search">
-            <el-input
-              v-model="hot_search"
-              placeholder="제목 또는 내용, 브랜드명 입력"
-            >
+            <el-input v-model="hot_search" placeholder="제목 또는 내용, 브랜드명 입력">
             </el-input>
             <el-button type="primary" icon="el-icon-search"></el-button>
           </div>
         </div>
       </div>
     </div>
-    <tab-btn @getShopList="getShopList" />
+    <tab-btn @tabBtn="getShopList" />
     <div class="sort">
       <ul>
         <li v-for="(item, index) in sort" :key="index">
@@ -91,32 +83,19 @@
         </li>
       </ul>
       <select class="sort_select">
-        <option
-          v-for="(item, index) in sort_options"
-          :key="index"
-          :value="item.value"
-          :selected="index === sort_value"
-        >
+        <option v-for="(item, index) in sort_options" :key="index" :value="item.value" :selected="index === sort_value">
           {{ item.label }}
         </option>
       </select>
     </div>
-    <div class="ev-shop">
-      <div class="shoplist">
-        <shop-item
-          v-for="(item, index) in shoplist"
-          :key="index"
-          :shop="item"
-          width="19%"
-          height="48.5%"
-          :priceshow="false"
-        />
+    <div class="ev-shop clearfix">
+      <div class="shoplist clearfix">
+        <shop-item v-for="(item, index) in shoplist" :key="index" :shop="item" width="19%" height="320px"
+          :priceshow="false" />
       </div>
       <div class="shoppage">
-        <el-pagination background layout="prev, pager, next" 
-        :page-count="page_total"
-        :page-size="30"
-        @current-change="pagenum()">
+        <el-pagination background layout="prev, pager, next" :total="page_total" :current-page.sync='page'
+          :page-size="10">
         </el-pagination>
       </div>
     </div>
@@ -192,27 +171,37 @@ export default {
       ],
       sort_value: 0,
       shoplist: [],
+      list: [],
       page: 1,
-      page_total: 10,
+      page_total: 0,
     };
   },
   methods: {
     getShopList(item) {
       // console.log(item);
       const data = {
-        parent_name: item||"全部",
-        page: this.page,
+        parent_name: item || "全部",
+
       };
       getShopList(data).then((res) => {
-        console.log(res);
-        this.shoplist = res.data.res;
+        
+        this.list = res.data.res;
+        this.shoplist = this.list.slice((this.page - 1) * 10, this.page * 10)
+        this.page_total = this.list.length
+        console.log(res,this.shoplist,this.page_total);
       });
     },
-    pagenum(value){
-      this.page = value;
-      this.getShopList(item)
-    }
+   
+  },
+  watch: {
+    page: {
+      deep:true,
+      handler(nval, oval) {
 
+        this.shoplist = this.list.slice((nval - 1) * 10, nval * 10)
+        console.log(nval,this.shoplist);
+      }
+    }
   },
   created() {
     this.getShopList();
@@ -226,6 +215,7 @@ export default {
   margin: 0 auto;
   width: 80%;
 }
+
 .ev-title {
   color: #333;
   font-family: "ProximaNova-Thin";
@@ -236,7 +226,7 @@ export default {
   font-weight: 100;
 }
 
-.el-carousel__item > img {
+.el-carousel__item>img {
   color: #475669;
   height: 500px;
   font-size: 18px;
@@ -245,6 +235,7 @@ export default {
   width: 100%;
   height: 100%;
 }
+
 .ev-dragram {
   position: relative;
   margin: 0 auto;
@@ -252,6 +243,7 @@ export default {
   min-height: 45vh;
   width: 100%;
 }
+
 .mask {
   position: absolute;
   bottom: 0;
@@ -260,6 +252,7 @@ export default {
   height: 150px;
   background-color: rgba($color: #fff, $alpha: 0.5);
 }
+
 .txt {
   position: absolute;
   z-index: 200;
@@ -269,22 +262,26 @@ export default {
   margin: 35px 650px 0px 155px;
   box-sizing: border-box;
   text-align: left;
+
   p {
     display: block;
     font-size: 14px;
     color: #666;
   }
+
   .txt2 {
     display: block;
     color: #000;
     font-size: 40px;
     margin-top: 3px;
   }
+
   .txt3 {
     display: block;
     font-size: 22px;
   }
 }
+
 .cet-img {
   position: absolute;
   bottom: -10px;
@@ -295,25 +292,31 @@ export default {
   padding: 10px;
   width: 440px;
   background-color: #fff;
+
   li {
     width: 32%;
     height: 100%;
+
     img {
       width: 100%;
     }
   }
 }
+
 .senction {
   width: 100%;
   height: 187px;
   margin: 70px auto;
   display: flex;
   justify-content: space-between;
+
   .my_brand_cont {
     display: block;
     width: 45%;
+
     .cont-title {
       border-bottom: 2px solid #000;
+
       h3 {
         width: 100%;
         font-size: 26px;
@@ -321,16 +324,19 @@ export default {
         text-align: left;
       }
     }
+
     .cont {
       width: 100%;
       font-size: 14px;
       color: #333;
       padding: 30px 0;
+
       .cont-info {
         p {
           text-align: center;
         }
       }
+
       .cont-btn {
         display: block;
         width: 140px;
@@ -341,15 +347,18 @@ export default {
         margin: 18px auto;
         text-align: center;
         line-height: 40px;
+
         a {
           color: #fff;
         }
       }
     }
   }
+
   .benefit {
     display: block;
     width: 45%;
+
     .benefit-title {
       h3 {
         width: 100%;
@@ -359,22 +368,27 @@ export default {
         margin-left: 5%;
       }
     }
+
     .benefit-cont {
       width: 100%;
       font-size: 14px;
       color: #333;
       padding: 30px 0;
+
       ul {
         margin: 0 auto;
         padding: 0;
         display: flex;
         justify-content: space-between;
+
         .ev_cont {
           position: relative;
           width: 25%;
+
           img {
             width: 70%;
           }
+
           &:not(:last-child)::after {
             position: absolute;
             right: 0;
@@ -388,12 +402,14 @@ export default {
     }
   }
 }
+
 .hotkeyword {
   width: 100%;
   height: 20vh;
   margin: 40px 0;
   background-color: #eee;
   display: flex;
+
   .hot-title {
     width: 20%;
     height: 100%;
@@ -404,13 +420,16 @@ export default {
     text-align: center;
     font-family: "ProximaNova-Thin";
   }
+
   .hot {
     display: flex;
+
     .hot-show {
       width: 60%;
       height: 100%;
       padding: 10px 15px;
       overflow: hidden;
+
       ul {
         li {
           float: left;
@@ -419,6 +438,7 @@ export default {
           background-color: #fff;
           line-height: 37px;
           margin: 5px 3px;
+
           a {
             display: inline-block;
             height: 100%;
@@ -430,10 +450,12 @@ export default {
         }
       }
     }
+
     .hot-search {
       width: 20%;
       height: 100%;
       padding: 10px 15px;
+
       .search {
         display: flex;
         width: 100%;
@@ -443,6 +465,7 @@ export default {
     }
   }
 }
+
 .sort {
   width: 100%;
   margin: 40px 0;
@@ -450,15 +473,18 @@ export default {
   justify-content: space-between;
   height: 32px;
   line-height: 32px;
+
   ul {
     display: flex;
     width: 85%;
     height: 32px;
+
     li {
       height: 100%;
       line-height: 32px;
       padding: 6px 20px 6px 21px;
       position: relative;
+
       &:not(:last-child)::after {
         position: absolute;
         right: 0;
@@ -469,15 +495,17 @@ export default {
       }
     }
   }
+
   .sort_select {
     width: 150px;
     height: 100%;
     line-height: 32px;
   }
 }
+
 .shoplist {
   width: 100%;
-  height: 70vh;
+
   overflow: hidden;
   display: flex;
   flex-wrap: wrap;

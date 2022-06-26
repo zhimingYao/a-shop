@@ -48,17 +48,29 @@
 
       </div>
       <p>Knapsack</p>
-      <div>
+      <div class="clearfix">
         <ul>
           <li></li>
         </ul>
-        <switch-page :itemlist="swipers">
+        <!-- <switch-page :itemlist="swipers">
             
-          </switch-page>
-        <!-- <swiper-vue :shop="swipers" height="700px" type="card" :Obscuration="true"  width="900px" imgwidth="600px" marginLeft="300px"
-          :loop="false" :autoplay="false"> </swiper-vue> -->
+          </switch-page> -->
+        <swiper-vue :shop="swipers" height="700px" type="card"  width="900px" imgwidth="600px" marginLeft="300px"
+          :loop="false" :autoplay="false"> </swiper-vue>
 
       </div>
+      <div>
+        <div>
+           <router-link ></router-link>
+        </div>
+
+       
+        <div>
+            <router-view></router-view>
+        </div>
+      </div>
+      
+
     </div>
   </div>
 </template>

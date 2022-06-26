@@ -55,8 +55,6 @@ button {
   height: 60px;
   background-color: #fff;
   border: 1px solid #ccc;
-  font-size: 18px;
-  font-weight: 800;
   cursor: pointer;
   position: relative;
 }

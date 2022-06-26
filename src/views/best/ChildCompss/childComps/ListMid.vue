@@ -13,14 +13,8 @@
             <div class="front">{{ item.title }}</div>
           </div>
           <div class="price">
-            <!-- <span class="discount_price">{{ item.price }}</span>
-            <span class="base_price">{{ item.price + 500 }}</span> -->
-            <div class="front">[댓글 이벤트] | [04/16 예약배송]</div>
-            <div class="product">Toque tote S (토크 토트 스몰) Light beige</div>
-          </div>
-          <div class="price">
-            <span class="discount_price">285,000</span>
-            <span class="base_price">42,000</span>
+            <span class="discount_price">{{ item.price }}</span>
+            <span class="base_price">{{ item.price + 500 }}</span>
             <span class="discount_rate">10%</span>
           </div>
           <p class="reservation">预定</p>
@@ -54,13 +48,8 @@ export default {
   methods: {
     async getImg_(parent_name, start, end) {
       const res = await getImg({ parent_name, start, end });
-<<<<<<< HEAD
       // console.log(res,this.listMiddle);
       if (this.listMiddle == "All" || "配件") {
-=======
-      if (this.listMiddle == "All") {
-        this.middleListAll = res;
->>>>>>> 0361f64f19df08f03d1c7febe4211f8b484a809f
         this.imgMiddleList = res;
       } else {
         this.imgMiddleList = res;
@@ -77,7 +66,6 @@ export default {
       this.getImg_(this.listMiddle, 4, 7);
     }
   },
-<<<<<<< HEAD
   watch: {
     listMiddle() {
       if (this.listMiddle == "All") {
@@ -87,8 +75,6 @@ export default {
       }
     },
   },
-=======
->>>>>>> 0361f64f19df08f03d1c7febe4211f8b484a809f
 };
 </script>
 
@@ -97,13 +83,10 @@ export default {
   background-color: #f2f2f2;
   padding: 0px 0 0 21px;
 }
-<<<<<<< HEAD
 li:hover {
   box-shadow: 0 0 4px 4px #ddd;
   transform: scale(1.01);
 }
-=======
->>>>>>> 0361f64f19df08f03d1c7febe4211f8b484a809f
 ul {
   display: flex;
   justify-content: space-around;
@@ -111,10 +94,7 @@ ul {
   li {
     width: calc((100% / 4 - 4%));
     position: relative;
-<<<<<<< HEAD
     border: 1px solid #bbb;
-=======
->>>>>>> 0361f64f19df08f03d1c7febe4211f8b484a809f
     .icon_best {
       width: 50px;
       height: 50px;
@@ -138,18 +118,11 @@ ul {
       width: 100%;
     }
     .textMax {
-<<<<<<< HEAD
       height: 126px;
       text-align: justify;
       padding: 4%;
       .text_wrap {
         height: 61px;
-=======
-      width: 100%;
-      height: 186px;
-      .text_wrap {
-        height: 91px;
->>>>>>> 0361f64f19df08f03d1c7febe4211f8b484a809f
         .brand {
           color: #000000;
           font-size: 13px;

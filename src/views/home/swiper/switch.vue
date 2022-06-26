@@ -1,10 +1,10 @@
 <template>
     <div>
-        <div class="zs-adv">
+        <div class="zs-adv clearfix">
 
             <a title="上一页" :href="'#'" class="adv-pre" v-show="leftButton" @click="leftScroll">上一个</a>
             <div id="adv-pad-scroll">
-                <div class="adv-pad">
+                <div class="adv-pad clearfix">
                     <img class="adv-pad-item" v-for="(item, index) in itemlist" :key="index" alt=""
                         :ref="`item${index}`" :src="item.swiperImg" />
                 </div>
@@ -45,7 +45,7 @@ export default {
 
                 if (this.clickNum > 0) {
                     this.marginLeft = this.marginLeft + 420
-                    document.getElementsByClassName("adv-pad")[0].style.left = `${this.marginLeft}px`;
+                    document.getElementsByClassName("adv-pad")[0].style.marginLeft = `${this.marginLeft}px`;
                 } else {
                     this.leftButton = false
                 }
@@ -60,7 +60,7 @@ export default {
                 if (this.clickNum < this.itemlist.length - 1) {
 
                     this.marginLeft = this.marginLeft - 420
-                    document.getElementsByClassName("adv-pad")[0].style.left = `${this.marginLeft}px`;
+                    document.getElementsByClassName("adv-pad")[0].style.left.marginLeft = `${this.marginLeft}px`;
                     console.log(document.getElementsByClassName("adv-pad")[0].style.left);
                 } else {
                     this.rightButton = false
@@ -101,7 +101,7 @@ export default {
 .zs-adv {
 
     width: 1272px;
-    height: 120px;
+    height: 600px;
 
     a {
         margin-top: 58px;
@@ -122,16 +122,17 @@ export default {
 
     #adv-pad-scroll {
         float: left;
-        width: 1200px;
+        width: 1500px;
         overflow: hidden;
-
+        margin:0 auto;
         .adv-pad {
-            width: 2400px;
-            height: 120px;
+            width: 2500px;
+            height: 600px;
 
             .adv-pad-item {
-               position: absolute;
-               left: 0;
+                width:500px;
+               float:left;
+               margin-left:20px;
             }
 
             
