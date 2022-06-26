@@ -89,6 +89,7 @@ export default {
             console.log('1111')
              this.$store.dispatch('user/login',this.loginform).then(data=>{
                  this.$router.push({path:this.redirect || '/'})
+                 return this.$message.success('用户登录成功')
              }).catch(error=>{
                  return error
              })

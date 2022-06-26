@@ -86,22 +86,48 @@ const routes = [
     component: () => import("../components/botNav/world"),
   },
   /**底部导航结束 botNav**/
-<<<<<<< HEAD
     // best
     {
     path: '/best',
     name: 'Best',
     component: () => import('../views/best/best.vue'),
-  },
+  }, 
   /* 跳转结束 */
   /* 点击头部导航栏跳转 */
   {
     path: '/popslideshow',
     name: 'Popslideshow',
     component: () => import('@/views/popslideshow/index')
-  }
-=======
->>>>>>> ee7ddddfcaf4dce2a9979097593f21cf2a269a38
+  },
+  /* 分类搜素 */
+  {
+    path:'/search',
+    name:'search',
+    component:()=> import ('@/views/search/index.vue'),
+    redirect:'/search/product',
+    children:[
+      {
+        path:'product',
+        name:'product',
+        component:()=>import ('@/views/search/product/index.vue')
+      },
+      {
+        path:'activity',
+        name:'activity',
+        component:()=>import ('@/views/search/activity/index.vue')
+      },
+      {
+        path:'show',
+        name:'show',
+        component:()=>import ('@/views/search/show/index.vue')
+      }
+    ]
+  },
+  {
+    path: '/exclusive',
+    name: 'exclusive',
+    component: () => import('@/views/exclusive/wantneed/index.vue')
+  },
 ];
 
 const router = new VueRouter({

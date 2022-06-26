@@ -20,7 +20,8 @@ export default{
     BotNav,
     NavBar,
     BackTop
-}
+},
+
 }
 </script>
 

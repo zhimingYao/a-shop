@@ -8,10 +8,10 @@
         <div class="site-search">
           <div id="search">
             <div class="ipt">
-              <input type="text" name="s" class="text" placeholder="潮流,从搜索开始"
-                style="background-color: transparent; border: 0" />
+              <input type="text" name="s" class="text" placeholder="潮流,从搜索开始" v-model="parent_name"
+                style="background-color: transparent;" />
             </div>
-            <img src="../../assets/image/search.png" alt="" />
+            <img src="../../assets/image/search.png" alt="" @click="search"/>
           </div>
         </div>
       </div>
@@ -28,7 +28,18 @@
 
 <script>
 export default {
-  name: 'Top'
+  name: 'Top',
+  data(){
+    return{
+    parent_name:''
+    }
+  },
+  methods:{
+    search(){
+    console.log(this.parent_name)
+    this.$router.push('/search?redirect='+this.parent_name)
+    }
+  }
 };
 </script>
 
@@ -140,5 +151,10 @@ export default {
       }
     }
     }
+  }
+  .text{
+    padding-left: 10px;
+     border: none; 
+     outline: none;
   }
 </style>
