@@ -69,7 +69,7 @@
   </div>
 </template>
 <script>
-import { getShopCarList } from '@/api/shopCar';
+import { getShopCar } from '../api/shopcar.js'
 export default {
   name: 'BackTop',
   props: {
@@ -123,7 +123,7 @@ export default {
      */
     getShopList() {
       // console.log(this.$store.state.user.id);
-      getShopCarList(this.$store.state.user.id).then(data => {
+      getShopCar(this.$store.state.user.id).then(data => {
         if (!data.data.code === 200) return this.$message.error('你还没登录,请前往登录,获取购物车列表');
         this.carCount = data.data.data.length;
         this.shopCarList = data.data.data;

@@ -15,6 +15,15 @@
           <div class="price">
             <span class="discount_price">{{ item.price }}</span>
             <span class="base_price">{{ item.price + 1000 }}</span>
+            <div class="front">
+              [펜트하우스 이지아,강민경,효민,류이서,보라끌레르 착용] | [04/16
+              예약배송]
+            </div>
+            <div class="product">Sac de Trompette Small FA0SB013-10</div>
+          </div>
+          <div class="price">
+            <span class="discount_price">37,800</span>
+            <span class="base_price">42,000</span>
             <span class="discount_rate">10%</span>
           </div>
           <p class="reservation">预定</p>
@@ -37,6 +46,7 @@ export default {
   data() {
     return {
       imgTopList: [],
+      topListAll: [],
     };
   },
   props: {

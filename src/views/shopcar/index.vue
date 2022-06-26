@@ -50,7 +50,7 @@
 </template>
 
 <script>
-import { getShopCar } from "@/api/shopCar";
+import { getShopCar } from "@/api/shopcar";
 export default {
   name: "ShopCar",
   data() {

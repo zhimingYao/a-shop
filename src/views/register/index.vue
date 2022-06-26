@@ -63,7 +63,7 @@ export default {
             if (value) {
 
 
-                return callback()
+                return callback(new Error('该用户名已经被注册'))
 
             }
 

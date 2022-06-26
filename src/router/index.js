@@ -134,10 +134,15 @@ const routes = [{
     name: 'buyShop',
     component:() =>import('@/views/buyShop/index.vue')
   },
+  {
+    path:"/event",
+    name:"Event",
+    component:()=>import("@/views/event")
+  }
 ];
 
 const router = new VueRouter({
   routes
-});
+})
 
 export default router;
