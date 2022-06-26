@@ -55,8 +55,11 @@ export default {
         
          getSearch(name).then(data=>{
              console.log(data)
+
              this.total=data.data.length
+
              this.$store.dispatch('search/total',this.total)
+             
              console.log(this.total)
              this.list=data.data
              console.log(this.list)

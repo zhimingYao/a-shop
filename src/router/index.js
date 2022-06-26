@@ -128,6 +128,12 @@ const routes = [
     name: 'exclusive',
     component: () => import('@/views/exclusive/wantneed/index.vue')
   },
+  /* 一级导航分类 */
+   {
+    path:'/proimary',
+    name:'proimary',
+    component:()=> import ('@/views/proimary/index.vue')
+  } 
 ];
 
 const router = new VueRouter({
