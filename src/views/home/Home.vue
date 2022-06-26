@@ -55,22 +55,27 @@
         <!-- <switch-page :itemlist="swipers">
             
           </switch-page> -->
-        <swiper-vue :shop="swipers" height="700px" type="card"  width="900px" imgwidth="600px" marginLeft="300px"
+        <swiper-vue :shop="swipers" height="700px" type="card" width="900px" imgwidth="600px" marginLeft="300px"
           :loop="false" :autoplay="false"> </swiper-vue>
 
       </div>
-      <div>
-        <div>
-           <router-link ></router-link>
+      <div class="shoplisttap clearfix">
+        <div class="clearfix">
+          <span v-for="(item, index) in shopListtab" :key="index" @click="getshoplist(item)" :class="{selectStyle:shopitem==item}">{{ item }}</span>
         </div>
 
-       
-        <div>
-            <router-view></router-view>
+
+        <div class="clearfix">
+         <shop-item v-for="(item, index) in list.shopList.slice(0, 7)" :key="index" :shop="item" :pshow="true"
+            height="300px" width="13.5%" ></shop-item>
         </div>
       </div>
-      
-
+<div>
+  <img src="../../assets/image/homebot.png" alt="">
+  <img src="../../assets/image/homebot.png" alt="">
+  <img src="../../assets/image/homebot.png" alt="">
+</div>
+<buttom-vue></buttom-vue>
     </div>
   </div>
 </template>
@@ -80,10 +85,11 @@ import SwiperVue from "./swiper/index.vue";
 import { getSwiper, getSpu, getproduct } from "@/api/home";
 import Ancladlist from "./swiper/ancladlist.vue";
 import SwitchPage from "./swiper/switch.vue";
+import ButtomVue from "./buttom/ButtomVue.vue";
 
 export default {
   name: "Home",
-  components: { SwiperVue, Ancladlist, SwitchPage },
+  components: { SwiperVue, Ancladlist, SwitchPage, ButtomVue },
   data() {
     return {
       swipers: [],
@@ -92,9 +98,10 @@ export default {
         SwiperList: [],
         SwiperCarousel: [],
         SwiperColor: [],
-
+        shopList: [],
       },
-
+      shopListtab: ['连帽卫衣', '单茄克', '单风衣', '针织短裤', '运动背心'],
+      shopitem:'连帽卫衣',
       typeList: {
         "服饰": [],
         "鞋类": [],
@@ -130,6 +137,10 @@ export default {
         console.log(this.typeList);
       });
     },
+    getshoplist(item){
+      this.getSpu(item, 'shopList');
+      this.shopitem=item
+    }
   },
   created() {
     this.getSwiper();
@@ -141,7 +152,7 @@ export default {
     this.getproduct("鞋类");
     this.getproduct("配件");
     this.getproduct("儿童专区");
-
+this.getSpu("连帽卫衣", 'shopList');
   },
 };
 </script>
@@ -161,7 +172,25 @@ export default {
       width: 25%;
     }
   }
-
+.shoplisttap{
+  div{
+     margin-bottom: 30px;
+  }
+  span{
+    padding: 20px;
+    font-size: 24px;
+    color: rgb(148, 146, 146);
+   
+  }
+  .selectStyle{
+    color: #000;
+    border-bottom: 2px solid #000;
+  }
+  span:hover{
+        color: rgb(80, 80, 80);
+    border-bottom: 2px solid rgb(81, 81, 81);
+  }
+}
   .SwiperAndList {
 
     .minlunb {

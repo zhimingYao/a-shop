@@ -11,11 +11,7 @@ const routes = [{
   path: '/home',
   name: 'HOME',
   component: () => import('@/views/home/Home.vue'),
-  children: {
-    path: '/shopListtab',
-    name: 'ShopListtab',
-    component: () => import('@/views/home/swiper/shopListtab.vue'),
-  }
+ 
 },
 
 {
