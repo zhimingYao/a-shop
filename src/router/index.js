@@ -128,7 +128,12 @@ const routes = [{
     name: 'exclusive',
     component: () => import('@/views/exclusive/wantneed/index.vue')
   },
-  
+  /* 商品提交订单 */
+  {
+    path: '/buyShop',
+    name: 'buyShop',
+    component:() =>import('@/views/buyShop/index.vue')
+  },
 ];
 
 const router = new VueRouter({

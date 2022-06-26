@@ -42,7 +42,7 @@
       <ul class="footer">
         <li>总价：￥</li>&emsp;|&emsp;
         <li>
-          <el-button type="danger" style="padding: 10px 30px">结算</el-button>
+          <el-button type="danger" style="padding: 10px 30px" @click="$router.push('/buyShop')">结算</el-button>
         </li>
       </ul>
     </footer>
@@ -50,6 +50,7 @@
 </template>
 
 <script>
+import { getShopCar } from "@/api/shopCar";
 export default {
   name: "ShopCar",
   data() {
@@ -90,9 +91,9 @@ export default {
   },
   methods:{
     getShopCar(){
-      let { token, username } = this.$store.state.user;
+      let  { token, username } = this.$store.state.user;
       getShopCar({token,username}).then(data=>{
-        this.shopcarlist = data
+        this.shopcarlist = data.data
       })
     },
     
@@ -114,7 +115,7 @@ export default {
 <style lang="scss" scoped>
 .shopCar {
   width: 1240px;
-  background-color: aliceblue;
+  background-color: white;
   margin: 20px auto;
   h1 {
     display: flex;
@@ -146,8 +147,8 @@ export default {
 
     .shopcar {
       height: 200px;
-      background-color: white;
-      border-bottom: 1px solid #000;
+      background-color: aliceblue;
+      border-radius: 10px;
       li:nth-child(1) {
         line-height: 200px;
       }
@@ -156,7 +157,6 @@ export default {
         float: left;
         width: 200px;
         height: 200px;
-        background-color: gold;
         img {
           width: 190px;
           height: 190px;

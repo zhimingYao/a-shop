@@ -17,7 +17,7 @@
         </li>
         <li></li>
         <li>
-          <router-link to="/shoplist">POP</router-link>
+          <router-link to="/popslideshow">POP</router-link>
         </li>
         <li>
           <router-link to="/exclusive">EXCLUSIVE</router-link>
