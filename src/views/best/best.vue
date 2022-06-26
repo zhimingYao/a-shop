@@ -8,8 +8,14 @@
       <div class="best_top_two">
         <div class="tabitem">
           <ul>
-            <li v-for="(item, index) in sort" :key="index">
-              <!-- <span v-for="(items, index) in item" :key="index">{{ items }}</span>  -->
+            <li
+              v-for="(item, index) in sort[this.msg]"
+              :key="index"
+              @click="underLine(index)"
+            >
+              <span :class="{ active: isShow == index ? true : false }">{{
+                item
+              }}</span>
             </li>
           </ul>
         </div>
@@ -41,6 +47,7 @@ export default {
   },
   data() {
     return {
+      isShow: 0,
       msg: "All",
       sort: {
         All: [],
@@ -81,12 +88,14 @@ export default {
       ],
     };
   },
-  methods:{
-    getValue(item){
-      this.msg=item
-      // console.log(this.msg,item)
-    }
-  }
+  methods: {
+    getValue(item) {
+      this.msg = item;
+    },
+    underLine(index) {
+      this.isShow = index;
+    },
+  },
 };
 </script>
 
@@ -116,25 +125,30 @@ export default {
   }
 }
 .tabitem {
-  width: 80%;
+  width: 90%;
   margin: 0 auto;
   ul {
     width: 100%;
     height: 32px;
-    margin: 20px auto;
+    margin: 25px auto 20px;
+    li:first-child {
+      border: none;
+    }
     li {
       display: inline-block;
-      box-sizing: border-box;
       text-align: center;
-      font-size: 14px;
-      line-height: 32px;
+      line-height: 15px;
+      padding: 0 20px;
+      font-size: 12px;
+      cursor: pointer;
+      border-left: 1px solid #bbb;
+      span {
+        padding-bottom: 5px;
+      }
     }
   }
 }
-.best_list {
-  margin-top: 90px;
-  padding: 4% 20px 50px 20px;
-  background-color: #f2f2f2;
-  // background-color: aquamarine;
+.active {
+  border-bottom: 1px solid #333;
 }
 </style>

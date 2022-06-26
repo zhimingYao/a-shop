@@ -3,8 +3,7 @@ import VueRouter from 'vue-router';
 
 Vue.use(VueRouter);
 
-const routes = [
-  {
+const routes = [{
     path: '/',
     redirect: '/home'
   },
@@ -28,10 +27,10 @@ const routes = [
     path: '/changePassword',
     name: 'CPD',
     component: () => import('../views/login/Forgotpassword/idnex.vue')
-  }, 
+  },
   {
     path: '/shopCar',
-    name:'ShopCar',
+    name: 'ShopCar',
     component: () => import('../views/shopcar/index.vue')
   },
   /**底部导航 botNav**/
@@ -86,8 +85,8 @@ const routes = [
     component: () => import("../components/botNav/world"),
   },
   /**底部导航结束 botNav**/
+  {
     // best
-    {
     path: '/best',
     name: 'Best',
     component: () => import('../views/best/best.vue'),
@@ -128,6 +127,7 @@ const routes = [
     name: 'exclusive',
     component: () => import('@/views/exclusive/wantneed/index.vue')
   },
+  
 ];
 
 const router = new VueRouter({

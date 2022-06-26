@@ -1,24 +1,20 @@
 <template>
   <div class="listTop">
     <ul>
-      <li v-for="(item, index) in imgTopList.data" :key="index">
+      <li v-for="(item, index) in imgTopList" :key="index">
         <span class="icon_best">
-          <strong>{{ index }}</strong>
+          <strong>{{ index + 1 }}</strong>
           <p>BEST</p>
         </span>
         <img :src="item.img" alt="" />
         <div class="textMax">
           <div class="text_wrap">
             <div class="brand">LOEUVRE</div>
-            <div class="front">
-              [펜트하우스 이지아,강민경,효민,류이서,보라끌레르 착용] | [04/16
-              예약배송]
-            </div>
-            <div class="product">Sac de Trompette Small FA0SB013-10</div>
+            <div class="front">{{ item.title }}</div>
           </div>
           <div class="price">
-            <span class="discount_price">37,800</span>
-            <span class="base_price">42,000</span>
+            <span class="discount_price">{{ item.price }}</span>
+            <span class="base_price">{{ item.price + 1000 }}</span>
             <span class="discount_rate">10%</span>
           </div>
           <p class="reservation">预定</p>
@@ -41,7 +37,6 @@ export default {
   data() {
     return {
       imgTopList: [],
-      topListAll: [],
     };
   },
   props: {
@@ -53,27 +48,33 @@ export default {
   methods: {
     async getImg_(parent_name, start, end, sort_) {
       const res = await getImg({ parent_name, start, end, sort_ });
-      console.log(res);
-      if (this.listTop == "All") {
-        this.topListAll = res;
+      // console.log(res, this.listTop);
+      if (this.listTop == "All" || "服饰") {
         this.imgTopList = res;
       } else {
-        this.imgTopList = res.data;
+        this.imgTopList = res;
       }
-      console.log(this.imgTopList);
     },
-    
   },
   created() {
-    console.log(this.listTop);
     if (this.listTop == "All") {
       let arr = ["服饰"];
       arr.forEach((item) => {
         this.getImg_(item, 1, 3, "price");
       });
     } else {
-      this.getImg_(this.listTop, 1, 3);
+      this.getImg_(this.listTop, 1, 3, "price");
     }
+  },
+  watch: {
+    listTop() {
+      if (this.listTop == "All") {
+        this.getImg_('服饰', 1, 3, "price");
+      } else {
+        // console.log(this.listTop);
+        this.getImg_(this.listTop, 1, 3, "price");
+      }
+    },
   },
 };
 </script>
@@ -81,9 +82,11 @@ export default {
 <style lang="scss" scoped>
 .lst_top {
   padding: 4% 20px 0 20px;
-  //   width: 82%;
-  //   margin: 0 auto;
   background-color: #f2f2f2;
+}
+li:hover {
+  box-shadow: 0 0 4px 6px #ddd;
+  transform: scale(1.02);
 }
 ul {
   width: 100%;
@@ -94,7 +97,7 @@ ul {
   li {
     width: calc((100% / 3 - 4%));
     position: relative;
-    border: 1px solid #555;
+    border: 1px solid #bbb;
     .icon_best {
       width: 70px;
       height: 79px;
@@ -124,10 +127,12 @@ ul {
     }
 
     .textMax {
-      width: 100%;
-      height: 186px;
+      // width: 100%;
+      padding: 4%;
+      height: 126px;
+      text-align: justify;
       .text_wrap {
-        height: 91px;
+        height: 61px;
         .brand {
           color: #000000;
           font-size: 13px;
@@ -143,12 +148,6 @@ ul {
           line-height: 14px;
           margin-bottom: 9px;
           padding-top: 3px;
-        }
-        .product {
-          line-height: 15px;
-          color: #555;
-          overflow: hidden;
-          margin-bottom: 16px;
         }
       }
       .price {
