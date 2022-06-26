@@ -1,13 +1,13 @@
 <template>
   <nav ref="nav" >
     <div class="nav" :class="{ navFixed: isFixed }">
-      <img class="img" src alt="图片logo" v-show="isShow" />
+      <img class="img" src="../../assets/image/logo.png" alt="图片logo" v-show="isShow" />
       <ul class="classify">
         <li>
           <router-link to="/">服饰</router-link>
         </li>
         <li>
-          <router-link to="/shoplist">鞋类</router-link>
+          <router-link to="/shopmagnify">鞋类</router-link>
         </li>
         <li>
           <router-link to="/shoplist">配件</router-link>
@@ -17,7 +17,7 @@
         </li>
         <li></li>
         <li>
-          <router-link to="/popslideshow">POP</router-link>
+          <router-link to="/shoplist">POP</router-link>
         </li>
         <li>
           <router-link to="/exclusive">EXCLUSIVE</router-link>
