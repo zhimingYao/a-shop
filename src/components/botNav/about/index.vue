@@ -6,7 +6,7 @@
     </div>
     <div class="about-img">
       <img
-        src="http://localhost:8080/static/img/img_company.b6eff004.gif"
+        src="../../../assets/images/life.gif"
         alt=""
       />
     </div>
