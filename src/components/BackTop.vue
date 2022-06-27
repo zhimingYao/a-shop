@@ -69,7 +69,7 @@
   </div>
 </template>
 <script>
-import { getShopCar } from '../api/shopCar.js'
+import { getShopCar } from '../api/shopcar.js'
 export default {
   name: 'BackTop',
   props: {

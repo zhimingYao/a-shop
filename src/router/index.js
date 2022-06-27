@@ -157,6 +157,13 @@ const routes = [{
     path:'/section/:iten',
     name:'Section',
     component:()=> import ('@/views/section/index.vue')
+  /* 详情页 */
+  },
+  {
+    path:'/detail',
+    name:'detail',
+    prop:true,
+    component:()=> import ('@/views/details/index.vue')
   }
 ];
 

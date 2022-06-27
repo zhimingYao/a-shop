@@ -153,6 +153,7 @@ export default {
     this.getproduct("配件");
     this.getproduct("儿童专区");
 this.getSpu("连帽卫衣", 'shopList');
+console.log(this.$store.getters.id,'测试id')
   },
 };
 </script>
