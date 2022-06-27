@@ -11,8 +11,9 @@ const getDefaultState = () => {
 const state = getDefaultState();
 
 const mutations = {
-  SET_TOKEN: (state, token) => {
+  SET_TOKEN: (state,token) => {
     state.token = token;
+    console.log(state.token,'147258')
   },
   SET_USERNAME: (state, username) => {
     state.username = username;
@@ -29,8 +30,8 @@ const actions = {
         const data = response;
         console.log(data);
         commit('SET_TOKEN', data.data.token);
-        commit('SET_TOKEN', data.data.userInfo);
-        commit('SET_ID', data.data.userInf.id);
+       /*  commit('SET_TOKEN', data.data.userInfo); */
+        commit('SET_ID', data.data.userInfo.id);
         setToken('token', data.data.token);
         resolve();
       });

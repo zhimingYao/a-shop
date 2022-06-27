@@ -137,7 +137,8 @@ export default {
       /* 点击二级标签跳转商品页面 */
       getsearch(item){
            this.$router.push('/search?redirect='+item)
-      }
+      },
+  
   },
   created(){
       this.getproduct()

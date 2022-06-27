@@ -1,5 +1,5 @@
 <template>
-  <div class="shop_item" :style="{width:width,height:height}" >
+  <div class="shop_item" :style="{width:width,height:height}" @click="getdetails()">
     <div class="shop_img">
       <img :src="shop.img" alt="" />
     </div>
@@ -36,6 +36,12 @@ export default {
   data() {
     return {};
   },
+  methods:{
+    getdetails(){
+       console.log(this.shop)
+      this.$router.push('/detail?shopdetail='+this.shop.id) 
+    }
+  }
 };
 </script>
 

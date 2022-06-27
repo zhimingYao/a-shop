@@ -151,7 +151,14 @@ const routes = [{
     path:'/proimary',
     name:'proimary',
     component:()=> import ('@/views/proimary/index.vue')
-  } 
+  } ,
+  /* 详情页 */
+  {
+    path:'/detail',
+    name:'detail',
+    prop:true,
+    component:()=> import ('@/views/details/index.vue')
+  }
 ];
 
 const router = new VueRouter({
