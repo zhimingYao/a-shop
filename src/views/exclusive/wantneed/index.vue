@@ -31,7 +31,7 @@
 <script>
 import EXDUSIVE from '@/views/exclusive/edition/index.vue'
 import Want from '@/views/exclusive/want/index.vue'
-import { getproduct } from "@/api/search.js";
+import { getproduct } from "@/api/home";
 export default {
   name: "exclusive",
   components:{

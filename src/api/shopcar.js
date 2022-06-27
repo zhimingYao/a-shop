@@ -1,4 +1,4 @@
-import request from '@/utils/request.js'
+import request from '@/utils/rquest.js'
 
 /* 购物车列表 */
 export function getShopCar(date){
