@@ -1,51 +1,54 @@
 <template>
- <div>
-    <nav ref="nav" >
-    <div class="nav" :class="{ navFixed: isFixed }">
-      <img class="img" src alt="图片logo" v-show="isShow" />
-      <ul class="classify">
-       <li v-for="(item,index) in parentName" :key="index"><router-link to="/proimary" @click.native="parentNamehandle(item)">{{item}}</router-link>
-       <div>
-        <suspension-vue :item="item" ></suspension-vue>
-       </div>
-      
-      </li>
-
-       <li></li>
-        <li>
-          <router-link to="/popslideshow">POP</router-link>
-        </li>
-        <li>
-          <router-link to="/exclusive">EXCLUSIVE</router-link>
-        </li>
-        <li>
-          <router-link to="/event">EVENT</router-link>
-        </li>
-        <li>
-          <router-link to="/best">BEST</router-link>
-        </li>
-      </ul>
-      <ul class="member" v-show="isShow">
-        <li>
-          <a href>搜索</a>
-        </li>
-        <li>
-          <a>MY</a>
-        </li>
-        <li>
-          <router-link to="/shopCar">购物车</router-link>
-        </li>
-      </ul>
-    </div>
-  </nav>
   <div>
+    <nav ref="nav" :class="{ navFixed: isFixed } ">
+      <div class="nav">
+        <img class="img" src="../../assets/image/s,k,r.png" alt="图片logo" v-show="isShow"
+          @click="$router.push('/home')" />
+        <ul class="classify">
+          <li v-for="(item, index) in parentName" :key="index">
+            <router-link to="/proimary" @click.native="parentNamehandle(item)">{{ item }}</router-link>
+            <div>
+              <suspension-vue :item="item" :typeList="typeList[item]"></suspension-vue>
+            </div>
+
+          </li>
+
+          <li></li>
+          <li>
+            <router-link to="/popslideshow">POP</router-link>
+          </li>
+          <li>
+            <router-link to="/exclusive">EXCLUSIVE</router-link>
+          </li>
+          <li>
+            <router-link to="/event">EVENT</router-link>
+          </li>
+          <li>
+            <router-link to="/best">BEST</router-link>
+          </li>
+        </ul>
+        <ul class="member" v-show="isShow">
+          <li>
+            <a href>搜索</a>
+          </li>
+          <li>
+            <a>MY</a>
+          </li>
+          <li>
+            <router-link to="/shopCar">购物车</router-link>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div>
+    </div>
   </div>
- </div>
 </template>
 
 <script>
-import {getParentName} from '@/api/navraptop.js'
+import { getParentName } from '@/api/navraptop.js'
 import SuspensionVue from './SuspensionVue.vue';
+import { getproduct } from "@/api/home";
 export default {
   components: { SuspensionVue },
   name: 'NavBarTop',
@@ -53,26 +56,44 @@ export default {
     return {
       isShow: false,
       isFixed: false,
-      parentName:[],
-      parentlist:[],
+      parentName: [],
+      parentlist: [],
+      typeList: {
+        "服饰": [],
+        "鞋类": [],
+        "配件": [],
+        "儿童专区": [],
+      },
     };
-  
+
   },
-  methods:{
-    getParentName(){
-     getParentName().then(data=>{
-       console.log(data)
-       this.parentName=data.data
-       this.parentlist=data.result
-     })
+  methods: {
+    getParentName() {
+      getParentName().then(data => {
+        console.log(data)
+        this.parentName = data.data
+        this.parentlist = data.result
+      })
     },
- parentNamehandle(item){
- console.log(item)
- this.$router.push('/proimary?parentName='+item)
- }
+    getproduct(name) {
+      console.log({ name });
+      getproduct(name).then((data) => {
+        console.log(data.data);
+        this.typeList[name] = data.res;
+        console.log(this.typeList);
+      });
+    },
+    parentNamehandle(item) {
+      console.log(item)
+      this.$router.push('/proimary?parentName=' + item)
+    }
   },
-  created(){
-  this.getParentName()
+  created() {
+    this.getParentName()
+    this.getproduct("服饰");
+    this.getproduct("鞋类");
+    this.getproduct("配件");
+    this.getproduct("儿童专区");
   },
   mounted() {
     let navTopDom = this.$refs['nav'];
@@ -101,12 +122,12 @@ a {
 
 li {
   display: inline-block;
-  
+
   a {
     font-size: 14px;
   }
 }
-  
+
 
 nav {
   background-color: wheat;
@@ -115,14 +136,16 @@ nav {
   z-index: 999;
   min-width: 1500px;
   height: 60px;
+
   .nav {
     width: 100%;
     height: 60px;
     background-color: black;
     min-width: 1500px;
+    position: relative;
 
     .img {
-      width: 96px;
+      width: 150px;
       height: 60px;
       position: absolute;
       top: 0px;
@@ -137,18 +160,27 @@ nav {
 
       li {
         margin-left: 5%;
-        line-height: 60px;
+
         text-align: center;
         font-size: 20px;
         color: white;
-        div{
+
+        a {
+          line-height: 60px;
+        }
+
+        div {
           display: none;
         }
       }
 
       li:hover a {
         color: rgb(70, 163, 129);
-        
+
+      }
+
+      li:hover div {
+        display: block;
       }
     }
 

@@ -10,6 +10,8 @@ import TabBtn from '@/components/TabBtn/index.js'
 import '@/icons'
 
 
+
+Vue.use(ShopItem)
 Vue.config.productionTip = false;
 Vue.use(ElementUI);
 Vue.use(TabBtn)

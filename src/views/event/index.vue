@@ -185,7 +185,7 @@ export default {
       };
       getShopList(data).then((res) => {
         
-        this.list = res.data.res;
+        this.list = res.res;
         this.shoplist = this.list.slice((this.page - 1) * 10, this.page * 10)
         this.page_total = this.list.length
         console.log(res,this.shoplist,this.page_total);

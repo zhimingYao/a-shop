@@ -173,6 +173,9 @@
 <script>
 export default {
   name: "Ministry",
+  data() {
+    placeholder: false;
+  },
 };
 </script>
 
@@ -241,9 +244,15 @@ export default {
           width: 426px;
           height: 34px;
           input {
-            width: 400px;
+            width: 390px;
             height: 32px;
             border: none;
+            border-radius: 4px;
+            list-style: none;
+            outline-color: rgb(153, 153, 255);
+          }
+          input:focus::-webkit-input-placeholder {
+            font-size: 14px;
           }
           svg {
             font-size: 26px;
@@ -408,7 +417,7 @@ export default {
               top: 8px;
               left: 50%;
               margin-left: -40px;
-              background: url(http://localhost:8080/static/img/icon_quick.a002d664.png)
+              background: url(../../../assets/image/icon雪碧图.png)
                 50% 50% no-repeat;
               background-position: 10px 10px;
               box-sizing: border-box;

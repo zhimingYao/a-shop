@@ -6,7 +6,7 @@
     </div>
     <div class="partner-img">
       <img
-        src="http://localhost:8080/static/img/img_marketing.f81f7e02.jpg"
+        src="../../../assets/images/partner.jpg"
         alt=""
       />
     </div>

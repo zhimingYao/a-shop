@@ -1,4 +1,4 @@
-import request from "@/utils/request.js";
+import request from "@/utils/rquest.js";
 
 export function getParentName() {
     return request({

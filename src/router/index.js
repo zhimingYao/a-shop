@@ -151,7 +151,13 @@ const routes = [{
     path:'/proimary',
     name:'proimary',
     component:()=> import ('@/views/proimary/index.vue')
-  } 
+  } ,
+  // 二级导航分类
+  {
+    path:'/section/:iten',
+    name:'Section',
+    component:()=> import ('@/views/section/index.vue')
+  }
 ];
 
 const router = new VueRouter({

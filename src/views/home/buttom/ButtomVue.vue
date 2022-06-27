@@ -2,8 +2,8 @@
     <div class="buttonvue clearfix">
         <div class="left but-left">
             <div class="clearfix">
-                <span class="left" @click="ulshow=true">消息</span>
-                <span class="left" @click="ulshow=false">活动公告</span>
+                <span class="left" @click="ulshow = true">消息</span>
+                <span class="left" @click="ulshow = false">活动公告</span>
             </div>
             <hr>
             <div>
@@ -26,16 +26,20 @@
         <div class="right but-right">
             <div>
                 <h2>服务中心<strong>1566-5027</strong></h2>
-                <br/>
+                <br />
                 <p>营业时间</p>
-                <br/>
+                <br />
 
                 <p>180180010@qq.com</p>
             </div>
             <div>
-                <br/>
+                <br />
 
-                <button>常见问题</button><button>1:1查询</button><SvgIcon icon-class="facebook-fill"></SvgIcon><SvgIcon icon-class="相机"></SvgIcon><SvgIcon icon-class="品牌标识-钉钉"></SvgIcon><SvgIcon icon-class="QQ-circle-fill"></SvgIcon>
+                <button>常见问题</button><button>1:1查询</button>
+                <SvgIcon icon-class="facebook-fill"></SvgIcon>
+                <SvgIcon icon-class="相机"></SvgIcon>
+                <SvgIcon icon-class="品牌标识-钉钉"></SvgIcon>
+                <SvgIcon icon-class="QQ-circle-fill"></SvgIcon>
             </div>
         </div>
     </div>
@@ -44,47 +48,53 @@
 <script>
 
 export default {
-data() {
-    return {
-        ulshow:true,
-    }
-},
+    data() {
+        return {
+            ulshow: true,
+        }
+    },
 
 }
 </script>
 
 <style lang="scss" scoped>
-.buttonvue{
+.buttonvue {
     width: 80%;
     margin: 30px auto;
-  .left{
-    float: left;
-    
-  }
-  .right{
-    float: right;
-  }
-   .but-left{
-    width:60%;
-    text-align: left;
-    span{
-     padding: 20px; 
-       font-size: 24px;
-    }
-   }
-   .but-right{
-       text-align: left;
-       
-       button{
-        padding: 10px;
-        background-color: white;
-        margin: 10px;
-        border:1px solid #000;
-       }
-       div:last-of-type{
-        font-size: 40px;
-       }
 
-   }
+    .left {
+        float: left;
+
+    }
+
+    .right {
+        float: right;
+    }
+
+    .but-left {
+        width: 60%;
+        text-align: left;
+
+        span {
+            padding: 20px;
+            font-size: 24px;
+        }
+    }
+
+    .but-right {
+        text-align: left;
+
+        button {
+            padding: 10px;
+            background-color: white;
+            margin: 10px;
+            border: 1px solid #000;
+        }
+
+        div:last-of-type {
+            font-size: 40px;
+        }
+
+    }
 }
 </style>

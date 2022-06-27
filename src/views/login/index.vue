@@ -88,7 +88,8 @@ export default {
             if(!valid)return
             console.log('1111')
              this.$store.dispatch('user/login',this.loginform).then(data=>{
-                 this.$router.push({path:this.redirect || '/'})
+                 this.$router.push({path:this.redirect || '/home'})
+                 console.log(this.$store.getters.token);
                  return this.$message.success('用户登录成功')
              }).catch(error=>{
                  return error

@@ -123,10 +123,11 @@ export default {
      */
     getShopList() {
       // console.log(this.$store.state.user.id);
-      getShopCar(this.$store.state.user.id).then(data => {
-        if (!data.data.code === 200) return this.$message.error('你还没登录,请前往登录,获取购物车列表');
-        this.carCount = data.data.data.length;
-        this.shopCarList = data.data.data;
+      getShopCar(this.$store.getters.id).then(data => {
+        console.log(data);
+        if (!data.code === 200) return this.$message.error('你还没登录,请前往登录,获取购物车列表');
+        this.carCount = data.data.length;
+        this.shopCarList = data.data;
         return (this.isShow = false); // 控制显示输出
         // console.log(this.shopCarList);
       });

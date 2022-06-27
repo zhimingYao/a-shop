@@ -1,5 +1,5 @@
 -<template>
-  <div class="tops">
+  <div class="tops clearfix">
     <div class="top">
       <div class="top1">
         <img src="../../assets/image/toplogo.png" alt="" srcset="" @click="$router.push('/home')">
@@ -10,16 +10,43 @@
             <div class="ipt">
               <input type="text" name="s" class="text" placeholder="潮流,从搜索开始" v-model="parent_name"
                 style="background-color: transparent;" />
+              <SvgIcon icon-class="头部搜索" @click="search" class="svg"></SvgIcon>
             </div>
-            <img src="../../assets/image/search.png" alt="" @click="search"/>
+
+
+
           </div>
         </div>
       </div>
       <div class="top3">
         <div id="top3">
-          <img src="../../assets/image/join.png" alt="" class="img1" @click="$router.push('/register')" />
-          <img src="../../assets/image/login.png" alt="" @click="$router.push('/login')" />
-          <img src="../../assets/image/shopCar.png" alt="" @click="$router.push('/shopCar')" />
+          <div @click="$router.push('/login')" v-if="$store.getters.token">
+            <SvgIcon icon-class="2-退出" class="svg"></SvgIcon>
+            <p>LOGOUT</p>
+          </div>
+          <div @click="$router.push('/register')"  v-if="!$store.getters.token">
+            <SvgIcon icon-class="我要加入【灰】" class="svg"></SvgIcon>
+            <p>注册</p>
+          </div>
+          <div @click="$router.push('/login')" v-if="$store.getters.token">
+            <SvgIcon icon-class="用户-角色-用户名-单人_jurassic" class="svg"></SvgIcon>
+            <p>MY</p>
+          </div>
+          <div @click="$router.push('/login')" v-if="!$store.getters.token">
+            <SvgIcon icon-class="登录"></SvgIcon>
+            <p>登录</p>
+          </div>
+          <div @click="$router.push('/shopCar')">
+            <SvgIcon icon-class="购物车" class="svg"></SvgIcon>
+      
+            <p>{{shopcarlength}}</p>
+          </div>
+
+
+
+          <!-- <img src="../../assets/image/join.png" alt="" class="img1"  />
+          <img src="../../assets/image/login.png" alt="" />
+          <img src="../../assets/image/shopCar.png" alt="" /> -->
         </div>
       </div>
     </div>
@@ -27,29 +54,32 @@
 </template>
 
 <script>
+import SvgIcon from '../SvgIcon/index.vue';
 export default {
-  name: 'Top',
-  data(){
-    return{
-    parent_name:''
+  name: "Top",
+  data() {
+    return {
+      parent_name: "",
+      shopcarlength:0,
+    };
+  },
+  methods: {
+    search() {
+      console.log(this.parent_name);
+      this.$router.push("/search?redirect=" + this.parent_name);
     }
   },
-  methods:{
-    search(){
-    console.log(this.parent_name)
-    this.$router.push('/search?redirect='+this.parent_name)
-    }
-  }
+  components: { SvgIcon }
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .tops {
   background-color: #fff(230, 230, 235);
   width: 100%px;
-  height: 65px;
+
   margin: 0 auto;
-  line-height: 65px;
+
 
   .top {
     width: 1500px;
@@ -57,24 +87,10 @@ export default {
 
     .top1 {
       float: left;
-      cursor: pointer;
-    }
-
-    .trl {
-      position: relative;
-      top: -9px;
-      width: 0;
-      height: 0px;
-      border: 3px solid;
-      border-bottom: 5px solid #000;
-      border-color: transparent transparent #000 transparent;
-    }
-
-    span {
-      font-weight: 750;
-      font-size: 25px;
 
     }
+
+
 
     .top2 {
       margin: 0 auto;
@@ -82,26 +98,42 @@ export default {
       .site-search {
         margin: 0 auto;
         width: 250px;
-        height: 60px;
-        line-height: 60px;
+        // height: 60px;
+        // line-height: 60px;
       }
 
       #search {
         position: relative;
-        height: 60px;
+        // height: 60px;
+
+        font-size: 24px;
+
+        .ipt {
+          height: 33px;
+          width: 260px;
+          border-bottom: 2px solid #000;
+          padding-top: 20px;
+
+          * {}
+
+          input {
+            height: 27px;
+            width: 220px;
+            float: left;
+
+
+          }
+
+          .svg {
+            float: right;
+          }
+
+        }
+
+
       }
 
-      #search input {
-        height: 27px;
-        width: 220px;
-        padding-right: 30px;
-      }
 
-      .ipt {
-        height: 43px;
-        width: 250px;
-        border-bottom: 2px solid #000;
-      }
 
       img {
         position: relative;
@@ -111,50 +143,35 @@ export default {
         margin-left: 222px;
       }
 
-      #search button {
-        direction: ltr;
-        text-indent: -9999em;
-      }
     }
 
     .top3 {
-      float: right;
+
       width: 200px;
+      font-size: 24px;
+      position: absolute;
+      right: 0;
+      top: 10px;
 
-      img {
-        height: 38px;
-        width: 36px;
-        position: relative;
-        top: -49px;
-      }
+      div {
+        float: left;
+        margin-right: 10px;
 
-      p {
-        position: relative;
-        top: -116px;
-        padding-left: 78%;
-      }
-
-      .img1 {
-        margin-right: 25px;
-      }
-
-      .img3 {
-        width: 25px;
-        height: 24px;
-        position: relative;
-        right: -30px;
-        top: -65px;
+        p {
+          font-size: 14px;
+        }
       }
 
       #tops {
         float: left;
       }
     }
-    }
   }
-  .text{
-    padding-left: 10px;
-     border: none; 
-     outline: none;
-  }
+}
+
+.text {
+  padding-left: 10px;
+  border: none;
+  outline: none;
+}
 </style>
