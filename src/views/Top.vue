@@ -68,12 +68,12 @@ export default {
 
 .tops{
   background-color: #fff(230, 230, 235);
-  width: 100%px;
+  width: 100%;
   height: 65px;
   margin: 0 auto;
   line-height: 65px;
   .top{
-    width:1500px ;
+    width:80% ;
     margin: 0 auto;
     .top1{
   float: left;

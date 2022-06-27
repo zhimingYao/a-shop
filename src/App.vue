@@ -2,20 +2,22 @@
   <div id="app">
  <Top></Top>
  <Lunbo></Lunbo>
+ <lunboRight></lunboRight>
  <router-view></router-view> 
-    
   </div>
 </template>
 <script>
 // 导入顶部
 import Top from '@/views/Top.vue'
 import Lunbo from '@/components/Lunbo.vue'
+import lunboRight from './components/lunbo-right.vue';
 // 导出App
 export default {
   name: "App",
   components:{
     Top,
     Lunbo,
+    lunboRight,
   }
 };
 </script>
@@ -26,6 +28,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  width: 100%;
 }
 
 nav {
