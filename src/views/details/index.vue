@@ -68,7 +68,8 @@
     </div>
     <div class="details_comments">
       <div class="comments_underline">
-        <button
+     
+          <button
           v-for="(its, index) in comments"
           :key="index"
           @click="getits(index)"
@@ -76,8 +77,9 @@
         >
           {{ its }}
         </button>
+      
       </div>
-      <img :src="igh.small" v-for="(igh, index) in img" :key="index" />
+    <img :src="igh.small" v-for="(igh, index) in img" :key="index" />
     </div>
     <div class="details_comments">
       <div class="comments_underline">
@@ -139,11 +141,14 @@
         >
           {{ its }}
         </button>
-       
       </div>
-       <div>
-            <h1>111</h1>
-        </div>
+            <div class="clear">
+               <div class="DTcomponent_one">
+      <p class="one_title">配送/交换/退货/售后服务相关注意事项</p>
+       <p class="two_title">商品的详细说明中包含配送/更换/退货/取消相关的指南时，会优先适用于下列说明事项:</p>
+    </div>
+              <DTcomponent></DTcomponent>
+            </div>
     </div>
   </div>
 </template>
@@ -152,11 +157,13 @@
 import { getdetailspu } from "@/api/details.js";
 import magnifying from "@/components/zoom/index.vue";
 import ButtomVue from "../home/buttom/ButtomVue.vue";
+import DTcomponent from '@/components/details/index.vue'
 export default {
   name: "details",
   components: {
     magnifying,
     ButtomVue,
+    DTcomponent,
   },
   data() {
     return {
@@ -239,10 +246,11 @@ export default {
       console.log(img);
       this.imgs = img;
     },
-    /* 平论按钮切换 */
+    /* 评论按钮切换 */
     getits(index) {
       console.log(index);
       this.ipx = index;
+      this
     },
   },
   created() {
@@ -514,4 +522,21 @@ export default {
     }
   
 }
+ .DTcomponent_one{
+   position: relative;
+ /*   background-color: blue; */
+   overflow: hidden;
+   
+   .one_title{
+     margin-top: 10px;
+   }
+   .two_title{
+     padding-left: 370px;
+     padding-top: -500px;
+     margin-top: -900px;
+ /*     margin-top: 500px; */
+   /*   background-color: green; */
+     /* position: absolute; */
+   }
+ }
 </style>

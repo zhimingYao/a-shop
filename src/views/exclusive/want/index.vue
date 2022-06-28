@@ -1,6 +1,6 @@
 <template>
   <div class="shopitem">
-       <div class="items">
+       <div class="items" @click="getdetails">
             <div>
                 <img :src="img" />
             </div>
@@ -31,6 +31,10 @@
 export default {
  name:'want',
  props:{
+   id:{
+  type:String,
+  default:0,
+   },
      img:{
          type:String,
          default:''
@@ -47,6 +51,12 @@ export default {
          type:Number,
          default:0,
      }
+ },
+ methods:{
+   /* 跳往详情页 */
+     getdetails(){
+      this.$router.push('/detail?shopdetail='+this.id) 
+    }
  },
   computed: {
     getpercentage() {
