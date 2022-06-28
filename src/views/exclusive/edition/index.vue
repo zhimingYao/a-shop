@@ -1,6 +1,6 @@
 <template>
   <div class="imgshop">
-    <div class="imglist">
+    <div class="imglist" @click="getdetails">
       <div>
           <div class="maskimg"></div>
         <img :src="img"  class="imgs"/>
@@ -16,7 +16,11 @@
 <script>
 export default {
     name:'edition',
- props:{
+     props:{
+       id:{
+        type:String,
+        default:0,
+       },
      img:{
          type:String,
          default:''
@@ -25,6 +29,12 @@ export default {
          type:String,
          default:''
      }
+ },
+ methods:{
+   /* 跳往详情页 */
+     getdetails(){
+      this.$router.push('/detail?shopdetail='+this.id) 
+    }
  }
 }
 </script>

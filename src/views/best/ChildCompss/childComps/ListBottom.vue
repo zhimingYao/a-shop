@@ -1,7 +1,7 @@
 <template>
   <div class="listBottom">
     <ul>
-      <li v-for="(item, index) in imgBottomList" :key="index">
+      <li v-for="(item, index) in imgBottomList" :key="index" @click="getdetails(item.id)">
         <span class="icon_best">
           <strong>{{ 8 + index }}</strong>
         </span>
@@ -53,6 +53,10 @@ export default {
         this.imgBottomList = res;
       }
     },
+    /* 跳往详情页 */
+     getdetails(id){
+      this.$router.push('/detail?shopdetail='+id) 
+    }
   },
   created() {
     if (this.listBottom == "All") {

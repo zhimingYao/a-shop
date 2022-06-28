@@ -5,24 +5,24 @@
       <button class="btn">+ ALL(10943)</button>
     </div>
     
-    <div class="clearfix"> <Want v-for="is in shoplist" :key="is.id" :img="is.img" :title="is.title" :special_price="is.special_price" :price="is.price"></Want></div>
+    <div class="clearfix"> <Want v-for="is in shoplist" :key="is.id" :img="is.img" :title="is.title" :special_price="is.special_price" :price="is.price" :id="is.id"></Want></div>
    
       <div>
       <p class="title">EDITION</p>
     </div>
-      <EXDUSIVE v-for="ig in imglist" :key="ig.id" :img="ig.img" :title="ig.title"></EXDUSIVE>
+      <EXDUSIVE v-for="ig in imglist" :key="ig.id" :img="ig.img" :title="ig.title" :id="ig.id"></EXDUSIVE>
      <div class="imgs">
          <img :src="imgs.img" v-for="imgs in img" :key="imgs.id" class="src">
      </div>
         <div>
       <p class="title">TALKING</p>
     </div>
-    <div class="clearfix"><EXDUSIVE v-for="igt in imglists" :key="igt.id" :img="igt.img" :title="igt.title"></EXDUSIVE></div>
+    <div class="clearfix"><EXDUSIVE v-for="igt in imglists" :key="igt.id" :img="igt.img" :title="igt.title" :id="igt.id"></EXDUSIVE></div>
      <div>
       <p class="title">WANT.NEED</p>
       <button class="btn">+ ALL(10943)</button>
     </div>
-     <div class="clearfix"> <Want v-for="iss in shoplists" :key="iss.id" :img="iss.img" :title="iss.title" :special_price="iss.special_price" :price="iss.price"></Want></div>
+     <div class="clearfix"> <Want v-for="iss in shoplists" :key="iss.id" :img="iss.img" :title="iss.title" :special_price="iss.special_price" :price="iss.price" :id="iss.id"></Want></div>
     <div>
     </div>
   </div>

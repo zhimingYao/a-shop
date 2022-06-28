@@ -1,7 +1,7 @@
 <template>
   <div class="listTop">
     <ul>
-      <li v-for="(item, index) in imgTopList" :key="index">
+      <li v-for="(item, index) in imgTopList" :key="index" @click="getdetails(item.id)">
         <span class="icon_best">
           <strong>{{ index + 1 }}</strong>
           <p>BEST</p>
@@ -55,6 +55,12 @@ export default {
         this.imgTopList = res;
       }
     },
+    /* 跳往详情页 */
+    getdetails(id){
+      
+    
+      this.$router.push('/detail?shopdetail='+id) 
+    }
   },
   created() {
     if (this.listTop == "All") {
