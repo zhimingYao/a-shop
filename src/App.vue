@@ -1,9 +1,9 @@
 <template>
   <div id="app">
     <nav-bar></nav-bar>
-    <keep-alive>
+    <!-- <keep-alive> -->
       <router-view></router-view>
-    </keep-alive>
+    <!-- </keep-alive> -->
     
     <back-top></back-top>
     <bot-nav></bot-nav>
@@ -20,7 +20,9 @@ export default {
     NavBar,
     BackTop
 },
-
+created(){
+  console.log(this.$store.getters.token);
+}
 
 }
 </script>
