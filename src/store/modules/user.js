@@ -3,7 +3,7 @@ import { getlogin } from '@/api/login.js';
 
 const getDefaultState = () => {
   return {
-    token: getToken(),
+    token: getToken('token')|| '',
     username: '',
     id: 0
   };

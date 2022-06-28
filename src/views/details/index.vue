@@ -30,7 +30,8 @@
             :src="ig.small"
             v-for="(ig, index) in img"
             :key="index"
-            @click="setimg(ig.small)"
+            @click="setimg(ig.small,index)"
+      
           />
         </div>
         <!-- 尺码 -->
@@ -61,7 +62,7 @@
         </div>
         <!-- 按钮 -->
         <div class="details_btn">
-          <button class="btnone">加入购物车</button>
+          <button class="btnone" @click="addshopcar">加入购物车</button>
           <button class="btntwo">立即购买</button>
         </div>
       </div>
@@ -154,7 +155,7 @@
 </template>
 
 <script>
-import { getdetailspu } from "@/api/details.js";
+import { getdetailspu,addShopCar } from "@/api/details.js";
 import magnifying from "@/components/zoom/index.vue";
 import ButtomVue from "../home/buttom/ButtomVue.vue";
 import DTcomponent from '@/components/details/index.vue'
@@ -172,41 +173,45 @@ export default {
       /* 左侧图片小框图片 */
       img: [],
       imgs: "",
+      /* 商品颜色 */
+      param:[],
+      /* 选中的颜色 */
+      paramss:'',
       options: [
         {
-          value: "选项1",
+          value: "XS",
           label: "XS",
         },
         {
-          value: "选项2",
+          value: "S",
           label: "S",
         },
         {
-          value: "选项3",
+          value: "M",
           label: "M",
         },
         {
-          value: "选项4",
+          value: "L",
           label: "L",
         },
         {
-          value: "选项5",
+          value: "XL",
           label: "XL",
         },
         {
-          value: "选项6",
+          value: "2XL",
           label: "2XL",
         },
         {
-          value: "选项7",
+          value: "3XL",
           label: "3XL",
         },
         {
-          value: "选项8",
+          value: "4XL",
           label: "4XL",
         },
         {
-          value: "选项9",
+          value: "5XL",
           label: "5XL",
         },
       ],
@@ -235,23 +240,55 @@ export default {
       let spu_id = this.$route.query.shopdetail;
       getdetailspu(spu_id).then((data) => {
         this.detailsshop = data.data;
-        /*  console.log(this.detailsshop) */
+         console.log(this.detailsshop)
         this.img = JSON.parse(data.data[0].imgs);
+        this.param=JSON.parse(data.data[0].param)
+        console.log(this.param)
         console.log(this.img);
         console.log(this.img);
       });
     },
     /* 放大镜效果 */
-    setimg(img) {
+    setimg(img,index) {
       console.log(img);
       this.imgs = img;
+      this.paramss=this.param[index]
+     /*  console.log(this.param[index]) */
+     
+    /*   console.log(this.param[index]) */
     },
     /* 评论按钮切换 */
     getits(index) {
       console.log(index);
       this.ipx = index;
-      this
     },
+    /* 添加到购物车 */
+    addshopcar(){
+      let customer_id=this.$store.getters.id
+       let sku_id=this.detailsshop[0].spu_id
+       console.log(this.detailsshop)
+      let num =this.num
+     /*  let pa=this.paramss
+      console.log(pa) */
+      let params=eval([this.paramss,this.value])
+      
+      let data={
+        customer_id,
+        sku_id,
+        num,
+        params
+      }
+
+       console.log(data) 
+       addShopCar(data).then(data=>{
+        if(data.code==200){
+          this.$router.push('/shopCars')
+          return this.$message.success('添加购物车成功')
+        }else{
+          return this.$message.error('添加购物车失败')
+        }
+      }) 
+    }
   },
   created() {
     this.getdetailspu();
