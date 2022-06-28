@@ -1,17 +1,25 @@
 module.exports = {
-  root: true,
   env: {
-    node: true
+    browser: true,
+    es2021: true
   },
-  'extends': [
-    'plugin:vue/essential',
-    'eslint:recommended'
-  ],
+  extends: ['eslint:recommended', 'plugin:vue/essential'],
   parserOptions: {
-    parser: '@babel/eslint-parser'
+    ecmaVersion: 12,
+    sourceType: 'module'
   },
+  plugins: ['vue'],
   rules: {
-    'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off'
+    'space-before-function-paren': 'off',
+    typeof: false, // 语法检查关闭
+
+    'eslint.enable': true,
+    'eslint.run': 'onType',
+    'eslint.options': {
+      extensions: ['.js', '.vue', '.jsx', '.tsx']
+    },
+    'editor.codeActionsOnSave': {
+      'source.fixAll.eslint': true
+    }
   }
-}
+};

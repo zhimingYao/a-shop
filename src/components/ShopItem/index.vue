@@ -1,11 +1,13 @@
 <template>
-  <div class="shop_item">
+  <div class="shop_item" :style="{width:width,height:height}" >
     <div class="shop_img">
       <img :src="shop.img" alt="" />
     </div>
     <div class="shop_item_details">
       <div class="shop_title">{{shop.title}}</div>
-      <div class="shop_price">{{shop.price}}</div>
+      <div v-if="!pshow" class="shop_price">{{shop.price}}</div>
+      <div v-else class="shop_price">COST:￥{{shop.price}}</div>
+      <p v-show='pshows'>www.stride.fun</p>
     </div>
   </div>
 </template>
@@ -14,7 +16,22 @@
 export default {
   name: "ShopItem",
   props:{
+    //渲染数据
     shop:Object,
+    //是否显示p标签
+    pshow:{
+      type:Boolean,
+      default:false,
+    },
+     pshows:{
+      type:Boolean,
+      default:false,
+    },
+    //宽度
+    width:String,
+    //高度
+    height:String,
+
   },
   data() {
     return {};
@@ -30,13 +47,15 @@ export default {
   border: 1px solid #ccc;
   background-color: #fff;
   cursor: pointer;
+  float: left;
+  padding-bottom: 10px;
   &:hover{
     transform: scale(1.007);
     box-shadow: 0 0 4px 4px #eee;
   }
   img {
-    width: 176px;
-    height: 176px;
+    width: 100%;
+    height: 80%;
   }
   .shop_item_details {
     padding: 24px;

@@ -9,7 +9,7 @@
        </ul>
       </div>
        <div>
-           <div class="register">
+           <div class="register" @click="$router.push('/register')">
                注册
            </div>
        </div>

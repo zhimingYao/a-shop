@@ -1,76 +1,96 @@
 <template>
-  <nav ref="nav">
+ <div>
+    <nav ref="nav" >
     <div class="nav" :class="{ navFixed: isFixed }">
-      <img class="img" src="" alt="图片logo" v-show="isShow">
+      <img class="img" src alt="图片logo" v-show="isShow" />
       <ul class="classify">
+       <li v-for="(item,index) in parentName" :key="index"><router-link to="/proimary" @click.native="parentNamehandle(item)">{{item}}</router-link>
+       <div>
+        <suspension-vue :item="item" ></suspension-vue>
+       </div>
+      
+      </li>
+
+       <li></li>
         <li>
-          <router-link to="/shoplist">服饰</router-link>
+          <router-link to="/popslideshow">POP</router-link>
         </li>
         <li>
-          <router-link to="/shoplist">鞋类</router-link>
+          <router-link to="/exclusive">EXCLUSIVE</router-link>
         </li>
         <li>
-          <router-link to="/shoplist">配件</router-link>
+          <router-link to="/event">EVENT</router-link>
         </li>
         <li>
-          <router-link to="/shoplist">儿童专区</router-link>
-        </li>
-        <li></li>
-        <li>
-          <router-link to="/shoplist">POP</router-link>
-        </li>
-        <li>
-          <router-link to="/shoplist">EXCLUSIVE</router-link>
-        </li>
-        <li>
-          <router-link to="/shoplist">EVENT</router-link>
-        </li>
-        <li>
-          <router-link to="/shoplist">BEST</router-link>
+          <router-link to="/best">BEST</router-link>
         </li>
       </ul>
       <ul class="member" v-show="isShow">
         <li>
-          <a href="">搜索</a>
+          <a href>搜索</a>
         </li>
         <li>
-          <a>MY</a>
+           <router-link to="/my">MY</router-link>
         </li>
         <li>
-          <a>购物车</a>
+          <router-link to="/shopCar">购物车</router-link>
         </li>
       </ul>
     </div>
   </nav>
-
+  <div>
+  </div>
+ </div>
 </template>
 
 <script>
+import {getParentName} from '@/api/navraptop.js'
+import SuspensionVue from './SuspensionVue.vue';
 export default {
-  name: "NavBarTop",
+  components: { SuspensionVue },
+  name: 'NavBarTop',
   data() {
     return {
       isShow: false,
-      isFixed: false
-    }
+      isFixed: false,
+      parentName:[],
+      parentlist:[],
+    };
+  
+  },
+  methods:{
+    getParentName(){
+     getParentName().then(data=>{
+       console.log(data)
+       this.parentName=data.data
+       this.parentlist=data.result
+     })
+    },
+ parentNamehandle(item){
+ console.log(item)
+ this.$router.push('/proimary?parentName='+item)
+ }
+  },
+  created(){
+  this.getParentName()
   },
   mounted() {
-    let navTopDom = this.$refs["nav"];
-    let h = parseFloat(getComputedStyle(navTopDom)["height"]);
-    let p = parseFloat(getComputedStyle(navTopDom)["paddingTop"]);
-    let pb = parseFloat(getComputedStyle(navTopDom)["paddingBottom"]);
+    let navTopDom = this.$refs['nav'];
+    let h = parseFloat(getComputedStyle(navTopDom)['height']);
+    let p = parseFloat(getComputedStyle(navTopDom)['paddingTop']);
+    let pb = parseFloat(getComputedStyle(navTopDom)['paddingBottom']);
     let H = h + p + pb;
     window.addEventListener("scroll", () => {
-      console.log(H);
+      // console.log(H);
       if (scrollY > H - 10) {
         this.isFixed = true;
-        this.isShow = true
+        this.isShow = true;
       } else {
         this.isFixed = false;
-        this.isShow = false
+        this.isShow = false;
       }
     });
-  },
+  }
 };
 </script>
 
@@ -81,12 +101,12 @@ a {
 
 li {
   display: inline-block;
-
+  
   a {
     font-size: 14px;
   }
-
 }
+  
 
 nav {
   background-color: wheat;
@@ -94,7 +114,7 @@ nav {
   padding: 0;
   z-index: 999;
   min-width: 1500px;
-
+  height: 60px;
   .nav {
     width: 100%;
     height: 60px;
@@ -121,10 +141,14 @@ nav {
         text-align: center;
         font-size: 20px;
         color: white;
+        div{
+          display: none;
+        }
       }
 
       li:hover a {
         color: rgb(70, 163, 129);
+        
       }
     }
 
@@ -147,10 +171,8 @@ nav {
 
       li:hover {
         background-color: #999;
-
       }
     }
-
   }
 }
 
@@ -159,6 +181,6 @@ nav {
   top: 0;
   width: 100% !important;
   z-index: 10;
-  animation: backtop .5s;
+  animation: backtop 0.5s;
 }
 </style>

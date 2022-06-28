@@ -11,6 +11,6 @@ serve.interceptors.request.use(config=>{
 })
 //响应拦截器
 serve.interceptors.response.use(res=>{
-    return res
+    return res.data
 })
 export default serve

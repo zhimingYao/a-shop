@@ -443,8 +443,7 @@ export default {
       width: 561px;
       height: 430px;
       padding: 10px;
-      .problem-right1 {
-      }
+      
     }
   }
 }

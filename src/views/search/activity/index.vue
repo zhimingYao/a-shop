@@ -1,12 +1,12 @@
 <template>
   <div>
-      <h1>1111</h1>
+      <h1>活动</h1>
   </div>
 </template>
 
 <script>
 export default {
- name:'Home',
+
 }
 </script>
 

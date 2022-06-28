@@ -61,3 +61,12 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 |__vue.config.js(配置代理)
 
 合并测试
+ 
+shopitem 全局组件
+ 
+ height 高
+ width 宽 
+ pshop:是否显示p标签
+ shop 传入的数据
+
+11111
