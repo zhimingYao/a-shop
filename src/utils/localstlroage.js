@@ -14,12 +14,12 @@ export function clear(){
 
 import Cookies from 'js-cookie'
 
-export function getToken(TokenKey) {
-    return Cookies.get(TokenKey)
+export function getToken(key) {
+    return Cookies.get(key)
   }
   
-  export function setToken(TokenKey,token) {
-    return Cookies.set(TokenKey, token)
+  export function setToken(key,val) {
+    return Cookies.set(key, val)
   }
   
   export function removeToken() {

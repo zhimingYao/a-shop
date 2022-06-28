@@ -15,7 +15,7 @@
             <el-input v-model="loginform.password" placeholder="请输入您的密码"></el-input>
           </el-form-item>
         </el-form>
-        <p>记住账号</p>
+        <p><SvgIcon v-show="!iconshow" icon-class="icon_对号-面 (1)" @click="iconshow=true"></SvgIcon><SvgIcon v-show="iconshow" icon-class="icon_对号-面 (2)" @click="iconshow=false"></SvgIcon>记住账号</p>
           </div>
           <div class="item_right">
         <div class="right_one">
@@ -54,19 +54,23 @@
 
 <script>
 import Loginfooter from '@/views/login/footer/index.vue'
+import SvgIcon from '@/components/SvgIcon/index.vue';
 export default {
   name: "Login",
    components:{
-           Loginfooter
-      },
+    Loginfooter,
+    SvgIcon
+},
   data() {
      
     return {
         /* 表单的数据 */
       loginform: {
-        username: '',
-        password:''
+        username: this.$store.getters.username,
+        password:this.$store.getters.password
       },
+      //是否记住密码
+      iconshow:false,
       //表单的验证规则
       loginrules:{
          username:[
@@ -82,12 +86,15 @@ export default {
       }
     };
   },
+  created(){
+    console.log(this.$store.getters.username,this.$store.getters.password,111111);
+  },
   methods:{
       login(){
         this.$refs.loginsform.validate(valid=>{
             if(!valid)return
             console.log('1111')
-             this.$store.dispatch('user/login',this.loginform).then(data=>{
+             this.$store.dispatch('user/login',this.loginform,this.iconshow).then(data=>{
                  this.$router.push({path:this.redirect || '/home'})
                  console.log(this.$store.getters.token);
                  return this.$message.success('用户登录成功')

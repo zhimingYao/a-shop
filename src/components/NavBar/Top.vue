@@ -20,7 +20,7 @@
       </div>
       <div class="top3">
         <div id="top3">
-          <div @click="$router.push('/login')" v-if="$store.getters.token">
+          <div @click="logout" v-if="$store.getters.token">
             <SvgIcon icon-class="2-退出" class="svg"></SvgIcon>
             <p>LOGOUT</p>
           </div>
@@ -28,7 +28,7 @@
             <SvgIcon icon-class="我要加入【灰】" class="svg"></SvgIcon>
             <p>注册</p>
           </div>
-          <div @click="$router.push('/login')" v-if="$store.getters.token">
+          <div @click="$router.push('/')" v-if="$store.getters.token">
             <SvgIcon icon-class="用户-角色-用户名-单人_jurassic" class="svg"></SvgIcon>
             <p>MY</p>
           </div>
@@ -55,6 +55,8 @@
 
 <script>
 import SvgIcon from '../SvgIcon/index.vue';
+import { setToken, getToken } from '@/utils/localstlroage.js';
+
 export default {
   name: "Top",
   data() {
@@ -67,6 +69,23 @@ export default {
     search() {
       console.log(this.parent_name);
       this.$router.push("/search?redirect=" + this.parent_name);
+    },
+    logout(){
+      this.$router.push("/");
+      
+        setToken('token', '');
+        
+       
+             this.$store.dispatch('user/register','').then(data=>{
+                 
+                 console.log(this.$store.getters.token);
+                 return this.$message.success('退出成功')
+             }).catch(error=>{
+                 return error
+             })
+      
+    
+      
     }
   },
   components: { SvgIcon }
