@@ -197,7 +197,6 @@ export default {
     page: {
       deep:true,
       handler(nval, oval) {
-
         this.shoplist = this.list.slice((nval - 1) * 10, nval * 10)
         console.log(nval,this.shoplist);
       }

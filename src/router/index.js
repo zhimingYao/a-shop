@@ -16,7 +16,7 @@ const routes = [{
   path: '/home',
   name: 'HOME',
   component: () => import('@/views/home/Home.vue'),
- 
+
 },
 
 {
@@ -147,29 +147,34 @@ const routes = [{
   component: () => import("@/views/event")
 },
 
-  /* 跳转结束 */
-  /* 点击头部导航栏跳转 */
+/* 跳转结束 */
+/* 点击头部导航栏跳转 */
 
-  
-  /* 一级导航分类 */
-   {
-    path:'/proimary',
-    name:'proimary',
-    component:()=> import ('@/views/proimary/index.vue')
-  } ,
-  // 二级导航分类
-  {
-    path:'/section/:iten',
-    name:'Section',
-    component:()=> import ('@/views/section/index.vue')
+
+/* 一级导航分类 */
+{
+  path: '/proimary',
+  name: 'proimary',
+  component: () => import('@/views/proimary/index.vue')
+},
+// 二级导航分类
+{
+  path: '/section/:iten',
+  name: 'Section',
+  component: () => import('@/views/section/index.vue')
   /* 详情页 */
-  },
-  {
-    path:'/detail',
-    name:'detail',
-    prop:true,
-    component:()=> import ('@/views/details/index.vue')
-  }
+},
+{
+  path: '/detail',
+  name: 'detail',
+  prop: true,
+  component: () => import('@/views/details/index.vue')
+},
+{/* 订单详情页 */
+  path: '/orderdetail',
+  name: 'orderDetail',
+  component: ()=> import("@/views/orderDetail/index")
+}
 ];
 
 const router = new VueRouter({

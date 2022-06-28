@@ -25,6 +25,9 @@ export default {
   methods: {
     select(index,item){
       this.selected = index;
+      if (item === "All") {
+        item = "全部"
+      }
       this.$emit('tabBtn',item)
     }
   },
