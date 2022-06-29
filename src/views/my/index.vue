@@ -388,6 +388,10 @@ export default {
     height: 100px;
     margin: 60px auto;
   }
+  .my-order{
+    width: 1240px;
+    margin: 0 auto;
+  }
   .my-address {
     width: 1240px;
     margin: 0 auto;

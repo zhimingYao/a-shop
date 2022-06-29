@@ -122,7 +122,7 @@ export default {
      * 用户登录后id存储于store中,获取用户id显示购物车列表
      */
     getShopList() {
-      // console.log(this.$store.state.user.id);
+      console.log(this.$store.state.user.id);
       getShopCar(this.$store.getters.id).then(data => {
         console.log(data);
         if (!data.code === 200) return this.$message.error('你还没登录,请前往登录,获取购物车列表');

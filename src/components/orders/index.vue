@@ -43,11 +43,11 @@ export default {
       let customer_id = this.$store.getters.id;
       console.log(customer_id);
       const data = {
-        customer_id: 7,
+        customer_id: customer_id||7,
       };
       return getUserOrder(data).then((res) => {
-        // console.log(res);
-        this.orderData = res.data.data;
+        console.log(res);
+        this.orderData = res.data;
       });
     },
     orderDetail(row, comuln, event) {

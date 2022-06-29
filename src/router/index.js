@@ -180,7 +180,7 @@ const routes = [{
   component: () => import('@/views/my/index.vue')
 },
 {/* 订单详情页 */
-  path: '/orderdetail',
+  path: '/orderdetail/:order_id/:status',
   name: 'orderDetail',
   component: () => import("@/views/orderDetail/index.vue")
 }

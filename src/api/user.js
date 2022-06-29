@@ -15,3 +15,19 @@ export function getOrderDetail(data) {
         data,
     })
 }
+
+export function payOrder(data) {
+    return request({
+        url:"/order/payOrder",
+        method:"get",
+        data,
+    })
+}
+
+export function deleteOrder(data) {
+   return request({
+    url:"/order/deleteOrder",
+    method:"post",
+    data,
+   })
+}
