@@ -28,7 +28,7 @@
             <SvgIcon icon-class="我要加入【灰】" class="svg"></SvgIcon>
             <p>注册</p>
           </div>
-          <div @click="$router.push('/')" v-if="$store.getters.token">
+          <div @click="$router.push('/my')" v-if="$store.getters.token">
             <SvgIcon icon-class="用户-角色-用户名-单人_jurassic" class="svg"></SvgIcon>
             <p>MY</p>
           </div>
@@ -133,7 +133,6 @@ export default {
           border-bottom: 2px solid #000;
           padding-top: 20px;
 
-          * {}
 
           input {
             height: 27px;

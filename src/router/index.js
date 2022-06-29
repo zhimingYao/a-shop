@@ -40,7 +40,6 @@ const routes = [{
   name: 'ShopCar',
   component: () => import('../views/shopcar/index.vue')
 },
-/**底部导航 botNav**/
 {
   // 关于我们
   path: "/about",
@@ -91,7 +90,6 @@ const routes = [{
   name: "World",
   component: () => import("../components/botNav/world"),
 },
-/**底部导航结束 botNav**/
 {
   // best
   path: '/best',
@@ -174,7 +172,13 @@ const routes = [{
     path:'/shopCars',
     name:'ShopCars',
     component:()=> import ('@/views/shopCars/index.vue')
-  }
+  },
+   {
+    // my
+    path:'/my',
+    name:'ELMy',
+    component:()=> import ('@/views/my/index.vue')
+  } 
 ];
 
 const router = new VueRouter({
