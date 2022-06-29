@@ -169,6 +169,11 @@ const routes = [{
     name:'detail',
     prop:true,
     component:()=> import ('@/views/details/index.vue')
+  },
+  {
+    path:'/shopCars',
+    name:'ShopCars',
+    component:()=> import ('@/views/shopCars/index.vue')
   }
 ];
 

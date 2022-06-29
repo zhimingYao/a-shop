@@ -36,7 +36,7 @@
             <a>MY</a>
           </li>
           <li>
-            <router-link to="/shopCar">购物车</router-link>
+            <router-link to="/shopCars">购物车</router-link>
           </li>
           <div></div>
         </ul>

@@ -36,7 +36,7 @@
             <SvgIcon icon-class="登录"></SvgIcon>
             <p>登录</p>
           </div>
-          <div @click="$router.push('/shopCar')">
+          <div @click="$router.push('/shopCars')">
             <SvgIcon icon-class="购物车" class="svg"></SvgIcon>
       
             <p>{{shopcarlength}}</p>
