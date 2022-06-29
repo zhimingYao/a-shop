@@ -92,9 +92,7 @@ export default {
   name: "orderDetail",
   data() {
     return {
-      orderDetail: {
-        skus:[],
-      },
+      orderDetail: {},
     };
   },
   methods: {
@@ -132,14 +130,40 @@ export default {
       return Y + M + D + h + m + s;
     },
     payOrder() {
-      let data = {};
+      let data = {
+        outTradeNo:`${this.orderDetail.code || "无"}`,
+        totalAmount:this.actual_price || "无",
+        subject:`来自${this.orderDetail.address || "未知地址"}的订单`,
+        body:this.orderDetail || "无",
+      };
+      console.log(data);
       payOrder(data).then((res) => {
         console.log(res);
       });
     },
     deleteOrder() {
-      deleteOrder(data).then(() => {
+      let data ={
+        id:this.orderDetail.id,
+      }
+      deleteOrder(data).then((res) => {
         console.log(res);
+        this.$confirm('此操作将删除本订单, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning',
+          center: true
+        }).then(() => {
+          this.$message({
+            type: 'success',
+            message: '删除成功!'
+          });
+          this.$router.push("/my");
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除'
+          });
+        });
       });
     },
   },
@@ -189,6 +213,10 @@ export default {
         return res
       });
       // console.log(res);
+      return res
+    },
+    outTradeNo(){
+
       return res
     }
   },

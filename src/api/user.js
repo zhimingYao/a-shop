@@ -19,7 +19,7 @@ export function getOrderDetail(data) {
 export function payOrder(data) {
     return request({
         url:"/order/payOrder",
-        method:"get",
+        method:"post",
         data,
     })
 }

@@ -63,7 +63,7 @@ export default {
   methods:{
       getshopcar(){
           getshopcar(2).then(data=>{
-              console.log(data)
+              console.log(data,'12345')
               this.shopcarlist=data.data
               this.length=data.data.length
               
