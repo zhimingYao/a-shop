@@ -131,10 +131,10 @@ export default {
     },
     payOrder() {
       let data = {
-        outTradeNo:`${this.orderDetail.code || "无"}`,
-        totalAmount:this.actual_price || "无",
-        subject:`来自${this.orderDetail.address || "未知地址"}的订单`,
-        body:this.orderDetail || "无",
+        outTradeNo: `${this.orderDetail.code || "无"}`,
+        totalAmount: this.actual_price || "无",
+        subject: `来自${this.orderDetail.address || "未知地址"}的订单`,
+        body: this.orderDetail || "无",
       };
       console.log(data);
       payOrder(data).then((res) => {
@@ -142,29 +142,31 @@ export default {
       });
     },
     deleteOrder() {
-      let data ={
-        id:this.orderDetail.id,
-      }
-      deleteOrder(data).then((res) => {
-        console.log(res);
-        this.$confirm('此操作将删除本订单, 是否继续?', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning',
-          center: true
-        }).then(() => {
-          this.$message({
-            type: 'success',
-            message: '删除成功!'
+      let data = {
+        id: this.orderDetail.id,
+      };
+      this.$confirm("此操作将删除本订单, 是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+        center: true,
+      })
+        .then(() => {
+          deleteOrder(data).then((res) => {
+            console.log(res);
+            this.$message({
+              type: "success",
+              message: "删除成功!",
+            });
+            this.$router.push("/my");
           });
-          this.$router.push("/my");
-        }).catch(() => {
+        })
+        .catch(() => {
           this.$message({
-            type: 'info',
-            message: '已取消删除'
+            type: "info",
+            message: "已取消删除",
           });
         });
-      });
     },
   },
   created() {
@@ -186,7 +188,7 @@ export default {
       arr.filter((item) => {
         let num = item.num;
         res += num;
-        return res
+        return res;
       });
       // console.log(res);
       return res;
@@ -198,27 +200,26 @@ export default {
       arr.filter((item) => {
         let num = item.price;
         res += num;
-        return res
+        return res;
       });
       // console.log(res);
-      return res
+      return res;
     },
-    actual_price(){
+    actual_price() {
       let length = this.orderDetail && this.orderDetail.skus.length;
       let arr = this.orderDetail.skus;
       let res = 0;
       arr.filter((item) => {
         let num = item.actual_price;
         res += num;
-        return res
+        return res;
       });
       // console.log(res);
-      return res
+      return res;
     },
-    outTradeNo(){
-
-      return res
-    }
+    outTradeNo() {
+      return res;
+    },
   },
 };
 </script>
