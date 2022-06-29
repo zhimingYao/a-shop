@@ -123,7 +123,8 @@ export default {
      */
     getShopList() {
       console.log(this.$store.state.user.id);
-      getShopCar(this.$store.getters.id).then(data => {
+      let customer_id = this.$store.getters.id;
+      getShopCar({customer_id}).then(data => {
         console.log(data);
         if (!data.code === 200) return this.$message.error('你还没登录,请前往登录,获取购物车列表');
         this.carCount = data.data.length;

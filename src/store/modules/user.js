@@ -6,8 +6,7 @@ const getDefaultState = () => {
     token: getToken('token') || '',
     username: getToken('username') || '',
     password: getToken('password') || '',
-
-    id: 0
+    id: getToken('id') || 0,
   };
 };
 const state = getDefaultState();
@@ -32,9 +31,8 @@ const actions = {
   login({ commit }, userinfo) {
     let { username, password } = userinfo
     return new Promise((resolve, reject) => {
-      getlogin({ username, password }).then(response => {
-        const data = response;
-
+      getlogin({ username, password }).then(data => {
+        console.log(data,'登录成狗');
         commit('SET_TOKEN', data.data.token);
         /*  commit('SET_TOKEN', data.data.userInfo); */
         commit('SET_ID', data.data.userInfo.id);

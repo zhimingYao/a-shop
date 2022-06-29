@@ -1,11 +1,9 @@
 import request from '@/utils/rquest.js'
 
-export function getshopcar(customer_id){
+export function getshopcar(data){
     return request({
-        url:"/shopCar/getShopCar",
+        url:"/shopcar/getShopCar",
         method:'post',
-        data:{
-            customer_id
-        }
+        data,
     })
 }
