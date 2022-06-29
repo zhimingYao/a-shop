@@ -180,7 +180,7 @@ export default {
     getShopList(item) {
       // console.log(item);
       const data = {
-        parent_name: item || "",
+        parent_name: item || "全部",
 
       };
       getShopList(data).then((res) => {

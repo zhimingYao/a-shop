@@ -94,7 +94,9 @@
     <div class="my-img">
       <img src="../../assets/images/personcenter.jpg" alt="" />
     </div>
-    <div class="my-order"></div>
+    <div class="my-order">
+      <order-user-list></order-user-list>
+    </div>
     <div class="my-address">
       <div class="address-first-line">
         <h3>我的地址</h3>
