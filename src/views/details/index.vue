@@ -1,5 +1,5 @@
 <template>
-  <div class="details">
+  <div class="details" :key="key">
     <div class="details_title">
       <span @click="$router.go(-1)"> Go back</span>
       <span> Go forward</span>
@@ -253,7 +253,7 @@ export default {
       console.log(img);
       this.imgs = img;
       this.paramss=this.param[index]
-     /*  console.log(this.param[index]) */
+      console.log(this.param[index])
      
     /*   console.log(this.param[index]) */
     },
@@ -264,13 +264,15 @@ export default {
     },
     /* 添加到购物车 */
     addshopcar(){
-      let customer_id=this.$store.getters.id
-       let sku_id=this.detailsshop[0].spu_id
-       console.log(this.detailsshop)
+      /* let customer_id=this.$store.getters.id */
+        let customer_id=2
+        console.log(this.detailsshop)
+       let sku_id=this.detailsshop[0].id
+       console.log(this.detailsshop,customer_id)
       let num =this.num
      /*  let pa=this.paramss
       console.log(pa) */
-      let params=eval([this.paramss,this.value])
+      let params=[this.paramss,this.value]
       
       let data={
         customer_id,
@@ -282,7 +284,8 @@ export default {
        console.log(data) 
        addShopCar(data).then(data=>{
         if(data.code==200){
-          this.$router.push('/shopCars')
+       /*    this.$router.push('/shopCars') */
+       console.log(data)
           return this.$message.success('添加购物车成功')
         }else{
           return this.$message.error('添加购物车失败')
@@ -301,6 +304,11 @@ export default {
         this.getdetailspu();
       },
     },
+  },
+  computed:{
+    key(){
+      return this.$route.path+1
+    }
   },
   destroyed() {
     this.getdetailspu();

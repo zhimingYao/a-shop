@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <nav-bar></nav-bar>
-    <keep-alive exclude="Login">
+    <keep-alive :exclude="['Login','ShopCars']">
       <router-view></router-view>
     </keep-alive>
 
