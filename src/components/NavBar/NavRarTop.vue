@@ -30,6 +30,7 @@
         <ul class="member" v-show="isShow">
           <li>
             <a href>搜索</a>
+
           </li>
           <li>
             <a>MY</a>
@@ -37,6 +38,7 @@
           <li>
             <router-link to="/shopCar">购物车</router-link>
           </li>
+          <div></div>
         </ul>
       </div>
     </nav>

@@ -57,6 +57,7 @@
           </div>
           <div class="right_two">
               <span>共计{{total}}件</span>
+              <Classify  @getshoplist="getshoplist" :page="pageage" :lists="shoplists" v-if="shoplists.length>0"></Classify>
           </div>
           <div class="right_three">
               <ShopItem v-for="igt in shoplist" :shop="igt" :key="igt.id" :width="width" :pshow="true" class="shopit"></ShopItem>
@@ -77,88 +78,90 @@
 <script>
 import {getproduct} from '@/api/proimary.js'
 import {getSecond} from '@/api/navraptop.js'
+import Classify from '@/components/classify/index.vue'
 export default {
-  name:'proimary',
-  data(){
-    return{
-        /* 一级分类获取的商品 */
-        shoplists:[],
-        /* 分页一级分类获取的商品 */
-       shoplist:[],
-       /* 一级标题的名称 */
-       parent_name:'',
-       /* 搜索框绑定的数据 */
-      parent_names:'', 
-       /* 获取的二级分类标签 */
-       list:[],
-       /* 左边栏商品数组 */
-       leftlist:[],
-       /* 商品总条数 */
-       total:0,
-       /* 当前页码值 */
-       pageage:1,
-       /* 一页显示多少条数据 */
-       pagesize:30,
-       /* shopitem组件的宽度 */
-       width:'18%'
-    }
-  },
-  methods:{
-      /* 获取一级分类商品 */
-      getproduct(){
-          let parent_name=this.$route.query.parentName
-          this.parent_name=parent_name
-        getproduct(parent_name).then(data=>{
-            console.log(data)
+    name: "proimary",
+    data() {
+        return {
+            /* 一级分类获取的商品 */
+            shoplists: [],
+            /* 分页一级分类获取的商品 */
+            shoplist: [],
+            /* 一级标题的名称 */
+            parent_name: "",
+            /* 搜索框绑定的数据 */
+            parent_names: "",
+            /* 获取的二级分类标签 */
+            list: [],
+            /* 左边栏商品数组 */
+            leftlist: [],
+            /* 商品总条数 */
+            total: 0,
+            /* 当前页码值 */
+            pageage: 1,
+            /* 一页显示多少条数据 */
+            pagesize: 10,
+            /* shopitem组件的宽度 */
+            width: "18%",
 
-            this.shoplists=data.res
-
-            this.shoplist=this.shoplists.slice(0,30)
-
-            this.leftlist=this.shoplist.slice(10,20)
-
-             this.total=data.res.length
-
-            this.getSecond()
-        })
-      },
-      /* 获取二级导航 */
-      getSecond(){
-          getSecond(this.parent_name).then(data=>{
-              console.log(data.data)
-            this.list=data.data.slice(0,5)
-            console.log(this.list)
-          })
-      },
-      /* 点击搜索跳到商品页面 */
-      search(){
-          this.$router.push('/search?redirect='+this.parent_names)
-      },
-      /* 点击二级标签跳转商品页面 */
-      getsearch(item){
-           this.$router.push('/search?redirect='+item)
-      },
-  
-  },
-  created(){
-      this.getproduct()
-  },
-  watch:{
-      /* 监听路由 根据不同路由页面商品不同 */
-      '$route':{
-          deep:true,
-          handler(){
-              this.getproduct()
-          }
-      },
-      /* 监听页码 切换商品页面 */
-    pageage:{
-        deep:true,
-        handler(news,old){
-        this.shoplist=this.shoplists.slice((news-1)*30,news*30)
+        };
+    },
+    methods: {
+        /* 获取一级分类商品 */
+        getproduct() {
+            let parent_name = this.$route.query.parentName;
+            this.parent_name = parent_name;
+            getproduct(parent_name).then(data => {
+                console.log(data);
+                this.shoplists = data.res;
+                this.shoplist = this.shoplists.slice(0, this.pagesize);
+                this.leftlist = this.shoplists.slice(10, 20);
+                this.total = data.res.length;
+                this.getSecond();
+                console.log(this.shoplists,this.shoplist,this.leftlist);
+            });
+        },
+        /* 获取二级导航 */
+        getSecond() {
+            getSecond(this.parent_name).then(data => {
+                console.log(data.data);
+                this.list = data.data.slice(0, 5);
+                console.log(this.list);
+            });
+        },
+        /* 点击搜索跳到商品页面 */
+        search() {
+            this.$router.push("/search?redirect=" + this.parent_names);
+        },
+        /* 点击二级标签跳转商品页面 */
+        getsearch(item) {
+            this.$router.push("/search?redirect=" + item);
+        },
+        getshoplist(val,value1) {
+      this.shoplist = val
+      this.pagesize=value1
+    },
+    },
+    created() {
+        this.getproduct();
+    },
+    watch: {
+        /* 监听路由 根据不同路由页面商品不同 */
+        "$route": {
+            deep: true,
+            handler() {
+                this.getproduct();
+            }
+        },
+        /* 监听页码 切换商品页面 */
+        pageage: {
+            deep: true,
+            handler(news, old) {
+                this.shoplist = this.shoplists.slice((news - 1) * this.pagesize, news * this.pagesize);
+            }
         }
-    }
-  }
+    },
+    components: { Classify }
 }
 </script>
 
@@ -218,6 +221,7 @@ export default {
         height: 27px;
         width: 220px;
         padding-right: 30px;
+        border: none;
       }
 
       .ipt {

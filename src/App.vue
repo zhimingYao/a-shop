@@ -1,10 +1,10 @@
 <template>
   <div id="app">
     <nav-bar></nav-bar>
-    <!-- <keep-alive> -->
+    <keep-alive exclude="Login">
       <router-view></router-view>
-    <!-- </keep-alive> -->
-    
+    </keep-alive>
+
     <back-top></back-top>
     <bot-nav></bot-nav>
   </div>
@@ -19,10 +19,16 @@ export default {
     BotNav,
     NavBar,
     BackTop
-},
-created(){
-  console.log(this.$store.getters.token);
-}
+  },
+  created() {
+    console.log(this.$store.getters.token);
+  },
+  computed: {
+
+    // key() {
+    //   return this.$router.path + Math.random()
+    // }
+  }
 
 }
 </script>
