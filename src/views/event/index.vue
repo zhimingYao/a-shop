@@ -180,7 +180,7 @@ export default {
     getShopList(item) {
       // console.log(item);
       const data = {
-        parent_name: item || "全部",
+        parent_name: item || "",
 
       };
       getShopList(data).then((res) => {
@@ -201,7 +201,8 @@ export default {
         this.shoplist = this.list.slice((nval - 1) * 10, nval * 10)
         console.log(nval,this.shoplist);
       }
-    }
+    },
+
   },
   created() {
     this.getShopList();

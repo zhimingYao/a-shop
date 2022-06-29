@@ -2,7 +2,7 @@
   <div class="tab-btn">
     <ul>
       <li v-for="(item, index) in tabData" :key="index">
-        <button :class="{ select: index == selected }" @click="select(index,item)">
+        <button :class="{ select: index == selected }" @click="select(index, item)">
           {{ item }}
         </button>
       </li>
@@ -23,9 +23,12 @@ export default {
     this.tabData.unshift("All");
   },
   methods: {
-    select(index,item){
+    select(index, item) {
       this.selected = index;
-      this.$emit('tabBtn',item)
+      if (item === "All") {
+        item = "全部"
+      }
+      this.$emit('tabBtn', item)
     }
   },
 };
@@ -36,20 +39,24 @@ export default {
   padding: 0;
   margin: 0 auto;
 }
+
 .tab-btn {
   width: 100%;
   height: 60px;
   background-color: #ccc;
 }
+
 ul {
   padding: 0;
   margin: 0 auto;
   display: flex;
   border-bottom: 1px solid #000;
 }
+
 li {
   width: 20%;
 }
+
 button {
   width: 100%;
   height: 60px;
@@ -58,8 +65,10 @@ button {
   cursor: pointer;
   position: relative;
 }
+
 .select {
   border: 1px solid #000;
+
   &::before {
     content: "";
     width: 100%;
@@ -68,6 +77,6 @@ button {
     position: absolute;
     left: 0;
     bottom: -2px;
-  }  
+  }
 }
 </style>
