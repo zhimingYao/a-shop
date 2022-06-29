@@ -1,9 +1,9 @@
 <template>
   <div id="app">
     <nav-bar></nav-bar>
-    <keep-alive exclude="Login">
+    <!-- <keep-alive exclude="Login"> -->
       <router-view></router-view>
-    </keep-alive>
+    <!-- </keep-alive> -->
 
     <back-top></back-top>
     <bot-nav></bot-nav>
