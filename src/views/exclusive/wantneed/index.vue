@@ -1,5 +1,9 @@
 <template>
   <div class="exclude">
+    <div class="clearfix">
+      <lunbo></lunbo>
+      <lunbo-right></lunbo-right>
+    </div>
     <div>
       <p class="title">WANT.NEED</p>
       <button class="btn">+ ALL(10943)</button>
@@ -32,11 +36,15 @@
 import EXDUSIVE from '@/views/exclusive/edition/index.vue'
 import Want from '@/views/exclusive/want/index.vue'
 import { getproduct } from "@/api/home";
+import Lunbo from './Lunbo.vue';
+import LunboRight from './lunbo-right.vue';
 export default {
   name: "exclusive",
   components:{
      EXDUSIVE,
-     Want
+     Want,
+    Lunbo,
+    LunboRight
   },
   data() {
     return {
