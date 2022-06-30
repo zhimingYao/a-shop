@@ -49,7 +49,7 @@ export default {
     async getImg_(parent_name, start, end, sort_) {
       const res = await getImg({ parent_name, start, end, sort_ });
       // console.log(res, this.listTop);
-      if (this.listTop == "All" || "服饰") {
+      if (this.listTop == "全部" || "服饰") {
         this.imgTopList = res;
       } else {
         this.imgTopList = res;
@@ -63,7 +63,7 @@ export default {
     }
   },
   created() {
-    if (this.listTop == "All") {
+    if (this.listTop == "全部") {
       let arr = ["服饰"];
       arr.forEach((item) => {
         this.getImg_(item, 1, 3, "price");
@@ -74,7 +74,7 @@ export default {
   },
   watch: {
     listTop() {
-      if (this.listTop == "All") {
+      if (this.listTop == "全部") {
         this.getImg_('服饰', 1, 3, "price");
       } else {
         // console.log(this.listTop);
