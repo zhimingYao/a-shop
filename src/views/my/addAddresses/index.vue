@@ -1,4 +1,4 @@
-<template>
+0<template>
   <div class="addAddresses" v-show="flag">
     <div class="add-title">
       <h3>收货地址</h3>
@@ -139,16 +139,23 @@ export default {
       // 保存地址
       let provinceName = addressData[this.provinceCode].name;
       let cityName = addressData[this.provinceCode].child[this.cityCode].name;
-      let customer_id = this.$store.getters.id; //用户id
-      let name = this.name; //用户名
+      let customer_id = this.$store.getters.id; //用户id 
+      
+       let name = this.name; //用户名 
+        
       let tel = this.tel; //电话
       let address = `${provinceName}${cityName}${this.areaCode}${this.detailAddress}`; //地址
-      let options = [customer_id, name, tel, address];
+      let prime=true
+  /*     let options = [customer_id,name, tel, address,prime];   */
+  let options={'customer_id':customer_id,'name':name,'tel':tel,'address':address,'prime':this.isDefault}
+
+     console.log(options)
       // 发送请求
-      addAddress(options)
+     addAddress(options)
         .then((res) => {
+          console.log(res)
           // 在此页面提示新增收货地址成功
-          if (res.status === 200) {
+          if (res.data.code === 200) {
             this.$message({
               showClose: true,
               message: "成功",
@@ -172,7 +179,7 @@ export default {
             message: "新增失败",
             type: "error",
           });
-        });
+        }); 
     },
   },
   watch: {},

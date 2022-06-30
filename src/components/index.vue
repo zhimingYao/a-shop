@@ -1,7 +1,7 @@
 <template>
   <div >
     <nav-bar></nav-bar>
-    <keep-alive :exclude="['Login','Section',,'ShopCars']">
+    <keep-alive :exclude="['Login','Section','ShopCars','buyShop']">
       <router-view></router-view>
     </keep-alive>
 

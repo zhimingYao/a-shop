@@ -42,7 +42,7 @@
         <p class="one_total">￥{{ total }}</p>
       </div>
       <div class="footer_two">
-        <button>结算</button>
+        <button @click="submit">结算</button>
       </div>
     </div>
   </div>
@@ -71,7 +71,7 @@ export default {
   methods: {
     getshopcar() {
       let customer_id = this.$store.getters.id;
-      getshopcar(2).then((data) => {
+      getshopcar(customer_id).then((data) => {
         console.log(data);
         this.shopcarlist = data.data;
         this.length = data.data.length;
@@ -126,6 +126,13 @@ export default {
         return this.$message.info("取消删除");
       }
     },
+    /* 提交订单 */
+    submit(){
+      this.$router.push('/buyShop')
+      this.$store.dispatch('shopcar/shopcarlist',this.checkbox)
+
+      console.log(this.$store.getters.shopcarlist)
+    }
   },
   created() {
     this.getshopcar();
@@ -156,6 +163,9 @@ export default {
       };
     },
   },
+  destroyed(){
+    this.getshopcar()
+  }
 };
 </script>
 
@@ -211,7 +221,7 @@ export default {
       }
       .one_title {
         text-align: left;
-        margin-left: -230px;
+        margin-left: -200px;
         .title_one {
           color: rgba(0, 0, 0, 0.85);
           font-weight: 500;

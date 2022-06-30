@@ -264,8 +264,8 @@ export default {
     },
     /* 添加到购物车 */
     addshopcar(){
-      /* let customer_id=this.$store.getters.id */
-        let customer_id=2
+       let customer_id=this.$store.getters.id
+       /*  let customer_id=2 */
         console.log(this.detailsshop)
        let sku_id=this.detailsshop[0].id
        console.log(this.detailsshop,customer_id)
