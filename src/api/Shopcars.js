@@ -9,7 +9,7 @@ export function getshopcar(data){
 }
 export function detshopcar(customer_id){
     return request({
-        url:'/shopCar/deleteShopCar',
+        url:'/shopcar/deleteShopCar',
         method:'post',
         data:{
             customer_id            
