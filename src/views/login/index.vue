@@ -5,19 +5,31 @@
       <hr />
       <div class="item">
         <div class="item_left">
-          <el-form ref="loginsform" :model="loginform" label-width="80px" :rules="loginrules">
+          <el-form ref="loginsform"
+                   :model="loginform"
+                   label-width="80px"
+                   :rules="loginrules">
             <!-- 用户名输入框 -->
-            <el-form-item label="用户名" prop="username">
-              <el-input v-model="loginform.username" placeholder="请输入您的用户名" class="ipt"></el-input>
+            <el-form-item label="用户名"
+                          prop="username">
+              <el-input v-model="loginform.username"
+                        placeholder="请输入您的用户名"
+                        class="ipt"></el-input>
             </el-form-item>
             <!-- 表单密码框 -->
-            <el-form-item label="密码" prop="password">
-              <el-input v-model="loginform.password" placeholder="请输入您的密码"></el-input>
+            <el-form-item label="密码"
+                          prop="password">
+              <el-input v-model="loginform.password"
+                        placeholder="请输入您的密码"></el-input>
             </el-form-item>
           </el-form>
           <p>
-            <SvgIcon v-show="!loginform.iconshow" icon-class="icon_对号-面 (1)" @click="loginform.iconshow = true"></SvgIcon>
-            <SvgIcon v-show="loginform.iconshow" icon-class="icon_对号-面 (2)" @click="loginform.iconshow = false"></SvgIcon>记住账号
+            <SvgIcon v-show="!loginform.iconshow"
+                     icon-class="icon_对号-面 (1)"
+                     @click="loginform.iconshow = true"></SvgIcon>
+            <SvgIcon v-show="loginform.iconshow"
+                     icon-class="icon_对号-面 (2)"
+                     @click="loginform.iconshow = false"></SvgIcon>记住账号
           </p>
         </div>
         <div class="item_right">
@@ -64,7 +76,7 @@ export default {
     Loginfooter,
     SvgIcon
   },
-  data() {
+  data () {
 
     return {
       /* 表单的数据 */
@@ -74,7 +86,7 @@ export default {
         iconshow: true,
       },
       //是否记住密码
-      
+
       //表单的验证规则
       loginrules: {
         username: [
@@ -90,21 +102,21 @@ export default {
       }
     };
   },
-  created() {
+  created () {
     console.log(this.$store.getters.username, this.$store.getters.password, 111111);
   },
   methods: {
-    login() {
-     
+    login () {
+
       this.$refs.loginsform.validate(valid => {
         if (!valid) return
         console.log('1111')
 
         this.$store.dispatch('user/login', this.loginform).then(data => {
 
-           this.$router.push({path:this.redirect || '/'})
-          console.log(this.$store.getters.token);
-          
+          this.$router.push({ path: this.redirect || '/' })
+          // console.log(this.$store.getters.token);
+
 
           return this.$message.success('用户登录成功')
         }).catch(error => {
@@ -113,7 +125,7 @@ export default {
       })
     },
     /* 忘记密码事件 */
-    Forgotpassword() {
+    Forgotpassword () {
       this.$router.push('/changePassword')
     }
   },
@@ -139,7 +151,6 @@ export default {
   }
 
   .item {
-
     display: flex;
 
     .item_left {
@@ -151,8 +162,6 @@ export default {
         margin-left: 50px;
       }
     }
-
-    ;
 
     .right_one {
       width: 190px;
@@ -189,7 +198,6 @@ export default {
     margin-top: 70px;
     /*   background-color: red; */
     /*   overflow: hidden */
-    ;
     position: relative;
     margin-bottom: 70px;
 
@@ -199,7 +207,6 @@ export default {
       margin-top: 20px;
       /* background-color: blue; */
       margin-left: -700px;
-
     }
 
     ul {
@@ -221,7 +228,6 @@ export default {
         }
       }
     }
-
   }
 
   clear {

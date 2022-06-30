@@ -46,21 +46,17 @@
         <h1>请选择支付方式</h1>
         <div class="pay">
           <div class="pay-WeChat">
-            <img
-              src="http://192.168.205.195:8080/static/img/wecart.76711447.jpeg"
-              alt="微信支付"
-            />
+            <img src="../../assets/image/微信收款.png" alt="微信支付" />
           </div>
           <div class="pay-Alipay">
-            <img
-              src="http://192.168.205.195:8080/static/img/alipay.3eb09b48.jpeg"
-              alt="支付宝支付"
-            />
+            <img src="../../assets/image/支付宝收款.png" alt="支付宝支付" />
           </div>
         </div>
         <div class="shop-total">
           <ul>
-            <li><p>商品小计：</p></li>
+            <li>
+              <p>商品小计：</p>
+            </li>
             <li>
               <p>商品总价：</p>
               <p>￥{{}}</p>
@@ -79,7 +75,9 @@
                 <p>￥{{}}</p>
               </div>
 
-              <el-button type="danger" class="el-button">提交订单</el-button>
+              <el-button type="danger" class="el-button" @click="statement"
+                >提交订单</el-button
+              >
             </li>
           </ul>
         </div>
@@ -89,66 +87,60 @@
 </template>
 
 <script>
+import { payOrder } from '@/api/payOrder.js'
 export default {
-  name: "buyShop",
+  name: 'buyShop',
   data() {
     return {
       //buyShop 付钱
       buyShop: [
         {
           id: 1,
-          title: "安踏女服星标系列国旗中袖半袖短T恤短t",
+          title: '安踏女服星标系列国旗中袖半袖短T恤短t',
           spu_id: 3,
-          param: ["纯净白", "s"],
+          param: ['纯净白', 's'],
           num: 1,
-          img: "https://img.fishfay.com/shopgoods/4/162030502/162030502-2-1.jpg",
-          price: 299.0,
-          special_price: 449.0,
-        },
-        {
-          id: 1,
-          title: "安踏女服星标系列国旗中袖半袖短T恤短t",
-          spu_id: 3,
-          param: ["纯净白", "s"],
-          num: 5000000000000,
-          img: "https://img.fishfay.com/shopgoods/4/162030502/162030502-2-1.jpg",
-          price: 299.0,
-          special_price: 449.0,
-        },
-        {
-          id: 1,
-          title: "安踏女服星标系列国旗中袖半袖短T恤短t",
-          spu_id: 3,
-          param: ["纯净白", "s"],
-          num: 1,
-          img: "https://img.fishfay.com/shopgoods/4/162030502/162030502-2-1.jpg",
-          price: 299.0,
-          special_price: 449.0,
-        },
-        {
-          id: 1,
-          title: "安踏女服星标系列国旗中袖半袖短T恤短t",
-          spu_id: 3,
-          param: ["纯净白", "s"],
-          num: 5000000000000,
-          img: "https://img.fishfay.com/shopgoods/4/162030502/162030502-2-1.jpg",
-          price: 299.0,
-          special_price: 449.0,
-        },
-        {
-          id: 1,
-          title: "安踏女服星标系列国旗中袖半袖短T恤短t",
-          spu_id: 3,
-          param: ["纯净白", "s"],
-          num: 1,
-          img: "https://img.fishfay.com/shopgoods/4/162030502/162030502-2-1.jpg",
+          img: 'https://img.fishfay.com/shopgoods/4/162030502/162030502-2-1.jpg',
           price: 299.0,
           special_price: 449.0,
         },
       ],
-    };
+    }
   },
-};
+  methods: {
+    // 点击跳转支付页面进行支付
+    statement() {
+      /**
+       * @param {String} payOrder
+       * {
+       * outTradeNo
+       * totalAmount
+       * subject
+       * body
+       * }
+       */
+      let data = {
+        outTradeNo: this.$store.getters.username + Date.now(), // 订单ID
+        totalAmount: this.buyShop[0].price,
+        subject: this.buyShop[0].title,
+        body:
+          this.$store.getters.username +
+          `is paying for ${this.buyShop[0].title} ...`, // 商品描述
+      }
+      console.log(data)
+      payOrder(data)
+        .then((result) => {
+          if (result.code !== 200) {
+            return this.$message.error('获取支付接口失败')
+          }
+          window.open(result.data)
+        })
+        .catch((err) => {
+          return err
+        })
+    },
+  },
+}
 </script>
 
 <style lang="scss" scoped>
@@ -305,10 +297,10 @@ export default {
         .pay-Alipay {
           width: 195px;
           height: 145px;
-          margin-left: 3px;
+          margin-left: 200px;
           margin-top: 3px;
           border: 1px solid #4c4c4c;
-          float: left;
+          position: relative;
           img {
             width: 100%;
             height: 142px;

@@ -1,14 +1,21 @@
 <template>
   <div>
-    <nav ref="nav" :class="{ navFixed: isFixed } ">
+    <nav ref="nav"
+         :class="{ navFixed: isFixed } ">
       <div class="nav">
-        <img class="img" src="../../assets/image/s,k,r.png" alt="图片logo" v-show="isShow"
-          @click="$router.push('/home')" />
+        <img class="img"
+             src="../../assets/image/s,k,r.png"
+             alt="图片logo"
+             v-show="isShow"
+             @click="$router.push('/home')" />
         <ul class="classify">
-          <li v-for="(item, index) in parentName" :key="index">
-            <router-link to="/proimary" @click.native="parentNamehandle(item)">{{ item }}</router-link>
+          <li v-for="(item, index) in parentName"
+              :key="index">
+            <router-link to="/proimary"
+                         @click.native="parentNamehandle(item)">{{ item }}</router-link>
             <div>
-              <suspension-vue :item="item" :typeList="typeList[item]"></suspension-vue>
+              <suspension-vue :item="item"
+                              :typeList="typeList[item]"></suspension-vue>
             </div>
 
           </li>
@@ -27,7 +34,8 @@
             <router-link to="/best">BEST</router-link>
           </li>
         </ul>
-        <ul class="member" v-show="isShow">
+        <ul class="member"
+            v-show="isShow">
           <li>
             <a href>搜索</a>
 
@@ -54,7 +62,7 @@ import { getproduct } from "@/api/home";
 export default {
   components: { SuspensionVue },
   name: 'NavBarTop',
-  data() {
+  data () {
     return {
       isShow: false,
       isFixed: false,
@@ -70,34 +78,34 @@ export default {
 
   },
   methods: {
-    getParentName() {
+    getParentName () {
       getParentName().then(data => {
-        console.log(data)
+        // console.log(data)
         this.parentName = data.data
         this.parentlist = data.result
       })
     },
-    getproduct(name) {
-      console.log({ name });
+    getproduct (name) {
+      // console.log({ name });
       getproduct(name).then((data) => {
-        console.log(data.data);
+        // console.log(data.data);
         this.typeList[name] = data.res;
-        console.log(this.typeList);
+        // console.log(this.typeList);
       });
     },
-    parentNamehandle(item) {
-      console.log(item)
+    parentNamehandle (item) {
+      // console.log(item)
       this.$router.push('/proimary?parentName=' + item)
     }
   },
-  created() {
+  created () {
     this.getParentName()
     this.getproduct("服饰");
     this.getproduct("鞋类");
     this.getproduct("配件");
     this.getproduct("儿童专区");
   },
-  mounted() {
+  mounted () {
     let navTopDom = this.$refs['nav'];
     let h = parseFloat(getComputedStyle(navTopDom)['height']);
     let p = parseFloat(getComputedStyle(navTopDom)['paddingTop']);
@@ -105,10 +113,12 @@ export default {
     let H = h + p + pb;
     window.addEventListener("scroll", () => {
       // console.log(H);
-      if (scrollY > H - 10) {
+      if (scrollY > H - 10)
+      {
         this.isFixed = true;
         this.isShow = true;
-      } else {
+      } else
+      {
         this.isFixed = false;
         this.isShow = false;
       }
@@ -129,7 +139,6 @@ li {
     font-size: 14px;
   }
 }
-
 
 nav {
   background-color: wheat;
@@ -178,7 +187,6 @@ nav {
 
       li:hover a {
         color: rgb(70, 163, 129);
-
       }
 
       li:hover div {
