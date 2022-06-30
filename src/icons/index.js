@@ -4,9 +4,9 @@ import SvgIcon from '../components/SvgIcon'
 // context返回一个指定目录的加载方法,是否要递归,匹配的后缀名
 const req = require.context('./svg', false, /\.svg$/) // webpack方法
 // keys() 返回指定上下文中所有匹配文件名称
-req.keys().forEach(item => req(item)) // 遍历所有文件名并require自动加载
-console.log(req)
-console.log(req.keys())
+req.keys().forEach((item) => req(item)) // 遍历所有文件名并require自动加载
+// console.log(req)
+// console.log(req.keys())
 // req.keys().map(req)
 
 // 注册svg-icon组件

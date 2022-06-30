@@ -1,21 +1,36 @@
 <template>
   <div class="backtop">
     <div class="scroll">
-      <div id="carList" @click="getdrawer" type="primary">
-        <img src="../assets/image/购物车.png" alt />
+      <div id="carList"
+           @click="getdrawer"
+           type="primary">
+        <img src="../assets/image/购物车.png"
+             alt />
       </div>
-      <div id="service" @click="service = true" type="primary">
-        <img src="../assets/image/客服优先.png" alt />
+      <div id="service"
+           @click="service = true"
+           type="primary">
+        <img src="../assets/image/客服优先.png"
+             alt />
       </div>
-      <div id="toTop" v-if="isToTop" @click="toTop(step)">
-        <img src="../assets/image/方向-向上.png" alt />
+      <div id="toTop"
+           v-if="isToTop"
+           @click="toTop(step)">
+        <img src="../assets/image/方向-向上.png"
+             alt />
       </div>
-      <div id="toBottom" v-if="isToBottom" @click="toBottom(step)">
-        <img src="../assets/image/方向-向下.png" alt />
+      <div id="toBottom"
+           v-if="isToBottom"
+           @click="toBottom(step)">
+        <img src="../assets/image/方向-向下.png"
+             alt />
       </div>
     </div>
     <!-- 购物车 -->
-    <el-drawer title="我是标题" :visible.sync="drawer" :with-header="false" size="20%">
+    <el-drawer title="我是标题"
+               :visible.sync="drawer"
+               :with-header="false"
+               size="20%">
       <div>
         <div class="drawerHeader">
           <span>购物车</span>
@@ -25,7 +40,7 @@
           <span class="spanCard">
             <span>共 {{ carCount }} 件宝贝</span>
             <button>
-              <router-link to="/shopCar">管理</router-link>
+              <router-link to="/shopCars">管理</router-link>
             </button>
           </span>
         </div>
@@ -33,7 +48,9 @@
 
         <h2 v-if="isShow">你还没有去登录呢!</h2>
         <div v-if="!isShow">
-          <div class="shopListCar" v-for="(item, index) in shopCarList" :key="index">
+          <div class="shopListCar"
+               v-for="(item, index) in shopCarList"
+               :key="index">
             <div class="shopImg">
               <img :src="item.img" />
             </div>
@@ -51,13 +68,22 @@
       </div>
     </el-drawer>
     <!-- 客服 -->
-    <el-drawer title="我是标题" :visible.sync="service" :with-header="false" size="20%" class="bxo">
+    <el-drawer title="我是标题"
+               :visible.sync="service"
+               :with-header="false"
+               size="20%"
+               class="bxo">
       <div class="btnInput">
         <div class="drawerHeader">skr线上</div>
         <div class="drawerLogin">
           <h3>客服将尽快回复您,请等待!</h3>
-          <el-input type="textarea" :rows="2" placeholder="客服将尽快回复您" v-model="textarea" class="service_input" clearable
-            @change="service_change">
+          <el-input type="textarea"
+                    :rows="2"
+                    placeholder="客服将尽快回复您"
+                    v-model="textarea"
+                    class="service_input"
+                    clearable
+                    @change="service_change">
           </el-input>
         </div>
       </div>
@@ -75,7 +101,7 @@ export default {
       default: 50
     }
   },
-  data() {
+  data () {
     return {
       // 向上向下
       isToTop: true,
@@ -85,22 +111,24 @@ export default {
       shopCarList: [],
       carCount: 0,
       textarea: '',
-      isShow:true,
+      isShow: true,
     };
   },
   methods: {
     // 返回顶部
-    toTop(i) {
+    toTop (i) {
       //参数i表示间隔的幅度大小，以此来控制速度
       document.documentElement.scrollTop -= i;
-      if (document.documentElement.scrollTop > 0) {
+      if (document.documentElement.scrollTop > 0)
+      {
         var c = setTimeout(() => this.toTop(i), 16);
-      } else {
+      } else
+      {
         clearTimeout(c);
       }
     },
     // 返回底部
-    toBottom(i) {
+    toBottom (i) {
       var clientHeight = document.documentElement.clientHeight || document.body.clientHeight;
       var scrollHeight = document.documentElement.scrollHeight;
       // var badyHeiget = document.bady.scrollHeight
@@ -108,13 +136,15 @@ export default {
       // console.log(clientHeight);
       var height = scrollHeight - clientHeight; //超出窗口上界的值就是底部的scrolTop的值
       document.documentElement.scrollTop += i;
-      if (document.documentElement.scrollTop < height) {
+      if (document.documentElement.scrollTop < height)
+      {
         var c = setTimeout(() => this.toBottom(i), 16);
-      } else {
+      } else
+      {
         clearTimeout(c);
       }
     },
-    getdrawer() {
+    getdrawer () {
       this.drawer = true
       this.getShopList()
     },
@@ -122,11 +152,11 @@ export default {
     /**
      * 用户登录后id存储于store中,获取用户id显示购物车列表
      */
-    getShopList() {
+    getShopList () {
       // console.log(this.$store.state.user.id);
       getshopcar(this.$store.getters.id).then(data => {
-        console.log(data.data);
-        if (!data.code===200) return this.$message.error('你还没登录,请前往登录,获取购物车列表');
+        // console.log(data.data);
+        if (!data.code === 200) return this.$message.error('你还没登录,请前往登录,获取购物车列表');
         this.carCount = data.data.length;
         this.shopCarList = data.data;
         return (this.isShow = false); // 控制显示输出
@@ -134,26 +164,29 @@ export default {
       });
       this.isShow = true;
     },
-    service_change() {
+    service_change () {
       this.textarea = '';
       this.$message.success('您的留言小的已经收到,请等待小的与您练习');
     }
   },
   // 返回顶/底部
-  created() {
+  created () {
     var vm = this;
     window.onscroll = function () {
       let h = document.body.scrollHeight;
       let H = document.documentElement.scrollTop;
       let height = document.documentElement.clientHeight || document.body.clientHeight;
       // console.log(h, H, H + height);
-      if (H < 60) {
+      if (H < 60)
+      {
         vm.isToTop = false;
         vm.isToBottom = true;
-      } else if (H + height > h - 60) {
+      } else if (H + height > h - 60)
+      {
         vm.isToTop = true;
         vm.isToBottom = false;
-      } else {
+      } else
+      {
         vm.isToTop = true;
         vm.isToBottom = true;
       }
@@ -176,13 +209,13 @@ export default {
   // display: block;
   color: #fff;
 
-  &>div {
+  & > div {
     width: 50px;
     height: 45px;
     line-height: 45px;
     text-align: center;
     font-size: 35px;
-    font-family: '黑体';
+    font-family: "黑体";
     background-color: black;
 
     &:hover {

@@ -1,5 +1,5 @@
 <template>
-  <div >
+  <div>
     <nav-bar></nav-bar>
     <keep-alive :exclude="['Login','Section','ShopCars','buyShop']">
       <router-view></router-view>
@@ -20,9 +20,9 @@ export default {
     NavBar,
     BackTop
   },
-  name:'NavVue',
-  created() {
-    console.log(this.$store.getters.token);
+  name: 'NavVue',
+  created () {
+    // console.log(this.$store.getters.token);
   },
   computed: {
 
@@ -35,5 +35,4 @@ export default {
 </script>
 
 <style>
-
 </style>

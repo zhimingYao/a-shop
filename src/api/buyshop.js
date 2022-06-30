@@ -54,10 +54,11 @@ export function defaultAddress(data) {
 /* 提交订单 */
 export function payOrder(data) {
     return request({
-        url: '/order/payOrder',
-        method: 'post',
-        data: {
-            ...data,
-        },
+      url: '/order/payOrder',
+      method: 'post',
+      data: {
+        ...data,
+      },
     })
-}
+  }
+  

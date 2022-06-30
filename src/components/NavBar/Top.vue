@@ -2,47 +2,60 @@
   <div class="tops clearfix">
     <div class="top">
       <div class="top1">
-        <img src="../../assets/image/toplogo.png" alt="" srcset="" @click="$router.push('/home')">
+        <img src="../../assets/image/toplogo.png"
+             alt=""
+             srcset=""
+             @click="$router.push('/home')">
       </div>
       <div class="top2">
         <div class="site-search">
           <div id="search">
             <div class="ipt">
-              <input type="text" name="s" class="text" placeholder="潮流,从搜索开始" v-model="parent_name"
-                style="background-color: transparent;" />
-              <SvgIcon icon-class="头部搜索" @click="search" class="svg"></SvgIcon>
+              <input type="text"
+                     name="s"
+                     class="text"
+                     placeholder="潮流,从搜索开始"
+                     v-model="parent_name"
+                     style="background-color: transparent;" />
+              <SvgIcon icon-class="头部搜索"
+                       @click="search"
+                       class="svg"></SvgIcon>
             </div>
-
-
 
           </div>
         </div>
       </div>
       <div class="top3">
         <div id="top3">
-          <div @click="logout" v-if="$store.getters.token">
-            <SvgIcon icon-class="2-退出" class="svg"></SvgIcon>
+          <div @click="logout"
+               v-if="$store.getters.token">
+            <SvgIcon icon-class="2-退出"
+                     class="svg"></SvgIcon>
             <p>LOGOUT</p>
           </div>
-          <div @click="$router.push('/register')"  v-if="!$store.getters.token">
-            <SvgIcon icon-class="我要加入【灰】" class="svg"></SvgIcon>
+          <div @click="$router.push('/register')"
+               v-if="!$store.getters.token">
+            <SvgIcon icon-class="我要加入【灰】"
+                     class="svg"></SvgIcon>
             <p>注册</p>
           </div>
-          <div @click="$router.push('/my')" v-if="$store.getters.token">
-            <SvgIcon icon-class="用户-角色-用户名-单人_jurassic" class="svg"></SvgIcon>
+          <div @click="$router.push('/my')"
+               v-if="$store.getters.token">
+            <SvgIcon icon-class="用户-角色-用户名-单人_jurassic"
+                     class="svg"></SvgIcon>
             <p>MY</p>
           </div>
-          <div @click="$router.push('/login')" v-if="!$store.getters.token">
+          <div @click="$router.push('/login')"
+               v-if="!$store.getters.token">
             <SvgIcon icon-class="登录"></SvgIcon>
             <p>登录</p>
           </div>
           <div @click="$router.push('/shopCars')">
-            <SvgIcon icon-class="购物车" class="svg"></SvgIcon>
-      
+            <SvgIcon icon-class="购物车"
+                     class="svg"></SvgIcon>
+
             <p>{{shopcarlength}}</p>
           </div>
-
-
 
           <!-- <img src="../../assets/image/join.png" alt="" class="img1"  />
           <img src="../../assets/image/login.png" alt="" />
@@ -59,33 +72,33 @@ import { setToken, getToken } from '@/utils/localstlroage.js';
 
 export default {
   name: "Top",
-  data() {
+  data () {
     return {
       parent_name: "",
-      shopcarlength:0,
+      shopcarlength: 0,
     };
   },
   methods: {
-    search() {
+    search () {
       console.log(this.parent_name);
       this.$router.push("/search?redirect=" + this.parent_name);
     },
-    logout(){
+    logout () {
       this.$router.push("/");
-      
-        setToken('token', '');
-        
-       
-             this.$store.dispatch('user/register','').then(data=>{
-                 
-                 console.log(this.$store.getters.token);
-                 return this.$message.success('退出成功')
-             }).catch(error=>{
-                 return error
-             })
-      
-    
-      
+
+      setToken('token', '');
+
+
+      this.$store.dispatch('user/register', '').then(data => {
+
+        //  console.log(this.$store.getters.token);
+        return this.$message.success('退出成功')
+      }).catch(error => {
+        return error
+      })
+
+
+
     }
   },
   components: { SvgIcon }
@@ -99,17 +112,13 @@ export default {
 
   margin: 0 auto;
 
-
   .top {
     width: 1500px;
     margin: 0 auto;
 
     .top1 {
       float: left;
-
     }
-
-
 
     .top2 {
       margin: 0 auto;
@@ -133,25 +142,17 @@ export default {
           border-bottom: 2px solid #000;
           padding-top: 20px;
 
-
           input {
             height: 27px;
             width: 220px;
             float: left;
-
-
           }
 
           .svg {
             float: right;
           }
-
         }
-
-
       }
-
-
 
       img {
         position: relative;
@@ -160,11 +161,9 @@ export default {
         height: 24px;
         margin-left: 222px;
       }
-
     }
 
     .top3 {
-
       width: 200px;
       font-size: 24px;
       position: absolute;
