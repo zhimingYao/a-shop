@@ -10,11 +10,33 @@
       <div class="os-content">
         <div class="order_process">
           <el-steps :active="orderDetail.status" simple="">
-            <el-step title="待支付" icon="el-icon-edit"></el-step>
-            <el-step title="待发货" icon="el-icon-upload"></el-step>
-            <el-step title="等待收货" icon="el-icon-picture"></el-step>
+            <el-step title="待支付" icon="el-icon-upload"></el-step>
+            <el-step title="待发货" icon="el-icon-upload">
+              <svg-icon slot="icon" icon-class="022-货车发货" class-name="truck"></svg-icon>
+            </el-step>
+            <el-step title="等待收货" icon="el-icon-picture">
+              <svg-icon slot="icon" icon-class="收件箱,空盒子" class-name="truck"></svg-icon>
+            </el-step>
             <el-step title="已完成" icon="el-icon-picture"></el-step>
           </el-steps>
+          <!-- <svg-icon slot="icon" icon-class="022-货车发货" class-name="truck"></svg-icon> -->
+          <!-- <svg-icon slot="icon" icon-class="2-退出" class-name="truck"></svg-icon> -->
+          <!-- <svg-icon slot="icon" icon-class="登录" class-name="truck"></svg-icon> -->
+          <!-- <svg-icon slot="icon" icon-class="方向-向上" class-name="truck"></svg-icon> -->
+          <!-- <svg-icon slot="icon" icon-class="购物车" class-name="truck"></svg-icon> -->
+          <!-- <svg-icon slot="icon" icon-class="合同文书" class-name="truck"></svg-icon> -->
+          <!-- <svg-icon slot="icon" icon-class="加载" class-name="truck"></svg-icon> -->
+          <!-- <svg-icon slot="icon" icon-class="客服" class-name="truck"></svg-icon> -->
+          <!-- <svg-icon slot="icon" icon-class="品牌标识-钉钉" class-name="truck"></svg-icon> -->
+          <!-- <svg-icon slot="icon" icon-class="收件箱,空盒子" class-name="truck"></svg-icon> -->
+          <!-- <svg-icon slot="icon" icon-class="头部搜索" class-name="truck"></svg-icon> -->
+          <!-- <svg-icon slot="icon" icon-class="微信" class-name="truck"></svg-icon> -->
+          <!-- <svg-icon slot="icon" icon-class="facebook-fill" class-name="truck"></svg-icon> -->
+          <!-- <svg-icon slot="icon" icon-class="icon_对号-面(1)" class-name="truck"></svg-icon> -->
+          <!-- <svg-icon slot="icon" icon-class="nav搜索" class-name="truck"></svg-icon> -->
+          <!-- <svg-icon slot="icon" icon-class="noData" class-name="truck"></svg-icon> -->
+          <!-- <svg-icon slot="icon" icon-class="QQ-circle-fill" class-name="truck"></svg-icon> -->
+          <!-- <svg-icon slot="icon" icon-class="sanjiao3" class-name="truck"></svg-icon> -->
         </div>
         <div class="order_pay_or_cancle">
           <p><el-button type="danger" @click="payOrder">立即付款</el-button></p>
@@ -35,7 +57,8 @@
           </li>
           <li class="info">
             <h3>{{ item.title }}</h3>
-            <p>颜色：{{ JSON.parse(item.param)[0] }}</p>
+            <p>颜色：{{ JSON.parse(item.param)[0] }}111</p>
+           
             <p>数量：{{ item.num }}</p>
           </li>
           <li class="price">
@@ -349,5 +372,9 @@ export default {
       margin-bottom: 5px;
     }
   }
+}
+.truck{
+  width: 200%;
+  height: 200%;
 }
 </style>
