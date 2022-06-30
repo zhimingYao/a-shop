@@ -12,13 +12,14 @@
         <p>www:stride.fun</p>
       </div>
     </div> -->
-    <shop-item ></shop-item>
+     <shop-item v-for="(item, index) in NewShop[0]" :key="index" :shop="item" :pshow="true"
+           width="210px"   ></shop-item>
   </div>
 </template>
 
 <script>
 import { getproduct } from "../../../api/home";
-import ShopItem from "@/components/ShopItem/index.vue";
+
 export default {
     name: "lunbo-Right",
     data() {
@@ -56,46 +57,14 @@ export default {
     created() {
         this.getShopList1();
     },
-    components: { ShopItem }
+
 };
 </script>
 
 <style lang="scss" scoped>
 .right {
-width: 46%;
+width: 30%;
   float: right;
 
-  // .card {
-  //   cursor: pointer;
-    
-  //   height: 380px;
-  //   float: left;
-  //   border: 1px solid #e8e8e8;
-  //   margin-right: 18px;
-  //   img {
-  //     width: 100%;
-  //     height: 75%;
-  //   }
-  //   .card-anta {
-  //     color: rgba(0, 0, 0, 0.85);
-  //     font-weight: 500;
-  //     white-space: nowrap;
-  //     font-size: 16px;
-  //     text-overflow: ellipsis;
-  //     padding-top: 20px;
-  //     overflow: hidden; /*对超出容器的部分强制截取，高度不确定则换行*/
-  //     text-overflow: ellipsis; /*显示省略符号来代表被修剪的文本。*/
-  //     white-space: nowrap; /*禁止换行*/
-  //     width: 80%;
-  //     margin: 0 auto;
-  //   }
-  //   p {
-  //     height: 10%;
-  //     padding-top: 15px;
-  //     color: rgba(0, 0, 0, 0.45);
-  //     float: left;
-  //     font-size: 14px;
-  //   }
-  // }
 }
 </style>

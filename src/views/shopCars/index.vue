@@ -70,13 +70,13 @@ export default {
   },
   methods: {
     getshopcar() {
-      let customer_id = this.$store.getters.id;
-      getshopcar(2).then((data) => {
-        console.log(data);
-        this.shopcarlist = data.data;
-        this.length = data.data.length;
-        console.log(this.shopcarlist);
+        let customer_id = this.$store.getters.id;
+        console.log(customer_id);
+      getshopcar({customer_id}).then((res) => {
+        console.log(res);
+        this.shopcarlist = res.data;
       });
+      this.length = this.shopcarlist.length;
     },
     /* 购物车数量加一 */
     add(item) {

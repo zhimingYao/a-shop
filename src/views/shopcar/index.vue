@@ -22,10 +22,14 @@
           <span>尺码：{{ shopcar.param[1] }}</span>
           <div class="nums">
             <span>数量：</span>
-            <el-button style="display: inline-block" @click="reduce()">-</el-button>
+            <el-button style="display: inline-block" @click="reduce()"
+              >-</el-button
+            >
             <!-- num -->
-            <input type="text" v-model="shopcar.num">
-            <el-button style="display: inline-block" @click="add()">+</el-button>
+            <input type="text" v-model="shopcar.num" />
+            <el-button style="display: inline-block" @click="add()"
+              >+</el-button
+            >
           </div>
         </li>
         <li>
@@ -40,9 +44,15 @@
     </div>
     <footer>
       <ul class="footer">
-        <li>总价：￥</li>&emsp;|&emsp;
+        <li>总价：￥</li>
+        &emsp;|&emsp;
         <li>
-          <el-button type="danger" style="padding: 10px 30px" @click="$router.push('/buyShop')">结算</el-button>
+          <el-button
+            type="danger"
+            style="padding: 10px 30px"
+            @click="$router.push('/buyShop')"
+            >结算</el-button
+          >
         </li>
       </ul>
     </footer>
@@ -89,26 +99,22 @@ export default {
       ],
     };
   },
-  methods:{
-    getShopCar(){
-      let  { token, username } = this.$store.state.user;
-      getShopCar({token,username}).then(data=>{
-        this.shopcarlist = data.data
-      })
+  methods: {
+    getShopCar() {
+      let customer_id = this.$store.gitters.id;
+      getShopCar({ customer_id }).then((data) => {
+        this.shopcarlist = data.data;
+      });
     },
-    
+
     // 减少商品数量
-    reduce(){
-
-    },
-    // 增加商品数量 
-    add(){
-
-    }
+    reduce() {},
+    // 增加商品数量
+    add() {},
   },
-  created(){
-    this.getShopCar()
-  }
+  created() {
+    this.getShopCar();
+  },
 };
 </script>
 
@@ -173,8 +179,8 @@ export default {
           margin-left: 50px;
           font-weight: 900;
         }
-        .color{
-            margin-left: 50px;
+        .color {
+          margin-left: 50px;
         }
         span {
           font-weight: 500;
@@ -188,7 +194,7 @@ export default {
             margin-left: 0px;
             line-height: 40px;
           }
-          input{
+          input {
             text-align: center;
             overflow: hidden;
             width: 80px;
@@ -201,23 +207,23 @@ export default {
         }
       }
       li:nth-child(4) {
-          text-align: right;
+        text-align: right;
         width: 300px;
-        p{
-            margin-right: 50px;
+        p {
+          margin-right: 50px;
         }
-        p:nth-child(1){
-            margin-top: 60px;
-            color: palevioletred;
-            font-size: 20px;
+        p:nth-child(1) {
+          margin-top: 60px;
+          color: palevioletred;
+          font-size: 20px;
         }
-        p:nth-child(2){
-            text-decoration-line: line-through;
+        p:nth-child(2) {
+          text-decoration-line: line-through;
         }
-        p:nth-child(3){
-            font-size: 18px;
-            color: blue;
-            cursor: pointer;
+        p:nth-child(3) {
+          font-size: 18px;
+          color: blue;
+          cursor: pointer;
         }
       }
     }
@@ -230,9 +236,9 @@ export default {
     margin: 20px auto;
     .footer {
       margin-left: 960px;
-      li{
-          display: inline-block;
-          margin-top: 12px;
+      li {
+        display: inline-block;
+        margin-top: 12px;
       }
     }
   }

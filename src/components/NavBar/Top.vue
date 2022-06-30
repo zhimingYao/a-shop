@@ -39,7 +39,8 @@
           <div @click="$router.push('/shopCars')">
             <SvgIcon icon-class="购物车" class="svg"></SvgIcon>
       
-            <p>{{shopcarlength}}</p>
+            <p v-if="$store.getters.token">{{shopcarlength}}</p>
+            <p v-else>0</p>
           </div>
 
 
@@ -54,8 +55,10 @@
 </template>
 
 <script>
-import SvgIcon from '../SvgIcon/index.vue';
+
 import { setToken, getToken } from '@/utils/localstlroage.js';
+import { getshopcar, } from "@/api/Shopcars.js";
+
 
 export default {
   name: "Top",
@@ -86,9 +89,21 @@ export default {
       
     
       
-    }
+    },
+     getshopcar() {
+        let customer_id = this.$store.getters.id;
+        console.log(customer_id);
+      getshopcar({customer_id}).then((res) => {
+        console.log(res);
+        this.shopcarlength=res.data.length
+      });
+
+    },
   },
-  components: { SvgIcon }
+  created(){
+    this.getshopcar()
+  }
+
 };
 </script>
 

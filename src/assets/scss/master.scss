@@ -22,3 +22,21 @@ a {
 .left{
   float: left;
 }
+.el-loading-spinner .circular{
+  width: 42px;
+  height: 42px;
+  animation: loading-rotate 2s linear infinite;
+  display: none;
+}
+.el-loading-spinner{
+
+  /* 图片替换为你自定义的即可 */
+  background: url('../image/loading/loading.gif') no-repeat;
+  
+  background-size: 500px 350px;
+  width: 500px;
+  height: 500px;
+  position: relative;
+  top: 0%;
+  left: 30%;
+}

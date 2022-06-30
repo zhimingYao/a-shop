@@ -12,7 +12,7 @@ export function getdetailspu(spu_id){
 /* 商品添加到购物车 */
 export function addShopCar(data){
     return request ({
-        url:"/shopCar/addShopCar",
+        url:"/shopcar/addShopCar",
         method:'post',
         data:{
             ...data

@@ -1,18 +1,16 @@
 <template>
- <div class="lunbo">
+
   <div class="carousel">
     <el-carousel
-      height="1200px"
-      width="1200px"
-      indicator-position="outside"
-      arrow="always"
+    height="900px"
+      
     >
       <el-carousel-item v-for="(src, index) in Images" :key="index">
         <img :src="src" alt="" class="img1"/>
       </el-carousel-item>
     </el-carousel>
   </div>
-  </div>
+
 </template>
 
 <script>
@@ -30,35 +28,17 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 
-.el-carousel__arrow {
-  z-index: 10000;
-  width: 56px;
-  height: 56px;
+.carousel{
+  width: 69%;
+
+    float: left;
 }
-.carousel {
-  float: left;
-  width:68%;
-  cursor: pointer;
-}
-.el-carousel-item {
-  color: #475669;
-  font-size: 18px;
-  opacity: 0.75;
-  line-height: 938px;
-  margin: 0;
-}
+
 .img1 {
   width: 100%;
   height: 100%;
 }
 
-.el-carousel__item:nth-child(2n) {
-  background-color: #99a9bf;
-}
-
-.el-carousel__item:nth-child(2n + 1) {
-  background-color: #d3dce6;
-}
 </style>
