@@ -1,142 +1,189 @@
 <template>
-    <div>
-        <div class="zs-adv clearfix">
-
-            <a title="上一页" :href="'#'" class="adv-pre" v-show="leftButton" @click="leftScroll">上一个</a>
-            <div id="adv-pad-scroll">
-                <div class="adv-pad clearfix">
-                    <img class="adv-pad-item" v-for="(item, index) in itemlist" :key="index" alt=""
-                        :ref="`item${index}`" :src="item.swiperImg" />
-                </div>
-            </div>
-            <a title="下一页" :href="'#'" class="adv-next" v-show="rightButton" @click="rightScroll">下一个</a>
+  <div class="swipertap">
+    <div class="container">
+      <!-- swiper1 -->
+      <div class="swiper-container swiper1">
+        <div class="swiper-wrapper">
+          <div
+            :class="{selected:index==selected}"
+            class="swiper-slide"
+            v-for="(item, index) in title"
+            :key="index"
+            @click="selected=index"
+          >
+            <span class="span_content">{{ item }}</span>
+          </div>
         </div>
+      </div>
+      <!-- swiper2 -->
+      <div class="swiper-container swiper2">
+        <div class="swiper-wrapper">
+          <div
+            class="swiper-slide"
+            v-for="(item, index) in tapimg"
+            :key="index"
+          >
+            <img :src="item.swiperImg" alt="" />
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </template>
+
 <script>
+import $ from "jquery";
+window.onload = function () {};
 export default {
-    name: "SwitchPage",
-    components: {},
-    props: {
-        itemlist: [
+  name: "swipertap",
+  props: ["tapimg"],
+  data() {
+    return {
+      title: ["富强", "民主", "和谐", "平等"],
+      selected:0,
+    };
+  },
+  created() {},
+  mounted() {
+    function setCurrentSlide(ele, index) {
+      $(".swiper1 .swiper-slide").removeClass("selected");
+      ele.addClass("selected");
+      //swiper1.initialSlide=index;
+    }
 
-        ],
-    },
-    data() {
-        return {
-            maxClickNum: 0, // 最大点击次数
-            lastLeft: 0, // 上次滑动距离
-            clickNum: 0, // 点击次数
-            marginLeft: 0,
-            with: 400,
-            rightButton: true,
-            leftButton: true,
+    var swiper1 = new Swiper(".swiper1", {
+      slidesPerView: 5,
+      paginationClickable: true,
+      spaceBetween: 10,
+      freeMode: true,
+      loop: false,
+      onTab: function (swiper) {
+        var n = swiper1.clickedIndex;
+        alert(1);
+      },
+    });
+    swiper1.slides.each(function (index, val) {
+      var ele = $(this);
+      ele.on("click", function () {
+        setCurrentSlide(ele, index);
+        swiper2.slideTo(index, 500, false);
+        //mySwiper.initialSlide=index;
+      });
+    });
 
-            // imgx: 0,
-            // form: this.$form.createForm(this, { name: "horizontal_login" }),
-        };
-    },
-    //函数
-    methods: {
-        leftScroll() {
-            setTimeout(() => {
-                this.clickNum--
-                    this.rightButton = true
-
-                if (this.clickNum > 0) {
-                    this.marginLeft = this.marginLeft + 420
-                    document.getElementsByClassName("adv-pad")[0].style.marginLeft = `${this.marginLeft}px`;
-                } else {
-                    this.leftButton = false
-                }
-            })
-
-        },
-        rightScroll() {
-            setTimeout(() => {
-                this.clickNum++
-                this.leftButton = true
-
-                if (this.clickNum < this.itemlist.length - 1) {
-
-                    this.marginLeft = this.marginLeft - 420
-                    document.getElementsByClassName("adv-pad")[0].style.left.marginLeft = `${this.marginLeft}px`;
-                    console.log(document.getElementsByClassName("adv-pad")[0].style.left);
-                } else {
-                    this.rightButton = false
-                }
-            })
-   
-
-        // // 如果点击次数小于数组长度-1时，执行左滑动效果。
-        // if (this.clickNum < this.itemlist.length - 1) {
-        //     // 获取当前元素宽度
-        //     let width =
-        //         document.querySelectorAll(".adv-pad-item")[this.clickNum].offsetWidth;
-        //     // 获取最后一个元素距离左侧的距离
-        //     let lastItemOffsetLeft =
-        //         document.getElementsByClassName("adv-pad-item")[
-        //             this.itemlist.length - 1
-        //         ].offsetLeft;
-        //     // 获取可视区域宽度
-        //     const lookWidth = document.getElementById("adv-pad-scroll").clientWidth;
-        //     // 如果最后一个元素距离左侧的距离大于可视区域的宽度，表示最后一个元素没有出现，执行滚动效果
-        //     if (lastItemOffsetLeft > lookWidth) {
-        //         // 公示：滚动距离（元素的magin-left值） = 负的它自己的长度 + 上一次滑动的距离
-        //         document.getElementsByClassName("adv-pad")[0].style.marginLeft = `${-width + this.lastLeft
-        //             }px`;
-        //         this.lastLeft = -width + this.lastLeft;
-        //         // 点击次数+3
-        //         this.clickNum += 1;
-        //         // 记录到最后一个元素出现在可视区域时，点击次数的最大值。用于后面点击左侧箭头时判断右侧箭头的显示
-        //         this.maxClickNum = this.clickNum;
-        //     }
-        //     this.showRightIcon = lastItemOffsetLeft > lookWidth + width;
-        // }
-    },
-},
+    var swiper2 = new Swiper(".swiper2", {
+      direction: "horizontal",
+      loop: false,
+      autoHeight: true,
+      onSlideChangeEnd: function (swiper) {
+        var n = swiper.activeIndex;
+        setCurrentSlide($(".swiper1 .swiper-slide").eq(n), n);
+        swiper1.slideTo(n, 500, false);
+      },
+    });
+  },
 };
 </script>
-<style lang="scss" scoped>
-.zs-adv {
 
-    width: 1272px;
-    height: 600px;
+<style  lang="scss" scoped>
+// .show {
+//   width: 95%;
+//   overflow: hidden;
+//   margin: 0 auto;
+//   height: 100px;
+//   border: 5px solid #eee;
+//   border-radius: 5px;
+//   font-size: 14px;
+// }
 
-    a {
-        margin-top: 58px;
-        width: 16px;
-        height: 24px;
-        opacity: 0.8;
+// body {
+//   min-width: 320px;
+//   max-width: 640px;
+//   margin: 0 auto;
+//   color: #b5b5b5;
+//   padding: 0;
+//   font: "Microsoft Yahei", Verdana, Tahoma;
+//   text-align: center;
+// }
+
+// .container {
+//   width: 100%;
+//   .swiper-container {
+//     width: 50%;
+//     .swiper-wrapper {
+//       width: 80%;
+//       display: flex;
+//       justify-content: center;
+//       text-align: center;
+//       .swiper-slide {
+//         cursor: pointer;
+//         letter-spacing: 1em;
+//         margin-left: 10px;
+//         margin-bottom: 8px;
+//         .span_content {
+//           font-size: 20px;
+//           color: #b5b5b5;
+//         }
+//       }
+
+//     }
+//   }
+// }
+// .swiper1 .selected {
+//   color: #333;
+//   border-bottom: 3px solid #302e2e;
+// }
+
+
+
+.swiper1 {
+  color: #b5b5b5;
+  width: 50%;
+  display: flex;
+  .swiper-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 8px;
+    .span_content{
+      width: 50%;
+      font-size: 20px;
+      color: #b5b5b5;
     }
+  }
+}
+.swiper1 .swiper-slide {
+  width: 20%;
+  color: #b5b5b5;
+  text-align: center;
+  font-size: 18px;
+  height: 50px;
+  /* Center slide text vertically */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  cursor: pointer;
+}
+.swiper1 .selected {
+  color: #333;
+  border-bottom: 3px solid #302e2e;
+}
 
-
-    .adv-pre {
-        float: left;
-        margin-right: 20px;
-    }
-
-    .adv-next {
-        float: right;
-    }
-
-    #adv-pad-scroll {
-        float: left;
-        width: 1500px;
-        overflow: hidden;
-        margin:0 auto;
-        .adv-pad {
-            width: 2500px;
-            height: 600px;
-
-            .adv-pad-item {
-                width:500px;
-               float:left;
-               margin-left:20px;
-            }
-
-            
-        }
-    }
+.swiper2 {
+  width: 100%;
+  height: 550px;
+}
+.swiper2 .swiper-slide {
+  height: 550px;
+  text-align: center;
+  background-color: #f7f5f5e1;
 }
 </style>

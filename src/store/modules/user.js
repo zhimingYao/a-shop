@@ -6,8 +6,7 @@ const getDefaultState = () => {
     token: getToken('token') || '',
     username: getToken('username') || '',
     password: getToken('password') || '',
-
-    id: 0
+    id:getToken('id')|| 0,
   };
 };
 const state = getDefaultState();
