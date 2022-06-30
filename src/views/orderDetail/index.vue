@@ -9,7 +9,7 @@
       </div>
       <div class="os-content">
         <div class="order_process">
-          <el-steps :active="orderDetail.status" simple="" >
+          <el-steps :active="orderDetail.status" simple="">
             <el-step title="待支付" icon="el-icon-edit"></el-step>
             <el-step title="待发货" icon="el-icon-upload"></el-step>
             <el-step title="等待收货" icon="el-icon-picture"></el-step>
@@ -17,8 +17,10 @@
           </el-steps>
         </div>
         <div class="order_pay_or_cancle">
-          <p><el-button type="danger">立即付款</el-button></p>
-          <p><el-button type="text">取消订单</el-button></p>
+          <p><el-button type="danger" @click="payOrder">立即付款</el-button></p>
+          <p>
+            <el-button type="text" @click="deleteOrder">取消订单</el-button>
+          </p>
         </div>
       </div>
     </div>
@@ -27,21 +29,18 @@
         <span>商品清单</span>
       </div>
       <div class="si-content">
-        <ul>
+        <ul v-for="(item, index) in this.orderDetail.skus" :key="index">
           <li>
-            <img
-              :src="JSON.parse(this.orderDetail.skus[0].imgs)[0].small"
-              alt=""
-            />
+            <img :src="JSON.parse(item.imgs)[0].small" alt="" />
           </li>
           <li class="info">
-            <h3>{{ this.orderDetail.skus[0].title }}</h3>
-            <p>颜色：{{ JSON.parse(this.orderDetail.skus[0].param)[0] }}</p>
-            <p>数量：{{ this.orderDetail.skus[0].num }}</p>
+            <h3>{{ item.title }}</h3>
+            <p>颜色：{{ JSON.parse(item.param)[0] }}</p>
+            <p>数量：{{ item.num }}</p>
           </li>
           <li class="price">
-            <span>￥{{ this.orderDetail.skus[0].actual_price }}</span>
-            <p>￥{{ this.orderDetail.skus[0].price }}</p>
+            <span>￥{{ item.actual_price }}</span>
+            <p>￥{{ item.price }}</p>
           </li>
         </ul>
       </div>
@@ -74,13 +73,13 @@
       <ul class="payment">
         <li>付款信息</li>
         <li>
-          <p>商品数量：{{ this.orderDetail.skus[0].num }}</p>
+          <p>商品数量：{{ num }}</p>
         </li>
         <li>
-          <p>商品总额：￥{{ this.orderDetail.skus[0].price }}</p>
+          <p>商品总额：￥{{ price }}</p>
         </li>
         <li>
-          <p>应付金额：￥{{ this.orderDetail.skus[0].actual_price }}</p>
+          <p>应付金额：￥{{ actual_price }}</p>
         </li>
       </ul>
     </div>
@@ -88,7 +87,7 @@
 </template>
 
 <script>
-import { getOrderDetail } from "@/api/user.js";
+import { getOrderDetail, payOrder, deleteOrder } from "@/api/user.js";
 export default {
   name: "orderDetail",
   data() {
@@ -105,7 +104,7 @@ export default {
       console.log(data);
       getOrderDetail(data).then((res) => {
         console.log(res);
-        this.orderDetail = res.data.data;
+        this.orderDetail = res.data;
         console.log(this.orderDetail);
       });
     },
@@ -130,15 +129,95 @@ export default {
         date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
       return Y + M + D + h + m + s;
     },
+    payOrder() {
+      let data = {
+        outTradeNo: `${this.orderDetail.code || "无"}`,
+        totalAmount: this.actual_price || "无",
+        subject: `来自${this.orderDetail.address || "未知地址"}的订单`,
+        body: this.orderDetail || "无",
+      };
+      console.log(data);
+      payOrder(data).then((res) => {
+        console.log(res);
+      });
+    },
+    deleteOrder() {
+      let data = {
+        id: this.orderDetail.id,
+      };
+      this.$confirm("此操作将删除本订单, 是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+        center: true,
+      })
+        .then(() => {
+          deleteOrder(data).then((res) => {
+            console.log(res);
+            this.$message({
+              type: "success",
+              message: "删除成功!",
+            });
+            this.$router.push("/my");
+          });
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "已取消删除",
+          });
+        });
+    },
   },
   created() {
     this.getOrderDetail();
   },
   computed: {
     handlerDate() {
-      let str = JSON.stringify(this.orderDetail);
+      let str = JSON.stringify(this.orderDetail || []);
       let obj = JSON.parse(str);
-      let res = this.timestampToTime(obj.update_time&&JSON.parse(obj.update_time));
+      let res = this.timestampToTime(
+        obj.update_time && JSON.parse(obj.update_time)
+      );
+      return res;
+    },
+    num() {
+      let length = this.orderDetail.skus.length || 0;
+      let arr = this.orderDetail.skus;
+      let res = 0;
+      arr.filter((item) => {
+        let num = item.num;
+        res += num;
+        return res;
+      });
+      // console.log(res);
+      return res;
+    },
+    price() {
+      let length = this.orderDetail && this.orderDetail.skus.length;
+      let arr = this.orderDetail.skus;
+      let res = 0;
+      arr.filter((item) => {
+        let num = item.price;
+        res += num;
+        return res;
+      });
+      // console.log(res);
+      return res;
+    },
+    actual_price() {
+      let length = this.orderDetail && this.orderDetail.skus.length;
+      let arr = this.orderDetail.skus;
+      let res = 0;
+      arr.filter((item) => {
+        let num = item.actual_price;
+        res += num;
+        return res;
+      });
+      // console.log(res);
+      return res;
+    },
+    outTradeNo() {
       return res;
     },
   },
@@ -148,6 +227,7 @@ export default {
 <style lang="scss" scoped >
 .orderDetail {
   width: 60vw;
+  min-width: 800px;
   margin: 30px auto;
 }
 .orderstatus {

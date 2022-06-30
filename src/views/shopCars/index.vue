@@ -82,6 +82,7 @@ export default {
         this.length = data.data.length;
         console.log(this.shopcarlist);
       });
+      this.length = this.shopcarlist.length;
     },
     /* 购物车数量加一 */
     add (item) {

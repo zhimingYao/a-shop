@@ -1,21 +1,14 @@
 <template>
   <div>
-    <nav ref="nav"
-         :class="{ navFixed: isFixed } ">
+    <nav ref="nav" :class="{ navFixed: isFixed }">
       <div class="nav">
-        <img class="img"
-             src="../../assets/image/s,k,r.png"
-             alt="图片logo"
-             v-show="isShow"
-             @click="$router.push('/home')" />
+        <img class="img" src="../../assets/image/s,k,r.png" alt="图片logo" v-show="isShow"
+          @click="$router.push('/home')" />
         <ul class="classify">
-          <li v-for="(item, index) in parentName"
-              :key="index">
-            <router-link to="/proimary"
-                         @click.native="parentNamehandle(item)">{{ item }}</router-link>
+          <li v-for="(item, index) in parentName" :key="index">
+            <router-link to="/proimary" @click.native="parentNamehandle(item)">{{ item }}</router-link>
             <div>
-              <suspension-vue :item="item"
-                              :typeList="typeList[item]"></suspension-vue>
+              <suspension-vue :item="item" :typeList="typeList[item]"></suspension-vue>
             </div>
 
           </li>
@@ -34,19 +27,22 @@
             <router-link to="/best">BEST</router-link>
           </li>
         </ul>
-        <ul class="member"
-            v-show="isShow">
-          <li>
-            <a href>搜索</a>
+        <ul class="member" v-show="isShow">
+          <li v-show="!inputshow">
+            <a @click="inputshow = true">搜索</a>
 
           </li>
-          <li>
+          <li v-show="!inputshow">
             <router-link to="/my">MY</router-link>
           </li>
-          <li>
+          <li v-show="!inputshow">
             <router-link to="/shopCars">购物车</router-link>
           </li>
-          <div></div>
+
+          <div v-show="inputshow"> <input type="text" name="s" class="text" placeholder="潮流,从搜索开始" v-model="parent_name"
+              @keyup.enter="search" @blur="inputshow = false" /></div>
+
+
         </ul>
       </div>
     </nav>
@@ -62,7 +58,7 @@ import { getproduct } from "@/api/home";
 export default {
   components: { SuspensionVue },
   name: 'NavBarTop',
-  data () {
+  data() {
     return {
       isShow: false,
       isFixed: false,
@@ -74,18 +70,26 @@ export default {
         "配件": [],
         "儿童专区": [],
       },
+      parent_name: '',
+      inputshow: false,
     };
 
   },
   methods: {
-    getParentName () {
+    search() {
+      console.log(this.parent_name);
+      this.$router.push("/search?redirect=" + this.parent_name);
+    },
+
+    getParentName() {
+
       getParentName().then(data => {
         // console.log(data)
         this.parentName = data.data
         this.parentlist = data.result
       })
     },
-    getproduct (name) {
+    getproduct(name) {
       // console.log({ name });
       getproduct(name).then((data) => {
         // console.log(data.data);
@@ -93,19 +97,19 @@ export default {
         // console.log(this.typeList);
       });
     },
-    parentNamehandle (item) {
+    parentNamehandle(item) {
       // console.log(item)
       this.$router.push('/proimary?parentName=' + item)
     }
   },
-  created () {
+  created() {
     this.getParentName()
     this.getproduct("服饰");
     this.getproduct("鞋类");
     this.getproduct("配件");
     this.getproduct("儿童专区");
   },
-  mounted () {
+  mounted() {
     let navTopDom = this.$refs['nav'];
     let h = parseFloat(getComputedStyle(navTopDom)['height']);
     let p = parseFloat(getComputedStyle(navTopDom)['paddingTop']);
@@ -113,12 +117,10 @@ export default {
     let H = h + p + pb;
     window.addEventListener("scroll", () => {
       // console.log(H);
-      if (scrollY > H - 10)
-      {
+      if (scrollY > H - 10) {
         this.isFixed = true;
         this.isShow = true;
-      } else
-      {
+      } else {
         this.isFixed = false;
         this.isShow = false;
       }
@@ -201,6 +203,14 @@ nav {
       top: 0px;
       right: 5%;
       float: left;
+
+      input {
+        width: 200px;
+        background-color: white;
+        height: 30px;
+        margin-top: 5px;
+        padding: 10px;
+      }
 
       li {
         width: 60px;

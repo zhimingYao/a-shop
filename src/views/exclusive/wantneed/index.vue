@@ -1,6 +1,7 @@
 <template>
   <div class="exclude">
-    <div class="clearfix">
+    <p class="title">EXCLUSIVE</p>
+    <div class="lunbo clearfix">
       <lunbo></lunbo>
       <lunbo-right></lunbo-right>
     </div>
@@ -88,6 +89,11 @@ export default {
 .exclude {
   width: 100%;
   /*  background-color: red; */
+  .lunbo{
+    width: 100%;
+    max-width: 1700px;
+    margin: 0 auto;
+  }
   .title {
     color: #333;
     font-family: "ProximaNova-Thin";

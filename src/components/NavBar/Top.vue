@@ -51,10 +51,10 @@
             <p>登录</p>
           </div>
           <div @click="$router.push('/shopCars')">
-            <SvgIcon icon-class="购物车"
-                     class="svg"></SvgIcon>
-
-            <p>{{shopcarlength}}</p>
+            <SvgIcon icon-class="购物车" class="svg"></SvgIcon>
+      
+            <p v-if="$store.getters.token">{{shopcarlength}}</p>
+            <p v-else>0</p>
           </div>
 
           <!-- <img src="../../assets/image/join.png" alt="" class="img1"  />
@@ -67,8 +67,10 @@
 </template>
 
 <script>
-import SvgIcon from '../SvgIcon/index.vue';
+
 import { setToken, getToken } from '@/utils/localstlroage.js';
+import { getshopcar, } from "@/api/Shopcars.js";
+
 
 export default {
   name: "Top",
@@ -85,23 +87,35 @@ export default {
     },
     logout () {
       this.$router.push("/");
+      
+        setToken('token', '');
+        
+       
+             this.$store.dispatch('user/register','').then(data=>{
+                 
+                 console.log(this.$store.getters.token);
+                 return this.$message.success('退出成功')
+             }).catch(error=>{
+                 return error
+             })
+      
+    
+      
+    },
+     getshopcar() {
+        let customer_id = this.$store.getters.id;
+        console.log(customer_id);
+      getshopcar({customer_id}).then((res) => {
+        console.log(res);
+        this.shopcarlength=res.data.length
+      });
 
-      setToken('token', '');
-
-
-      this.$store.dispatch('user/register', '').then(data => {
-
-        //  console.log(this.$store.getters.token);
-        return this.$message.success('退出成功')
-      }).catch(error => {
-        return error
-      })
-
-
-
-    }
+    },
   },
-  components: { SvgIcon }
+  created(){
+    this.getshopcar()
+  }
+
 };
 </script>
 

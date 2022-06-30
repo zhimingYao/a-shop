@@ -30,8 +30,8 @@
             :src="ig.small"
             v-for="(ig, index) in img"
             :key="index"
-            @click="setimg(ig.small,index)"
-      
+            @click="setimg(ig.small, index)"
+            :class="{bord:imgs==ig.small}"
           />
         </div>
         <!-- 尺码 -->
@@ -69,8 +69,7 @@
     </div>
     <div class="details_comments">
       <div class="comments_underline">
-     
-          <button
+        <button
           v-for="(its, index) in comments"
           :key="index"
           @click="getits(index)"
@@ -78,9 +77,8 @@
         >
           {{ its }}
         </button>
-      
       </div>
-    <img :src="igh.small" v-for="(igh, index) in img" :key="index" />
+      <img :src="igh.small" v-for="(igh, index) in img" :key="index" />
     </div>
     <div class="details_comments">
       <div class="comments_underline">
@@ -93,12 +91,12 @@
           {{ its }}
         </button>
       </div>
-    
-        <p>产品满意度</p>
-        <p>这是购买者对产品的评价</p>
-  
-       <div class="comments_elrate">
-            <el-rate
+
+      <p>产品满意度</p>
+      <p>这是购买者对产品的评价</p>
+
+      <div class="comments_elrate">
+        <el-rate
           v-model="statevalue"
           disabled
           show-score
@@ -106,7 +104,7 @@
           score-template="{value}"
         >
         </el-rate>
-       </div>
+      </div>
     </div>
     <div class="details_comments">
       <div class="comments_underline">
@@ -118,19 +116,18 @@
         >
           {{ its }}
         </button>
-        
       </div>
-     <div class="comments_btn"><button>商品咨询</button></div>
-     <div class="comments_ul">
-         <ul>
-             <li v-for="(itq,index) in message" :key="index">
-                 <span class="span_one">{{itq.title}}</span>
-                 <span class="span_two">{{index}}</span>
-                 <span>{{itq.name}}</span>
-                 <span class="ul_span">{{itq.time}}</span>
-             </li>
-         </ul>
-     </div>
+      <div class="comments_btn"><button>商品咨询</button></div>
+      <div class="comments_ul">
+        <ul>
+          <li v-for="(itq, index) in message" :key="index">
+            <span class="span_one">{{ itq.title }}</span>
+            <span class="span_two">{{ index }}</span>
+            <span>{{ itq.name }}</span>
+            <span class="ul_span">{{ itq.time }}</span>
+          </li>
+        </ul>
+      </div>
     </div>
     <div class="details_comments">
       <div class="comments_underline">
@@ -143,22 +140,24 @@
           {{ its }}
         </button>
       </div>
-            <div class="clear">
-               <div class="DTcomponent_one">
-      <p class="one_title">配送/交换/退货/售后服务相关注意事项</p>
-       <p class="two_title">商品的详细说明中包含配送/更换/退货/取消相关的指南时，会优先适用于下列说明事项:</p>
-    </div>
-              <DTcomponent></DTcomponent>
-            </div>
+      <div class="clear">
+        <div class="DTcomponent_one">
+          <p class="one_title">配送/交换/退货/售后服务相关注意事项</p>
+          <p class="two_title">
+            商品的详细说明中包含配送/更换/退货/取消相关的指南时，会优先适用于下列说明事项:
+          </p>
+        </div>
+        <DTcomponent></DTcomponent>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import { getdetailspu,addShopCar } from "@/api/details.js";
+import { getdetailspu, addShopCar } from "@/api/details.js";
 import magnifying from "@/components/zoom/index.vue";
 import ButtomVue from "../home/buttom/ButtomVue.vue";
-import DTcomponent from '@/components/details/index.vue'
+import DTcomponent from "@/components/details/index.vue";
 export default {
   name: "details",
   components: {
@@ -174,9 +173,9 @@ export default {
       img: [],
       imgs: "",
       /* 商品颜色 */
-      param:[],
+      param: [],
       /* 选中的颜色 */
-      paramss:'',
+      paramss: "",
       options: [
         {
           value: "XS",
@@ -224,14 +223,14 @@ export default {
       /* 星星评分 */
       statevalue: 1.3,
       /* 留言 */
-      message:[
-          {title:'完整回答',name:"heay***",time:'2021.04.10'},
-          {title:'完整回答',name:"heay***",time:'2021.04.11'},
-          {title:'完整回答',name:"heay***",time:'2021.04.12'},
-           {title:'完整回答',name:"heay***",time:'2021.04.13'},
-           {title:'完整回答',name:"heay***",time:'2021.04.14'},
-          {title:'完整回答',name:"heay***",time:'2021.04.15'}
-      ]
+      message: [
+        { title: "完整回答", name: "heay***", time: "2021.04.10" },
+        { title: "完整回答", name: "heay***", time: "2021.04.11" },
+        { title: "完整回答", name: "heay***", time: "2021.04.12" },
+        { title: "完整回答", name: "heay***", time: "2021.04.13" },
+        { title: "完整回答", name: "heay***", time: "2021.04.14" },
+        { title: "完整回答", name: "heay***", time: "2021.04.15" },
+      ],
     };
   },
   methods: {
@@ -240,26 +239,26 @@ export default {
       let spu_id = this.$route.query.shopdetail;
       getdetailspu(spu_id).then((data) => {
         this.detailsshop = data.data;
-         console.log(this.detailsshop)
+        // console.log(this.detailsshop);
         this.img = JSON.parse(data.data[0].imgs);
-        this.param=JSON.parse(data.data[0].param)
-        console.log(this.param)
-        console.log(this.img);
-        console.log(this.img);
+        this.param = JSON.parse(data.data[0].param);
+        // console.log(this.param);
+        // console.log(this.img);
+        // console.log(this.img);
       });
     },
     /* 放大镜效果 */
-    setimg(img,index) {
-      console.log(img);
+    setimg(img, index) {
+      // console.log(img);
       this.imgs = img;
       this.paramss=this.param[index]
-      console.log(this.param[index])
+      // console.log(this.param[index])
      
     /*   console.log(this.param[index]) */
     },
     /* 评论按钮切换 */
     getits(index) {
-      console.log(index);
+      // console.log(index);/
       this.ipx = index;
     },
     /* 添加到购物车 */
@@ -268,7 +267,7 @@ export default {
        /*  let customer_id=2 */
         console.log(this.detailsshop)
        let sku_id=this.detailsshop[0].id
-       console.log(this.detailsshop,customer_id)
+      //  console.log(this.detailsshop,customer_id)
       let num =this.num
      /*  let pa=this.paramss
       console.log(pa) */
@@ -278,10 +277,10 @@ export default {
         customer_id,
         sku_id,
         num,
-        params
-      }
+        params,
+      };
 
-       console.log(data) 
+      //  console.log(data) 
        addShopCar(data).then(data=>{
         if(data.code==200){
        /*    this.$router.push('/shopCars') */
@@ -290,8 +289,8 @@ export default {
         }else{
           return this.$message.error('添加购物车失败')
         }
-      }) 
-    }
+      });
+    },
   },
   created() {
     this.getdetailspu();
@@ -316,7 +315,7 @@ export default {
 };
 </script>
 
-<style lang='scss'>
+<style lang='scss' scoped>
 .details {
   width: 1200px;
   /*    background-color: red; */
@@ -387,6 +386,10 @@ export default {
           width: 63px;
           float: left;
           margin-right: 12px;
+          
+        }
+        .bord{
+          border: 1px solid #000;
         }
       }
     }
@@ -457,7 +460,7 @@ export default {
     width: 1240px;
     margin-top: 120px;
 
-    .comments_underline{
+    .comments_underline {
       width: 100%;
       display: flex;
       border-bottom: 1px solid black;
@@ -483,105 +486,102 @@ export default {
         }
       }
     }
-    .comments_btn{
-          width: 100%;
-          height: 50px;
-          margin-top: 50px;
-          border-bottom: 2px solid black;
-          padding-bottom: 20px;
-          button{
-              width: 180px;
-              height: 50px;
-              margin-left: 1050px;
-              line-height: 50px;
-              background-color: #000;
-              color: #fff;
-          }
+    .comments_btn {
+      width: 100%;
+      height: 50px;
+      margin-top: 50px;
+      border-bottom: 2px solid black;
+      padding-bottom: 20px;
+      button {
+        width: 180px;
+        height: 50px;
+        margin-left: 1050px;
+        line-height: 50px;
+        background-color: #000;
+        color: #fff;
       }
-      .comments_ul{
+    }
+    .comments_ul {
+      width: 100%;
+      ul {
+        width: 100%;
+        li {
           width: 100%;
-          ul{
-              width: 100%;
-              li{
-                  width: 100%;
-                  border-bottom: 1px solid #e7e7e7;
-                  position: relative;
-                   padding-bottom: 5px;
-                  span{
-                      display: inline-block;
-                      margin-right: 200px;
-                      margin-top: 20px;
-                     
-                  }
-                  .span_one{
-                      background-color: black;
-                      color: white;
-                      font-size: 14px;
-                      position: absolute;
-                      margin-left: -450px;
-                  }
-                  .span_two{
-                      position: absolute;
-                      margin-left: -350px;
-                  }
-                  .ul_span{
-                      margin-left: 350px;
-                      background-color: #fff;
-                      margin-bottom: 10px;
-                      position: absolute;
-                  }
-              }
+          border-bottom: 1px solid #e7e7e7;
+          position: relative;
+          padding-bottom: 5px;
+          span {
+            display: inline-block;
+            margin-right: 200px;
+            margin-top: 20px;
           }
+          .span_one {
+            background-color: black;
+            color: white;
+            font-size: 14px;
+            position: absolute;
+            margin-left: -450px;
+          }
+          .span_two {
+            position: absolute;
+            margin-left: -350px;
+          }
+          .ul_span {
+            margin-left: 350px;
+            background-color: #fff;
+            margin-bottom: 10px;
+            position: absolute;
+          }
+        }
       }
-    .comments_elrate{
-        margin-left: -1000px;
-        position: relative;
-       padding-bottom: 50px;
+    }
+    .comments_elrate {
+      margin-left: -1000px;
+      position: relative;
+      padding-bottom: 50px;
     }
     img {
       margin-top: 50px;
       width: 960px;
     }
-   
+
+    margin-top: 50px;
+    line-height: 30px;
+    /*      background-color: red; */
+    p {
+      /*   width: 100%; */
+      /*  background-color: green; */
+      display: block;
       margin-top: 50px;
-      line-height: 30px;
- /*      background-color: red; */
-      p {
-        /*   width: 100%; */
-       /*  background-color: green; */
-        display: block;
-        margin-top: 50px;
-        margin-left: -1000px;
-      }
-      .el-rate__icon {
-        //评分图标大小
-        margin-top: 30px;
-        font-size: 35px;
-      }
-      .el-rate__text{
-          font-size: 35px;
-          margin-top: 30px;
-          position: absolute;
-      }
-      
+      margin-left: -1000px;
     }
-  
+    .el-rate__icon {
+      //评分图标大小
+      margin-top: 30px;
+      font-size: 35px;
+    }
+    .el-rate__text {
+      font-size: 35px;
+      margin-top: 30px;
+      position: absolute;
+    }
+  }
 }
- .DTcomponent_one{
-   position: relative;
- /*   background-color: blue; */
-   overflow: hidden;
-   
-   .one_title{
-     margin-top: 10px;
-   }
-   .two_title{
-     padding-left: 370px;
-     padding-top: -500px;
-     margin-top: -900px;
- /*     margin-top: 500px; */
-   /*   background-color: green; */
-     /* position: absolute; */
-   }
- }
+.DTcomponent_one {
+  position: relative;
+  /*   background-color: blue; */
+  overflow: hidden;
+
+  .one_title {
+    margin-top: 10px;
+  }
+  .two_title {
+    padding-left: 370px;
+    padding-top: -500px;
+    margin-top: -900px;
+    /*     margin-top: 500px; */
+    /*   background-color: green; */
+    /* position: absolute; */
+  }
+}
 </style>

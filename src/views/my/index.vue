@@ -94,7 +94,9 @@
     <div class="my-img">
       <img src="../../assets/images/personcenter.jpg" alt="" />
     </div>
-    <div class="my-order"></div>
+    <div class="my-order">
+      <order-user-list></order-user-list>
+    </div>
     <div class="my-address">
       <div class="address-first-line">
         <h3>我的地址</h3>
@@ -385,6 +387,10 @@ export default {
     width: 1240px;
     height: 100px;
     margin: 60px auto;
+  }
+  .my-order{
+    width: 1240px;
+    margin: 0 auto;
   }
   .my-address {
     width: 1240px;

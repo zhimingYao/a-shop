@@ -30,10 +30,9 @@ const actions = {
   login({ commit }, userinfo) {
     let { username, password } = userinfo
     return new Promise((resolve, reject) => {
-      getlogin({ username, password }).then((response) => {
-        const data = response
-
-        commit('SET_TOKEN', data.data.token)
+      getlogin({ username, password }).then(data => {
+        console.log(data,'登录成');
+        commit('SET_TOKEN', data.data.token);
         /*  commit('SET_TOKEN', data.data.userInfo); */
         commit('SET_ID', data.data.userInfo.id)
 
