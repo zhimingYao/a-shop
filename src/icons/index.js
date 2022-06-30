@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import SvgIcon from '@/components/SvgIcon'
+import SvgIcon from '../components/SvgIcon'
 // 自动加载svg中所有的图标
 // context返回一个指定目录的加载方法,是否要递归,匹配的后缀名
 const req = require.context('./svg', false, /\.svg$/) // webpack方法

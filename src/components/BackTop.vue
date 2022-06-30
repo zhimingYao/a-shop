@@ -1,7 +1,7 @@
 <template>
   <div class="backtop">
     <div class="scroll">
-      <div id="carList" @click="drawer = true" type="primary">
+      <div id="carList" @click="getdrawer" type="primary">
         <img src="../assets/image/购物车.png" alt />
       </div>
       <div id="service" @click="service = true" type="primary">
@@ -30,21 +30,24 @@
           </span>
         </div>
         <!-- 购物车详情 -->
-        <h2 v-if="isShow">你还没有去登录呢!</h2>
 
-        <div class="shopListCar" v-for="(item, index) in shopCarList" :key="index">
-          <div class="shopImg">
-            <img :src="item.img" />
-          </div>
-          <div class="details">
-            <p class="showTitle">{{ item.title }}</p>
-            <p class="shopCount">数量: {{ item.num }}</p>
-            <p class="detailsSpan">
-              <span>¥ {{ item.special_price }} </span>
-              <span class="discoun_price">¥ {{ item.price }}</span>
-            </p>
+        <h2 v-if="isShow">你还没有去登录呢!</h2>
+        <div v-if="!isShow">
+          <div class="shopListCar" v-for="(item, index) in shopCarList" :key="index">
+            <div class="shopImg">
+              <img :src="item.img" />
+            </div>
+            <div class="details">
+              <p class="showTitle">{{ item.title }}</p>
+              <p class="shopCount">数量: {{ item.num }}</p>
+              <p class="detailsSpan">
+                <span>¥ {{ item.special_price }} </span>
+                <span class="discoun_price">¥ {{ item.price }}</span>
+              </p>
+            </div>
           </div>
         </div>
+
       </div>
     </el-drawer>
     <!-- 客服 -->
@@ -53,15 +56,8 @@
         <div class="drawerHeader">skr线上</div>
         <div class="drawerLogin">
           <h3>客服将尽快回复您,请等待!</h3>
-          <el-input
-            type="textarea"
-            :rows="2"
-            placeholder="客服将尽快回复您"
-            v-model="textarea"
-            class="service_input"
-            clearable
-            @change="service_change"
-          >
+          <el-input type="textarea" :rows="2" placeholder="客服将尽快回复您" v-model="textarea" class="service_input" clearable
+            @change="service_change">
           </el-input>
         </div>
       </div>
@@ -69,7 +65,7 @@
   </div>
 </template>
 <script>
-import { getShopCar } from '../api/shopcar.js'
+import { getshopcar } from '../api/Shopcars'
 export default {
   name: 'BackTop',
   props: {
@@ -88,7 +84,8 @@ export default {
       service: false, //客服
       shopCarList: [],
       carCount: 0,
-      textarea: ''
+      textarea: '',
+      isShow:true,
     };
   },
   methods: {
@@ -117,15 +114,19 @@ export default {
         clearTimeout(c);
       }
     },
+    getdrawer() {
+      this.drawer = true
+      this.getShopList()
+    },
     // 购物车信息
     /**
      * 用户登录后id存储于store中,获取用户id显示购物车列表
      */
     getShopList() {
       // console.log(this.$store.state.user.id);
-      getShopCar(this.$store.getters.id).then(data => {
-        console.log(data);
-        if (!data.code === 200) return this.$message.error('你还没登录,请前往登录,获取购物车列表');
+      getshopcar(this.$store.getters.id).then(data => {
+        console.log(data.data);
+        if (!data.code===200) return this.$message.error('你还没登录,请前往登录,获取购物车列表');
         this.carCount = data.data.length;
         this.shopCarList = data.data;
         return (this.isShow = false); // 控制显示输出
@@ -159,9 +160,7 @@ export default {
     };
   },
   // 解构调用
-  created() {
-    this.getShopList();
-  }
+
 };
 </script>
 <style scoped lang="scss">
@@ -177,7 +176,7 @@ export default {
   // display: block;
   color: #fff;
 
-  & > div {
+  &>div {
     width: 50px;
     height: 45px;
     line-height: 45px;
@@ -191,6 +190,7 @@ export default {
     }
   }
 }
+
 img {
   width: 20px;
 }
@@ -203,6 +203,7 @@ img {
   background-color: #000;
   color: #fff;
 }
+
 .drawercontent {
   .spanCard {
     display: flex;
@@ -212,6 +213,7 @@ img {
     background-color: #ccc;
     padding: 0 10px;
     font-size: 12px;
+
     button {
       width: 50px;
       height: 20px;
@@ -222,6 +224,7 @@ img {
     }
   }
 }
+
 .shopListCar {
   width: 100%;
   height: 100px;
@@ -237,9 +240,11 @@ img {
       margin-left: 20px;
     }
   }
+
   .details {
     float: left;
     text-align: left;
+
     .showTitle {
       height: 20px;
       width: 130px;
@@ -248,10 +253,12 @@ img {
       white-space: nowrap;
       font-size: 16px;
     }
+
     .shopCount {
       color: rgb(51, 48, 48);
       font-size: 14px;
     }
+
     .detailsSpan {
       .discoun_price {
         text-decoration-line: line-through;
@@ -269,6 +276,7 @@ img {
   bottom: 0px;
   text-align: center;
 }
+
 .service_input {
   top: 180px;
 }

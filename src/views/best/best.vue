@@ -48,7 +48,7 @@ export default {
   data() {
     return {
       isShow: 0,
-      msg: "All",
+      msg: "全部",
       sort: {
         All: [],
         鞋类: ["ALL WOMEN", "APPAREL", "BAG", "SHOES", "ACC"],
@@ -90,7 +90,7 @@ export default {
   },
   methods: {
     getValue(item) {
-      this.msg = item;
+      this.msg = item||'全部';
     },
     underLine(index) {
       this.isShow = index;

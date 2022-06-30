@@ -20,6 +20,7 @@ export default {
     props: {
         page: Number,
         lists: Array,
+        value:Number,
     },
     data() {
         return {
@@ -141,6 +142,7 @@ export default {
     },
     created() {
         console.log(111);
+        
         this.list = JSON.parse(JSON.stringify(this.lists))
 
     }
