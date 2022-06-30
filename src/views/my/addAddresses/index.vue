@@ -2,7 +2,7 @@
   <div class="addAddresses" v-show="flag">
     <div class="add-title">
       <h3>收货地址</h3>
-      <h3 @click="flag = !flag">x</h3>
+      <h3 @click="changeflag()">x</h3>
     </div>
     <div class="add-content1">
       <div class="add-content1-name">
@@ -83,15 +83,19 @@
     </div>
     <div class="add-content4">
       <!-- checkout复选框 -->
-      <el-checkbox label="设置默认地址" v-model="isDefault"></el-checkbox>
+      <el-checkbox label="是否设置为默认地址" v-model="isDefault"></el-checkbox>
     </div>
     <div class="add-button">
       <div class="submit">
         <!-- 返回和保存按钮 -->
-        <button type="button" class="back-btn" @click="flag = !flag">
-          <span>返 回</span></button
-        ><button type="button" class="save-btn" @click="saveAddress">
+        <button type="button" class="back-btn" @click="changeflag()">
+          <span>返 回</span>
+        </button>
+        <button type="button" class="save-btn" v-if="(id==undefined?true:false)" @click="saveAddress">
           <span>保存地址</span>
+        </button>
+        <button type="button" class="save-btn" v-else @click="updateAddress">
+          <span>更新地址</span>
         </button>
       </div>
     </div>
@@ -100,7 +104,7 @@
 
 
 <script>
-import { addAddress } from "@/api/addAddress.js";
+import { addAddress,updateAddress } from "@/api/addAddress.js";
 import { addressData } from "../../../plugins/addressData/data.js";
 export default {
   name: "AddAddresses",
@@ -108,7 +112,7 @@ export default {
     return {
       country: "",
       detailAddress: "",
-      isDefault: false,
+      isDefault: 0,
       name: "",
       tel: "",
       proCode: "",
@@ -121,7 +125,14 @@ export default {
     };
   },
   props: {
-    flag: true, //控制表单是否显示
+    flag: {
+      type:Boolean,
+      default:true,
+    }, //控制表单是否显示
+    id:{
+      type:Number,
+      default:undefined,
+    }
   },
   methods: {
     provinceChange(value) {
@@ -135,7 +146,7 @@ export default {
     },
     saveAddress() {
       // 点击保存隐藏新增地址表单
-      this.flag = false;
+      this.changeflag()
       // 保存地址
       let provinceName = addressData[this.provinceCode].name;
       let cityName = addressData[this.provinceCode].child[this.cityCode].name;
@@ -145,15 +156,13 @@ export default {
         
       let tel = this.tel; //电话
       let address = `${provinceName}${cityName}${this.areaCode}${this.detailAddress}`; //地址
-      let prime=true
-  /*     let options = [customer_id,name, tel, address,prime];   */
-  let options={'customer_id':customer_id,'name':name,'tel':tel,'address':address,'prime':this.isDefault}
-
-     console.log(options)
+      let prime = this.isDefault?1:0;
+      let options = {customer_id, name, tel, address,prime};
+      console.log(options);
       // 发送请求
      addAddress(options)
         .then((res) => {
-          console.log(res)
+          console.log(res);
           // 在此页面提示新增收货地址成功
           if (res.data.code === 200) {
             this.$message({
@@ -181,10 +190,30 @@ export default {
           });
         }); 
     },
+    changeflag(){
+      this.$emit("changeflag",false)
+    },
+    updateAddress(){
+      // 点击保存隐藏新增地址表单
+      // 保存地址
+      let provinceName = addressData[this.provinceCode].name;
+      let cityName = addressData[this.provinceCode].child[this.cityCode].name;
+      // let customer_id = this.$store.getters.id; //用户id
+      let id = this.id;
+      let name = this.name; //用户名
+      let tel = this.tel; //电话
+      let address = `${provinceName}${cityName}${this.areaCode}${this.detailAddress}`; //地址
+      // let prime = this.isDefault?1:0;
+      let data = {id, name, tel, address};
+      console.log(data);
+      updateAddress(data).then((res)=>{
+        console.log(data);
+        this.changeflag()
+      })
+    }
   },
-  watch: {},
-  created() {},
-  mounted() {},
+  created() {
+  },
 };
 </script>
 

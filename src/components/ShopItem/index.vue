@@ -54,14 +54,18 @@ export default {
   background-color: #fff;
   cursor: pointer;
   float: left;
-  padding-bottom: 10px;
+  // padding-bottom: 10px;
   &:hover{
     transform: scale(1.007);
     box-shadow: 0 0 4px 4px #eee;
   }
-  img {
+  .shop_img{
     width: 100%;
-    height: 80%;
+    height: 100%;
+    img {
+    width: 100%;
+    min-height: 25vh;
+  }
   }
   .shop_item_details {
     padding: 24px;

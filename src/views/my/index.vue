@@ -108,13 +108,19 @@
       <div class="address-first-line-content">
         <template>
           <el-table :data="tableData" style="width: 100%">
-            <el-table-column prop="date" label="收货人姓名" width="280">
+            <el-table-column prop="name" label="收货人姓名" width="280">
             </el-table-column>
-            <el-table-column prop="name" label="收货人地址" width="580">
+            <el-table-column prop="address" label="收货人地址" width="580">
             </el-table-column>
-            <el-table-column prop="address" label="收货人电话" width="180">
+            <el-table-column prop="tel" label="收货人电话" width="180">
             </el-table-column>
-            <el-table-column prop="address" label="操作" width="200">
+            <el-table-column label="操作" width="200">
+              <template slot-scope="scope">
+                <el-button type="text" @click="deleteAddress(scope.row.id)"
+                  >删除</el-button
+                >
+                <el-button type="text" @click="updateAddress(scope.row.id)">操作</el-button>
+              </template>
             </el-table-column>
             <el-table-column slot="empty">
               <svg
@@ -174,14 +180,20 @@
         </template>
       </div>
     </div>
-    <add-Addresses :flag="flag" class="add-Addresses"></add-Addresses>
+    <add-Addresses
+      :flag="isshow"
+      :id="id"
+      @changeflag="changeflag"
+      class="add-Addresses"
+    ></add-Addresses>
   </div>
 </template>
 
 <script>
-import { changePassword } from "@/api/changePassword.js";
+import {changePassword,} from "@/api/changePassword.js";
 import AddAddresses from "@/views/my/addAddresses/index.vue";
 import { getUserOrder } from "@/api/getUserOrder.js";
+import { getAddress,deleteAddress,updateAddress } from "@/api/addAddress.js";
 export default {
   name: "ElMy",
   components: {
@@ -198,8 +210,9 @@ export default {
       },
       formLabelWidth: "120px",
       tableData: [],
-      flag: false, //新增收货地址表单是否出现 false不出现
+      isshow: false, //新增收货地址表单是否出现 false不出现
       orderList: [],
+      id:undefined,
     };
   },
   methods: {
@@ -234,7 +247,7 @@ export default {
         });
     },
     addAddress() {
-      this.flag = true;
+      this.isshow = true;
     },
     async getOrder() {
       const res = await getUserOrder({
@@ -249,9 +262,53 @@ export default {
         this.orderList = result;
       }
     },
+    changeflag(value) {
+      this.isshow = value;
+      this.getAddress();
+    },
+    getAddress() {
+      let customer_id = this.$store.getters.id;
+      console.log(customer_id);
+      getAddress({ customer_id }).then((res) => {
+        console.log(res, "12345");
+        this.tableData = [...res.data];
+      });
+    },
+    deleteAddress(id) {
+      console.log(id, "id");
+      let data = {
+        id,
+      };
+      this.$confirm("此操作将永久删除该文件, 是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      })
+        .then(() => {
+          deleteAddress(data).then((res) => {
+            console.log(res);
+            this.$message({
+              type: "success",
+              message: "删除成功!",
+            });
+            this.getAddress()
+          });
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "已取消删除",
+          });
+        });
+    },
+    updateAddress(id){
+      this.id = id;
+      this.isshow = true;
+    }
   },
   created() {
     // 页面加载渲染收货地址
+    this.getAddress();
   },
   mounted() {
     this.getOrder();
@@ -388,7 +445,7 @@ export default {
     height: 100px;
     margin: 60px auto;
   }
-  .my-order{
+  .my-order {
     width: 1240px;
     margin: 0 auto;
   }

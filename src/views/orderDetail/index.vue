@@ -10,9 +10,13 @@
       <div class="os-content">
         <div class="order_process">
           <el-steps :active="orderDetail.status" simple="">
-            <el-step title="待支付" icon="el-icon-edit"></el-step>
-            <el-step title="待发货" icon="el-icon-upload"></el-step>
-            <el-step title="等待收货" icon="el-icon-picture"></el-step>
+            <el-step title="待支付" icon="el-icon-upload"></el-step>
+            <el-step title="待发货" icon="el-icon-upload">
+              <svg-icon slot="icon" icon-class="022-货车发货" class-name="truck"></svg-icon>
+            </el-step>
+            <el-step title="等待收货" icon="el-icon-picture">
+              <svg-icon slot="icon" icon-class="收件箱,空盒子" class-name="truck"></svg-icon>
+            </el-step>
             <el-step title="已完成" icon="el-icon-picture"></el-step>
           </el-steps>
         </div>
@@ -35,7 +39,8 @@
           </li>
           <li class="info">
             <h3>{{ item.title }}</h3>
-            <p>颜色：{{ JSON.parse(item.param)[0] }}</p>
+            <p>颜色：{{ JSON.parse(item.param)[0] }}111</p>
+           
             <p>数量：{{ item.num }}</p>
           </li>
           <li class="price">
@@ -182,8 +187,7 @@ export default {
       return res;
     },
     num() {
-      let length = this.orderDetail.skus.length || 0;
-      let arr = this.orderDetail.skus;
+      let arr = this.orderDetail.skus || [];
       let res = 0;
       arr.filter((item) => {
         let num = item.num;
@@ -194,8 +198,7 @@ export default {
       return res;
     },
     price() {
-      let length = this.orderDetail && this.orderDetail.skus.length;
-      let arr = this.orderDetail.skus;
+      let arr = this.orderDetail.skus || [];
       let res = 0;
       arr.filter((item) => {
         let num = item.price;
@@ -206,8 +209,7 @@ export default {
       return res;
     },
     actual_price() {
-      let length = this.orderDetail && this.orderDetail.skus.length;
-      let arr = this.orderDetail.skus;
+      let arr = this.orderDetail.skus || [];
       let res = 0;
       arr.filter((item) => {
         let num = item.actual_price;
@@ -349,5 +351,9 @@ export default {
       margin-bottom: 5px;
     }
   }
+}
+.truck{
+  width: 200%;
+  height: 200%;
 }
 </style>

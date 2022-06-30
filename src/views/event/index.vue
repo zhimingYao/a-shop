@@ -90,7 +90,7 @@
     </div>
     <div class="ev-shop clearfix">
       <div class="shoplist clearfix">
-        <shop-item v-for="(item, index) in shoplist" :key="index" :shop="item" width="19%" height="320px"
+        <shop-item v-for="(item, index) in shoplist" :key="index" :shop="item" width="19%" height="45%"
           :priceshow="false" />
       </div>
       <div class="shoppage">
