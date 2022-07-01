@@ -76,7 +76,7 @@ export default {
   methods: {
     getshopcar () {
       let customer_id = this.$store.getters.id;
-      getshopcar(customer_id).then((data) => {
+      getshopcar({customer_id}).then((data) => {
         console.log(data);
         this.shopcarlist = data.data;
         this.length = data.data.length;
@@ -127,7 +127,7 @@ export default {
       {
         let customer_id = this.$store.getters.id;
         console.log(customer_id);
-        detshopcar(customer_id).then((data) => {
+        detshopcar({customer_id}).then((data) => {
           console.log(data);
         });
         return this.$message.success("删除购物车商品成功");
