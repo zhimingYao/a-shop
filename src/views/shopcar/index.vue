@@ -60,7 +60,7 @@
 </template>
 
 <script>
-import { getShopCar } from "@/api/shopCar";
+import { getshopcar } from "@/api/Shopcars";
 export default {
   name: "ShopCar",
   data() {
@@ -102,7 +102,7 @@ export default {
   methods: {
     getShopCar() {
       let customer_id = this.$store.gitters.id;
-      getShopCar({ customer_id }).then((data) => {
+      getshopcar({ customer_id }).then((data) => {
         this.shopcarlist = data.data;
       });
     },

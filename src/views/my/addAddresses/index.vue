@@ -83,7 +83,7 @@
     </div>
     <div class="add-content4">
       <!-- checkout复选框 -->
-      <el-checkbox label="是否设置为默认地址" v-model="isDefault"></el-checkbox>
+      <el-checkbox label="是否设置为默认地址" v-if="id == undefined ? true : false" v-model="isDefault"></el-checkbox>
     </div>
     <div class="add-button">
       <div class="submit">

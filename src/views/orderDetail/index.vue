@@ -139,11 +139,13 @@ export default {
         outTradeNo: `${this.orderDetail.code || "无"}`,
         totalAmount: this.actual_price || "无",
         subject: `来自${this.orderDetail.address || "未知地址"}的订单`,
-        body: this.orderDetail || "无",
+        body:this.orderDetail.name + this.orderDetail.tel,
       };
       console.log(data);
       payOrder(data).then((res) => {
         console.log(res);
+        let url = res.data || "";
+        window.open(url)
       });
     },
     deleteOrder() {

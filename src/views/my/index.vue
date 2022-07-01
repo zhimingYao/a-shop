@@ -111,6 +111,10 @@
             <el-table-column prop="name" label="收货人姓名" width="280">
             </el-table-column>
             <el-table-column prop="address" label="收货人地址" width="580">
+              <template slot-scope="scope">
+                <span>{{scope.row.address}}</span>
+                <button :class="{btn:true,btn_cl:(scope.row.prime==1)}" @click="defaultAddress(scope.row.id)">默认地址</button>
+              </template>
             </el-table-column>
             <el-table-column prop="tel" label="收货人电话" width="180">
             </el-table-column>
@@ -193,7 +197,7 @@
 import {changePassword,} from "@/api/changePassword.js";
 import AddAddresses from "@/views/my/addAddresses/index.vue";
 import { getUserOrder } from "@/api/getUserOrder.js";
-import { getAddress,deleteAddress,updateAddress } from "@/api/addAddress.js";
+import { getAddress,deleteAddress,updateAddress,defaultAddress } from "@/api/addAddress.js";
 export default {
   name: "ElMy",
   components: {
@@ -248,6 +252,7 @@ export default {
     },
     addAddress() {
       this.isshow = true;
+      this.id = undefined;
       this.getAddress();
     },
     async getOrder() {
@@ -305,6 +310,16 @@ export default {
     updateAddress(id){
       this.id = id;
       this.isshow = true;
+    },
+    defaultAddress(id){
+      defaultAddress({
+        id,
+        prime:1,
+        customer_id:this.$store.getters.id
+      }).then((res)=>{
+        console.log(res);
+        this.getAddress();
+      })
     }
   },
   created() {
@@ -488,5 +503,15 @@ export default {
   line-height: 23px;
   width: 50%;
   color: #909399;
+}
+.btn{
+  width: 80px;
+
+  margin-left:20px ;
+  background-color: #fff;
+  border-radius:10px 10px ;
+}
+.btn_cl{
+  background-color: red;
 }
 </style>
