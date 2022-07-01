@@ -20,10 +20,10 @@
         <div class="swiper-wrapper">
           <div
             class="swiper-slide"
-            v-for="(item, index) in tapimg"
+            v-for="(item, index) in tapimg.slice(8,12)"
             :key="index"
           >
-            <img :src="item.swiperImg" alt="" />
+            <img :src="item.img" alt="" />
           </div>
         </div>
       </div>
@@ -85,16 +85,18 @@ export default {
 };
 </script>
 
+
+
 <style  lang="scss" scoped>
-// .show {
-//   width: 95%;
-//   overflow: hidden;
-//   margin: 0 auto;
-//   height: 100px;
-//   border: 5px solid #eee;
-//   border-radius: 5px;
-//   font-size: 14px;
-// }
+.show {
+  width: 95%;
+  overflow: hidden;
+  margin: 20px auto;
+  height: 100px;
+  border: 5px solid #eee;
+  border-radius: 5px;
+  font-size: 14px;
+}
 
 // body {
 //   min-width: 320px;
@@ -106,33 +108,35 @@ export default {
 //   text-align: center;
 // }
 
-// .container {
-//   width: 100%;
-//   .swiper-container {
-//     width: 50%;
-//     .swiper-wrapper {
-//       width: 80%;
-//       display: flex;
-//       justify-content: center;
-//       text-align: center;
-//       .swiper-slide {
-//         cursor: pointer;
-//         letter-spacing: 1em;
-//         margin-left: 10px;
-//         margin-bottom: 8px;
-//         .span_content {
-//           font-size: 20px;
-//           color: #b5b5b5;
-//         }
-//       }
+.container {
+  width: 100%;
+  .swiper-container {
+    width: 50%;
+    margin: 0 auto;
+    .swiper-wrapper {
+      width:100%;
+      display: flex;
+      // justify-content: center;
+      
+      text-align: center;
+      .swiper-slide {
+        cursor: pointer;
+        // letter-spacing: 1em;
+        margin-left: 10px;
+        margin-bottom: 8px;
+        .span_content {
+          font-size: 20px;
+          color: #b5b5b5;
+        }
+      }
 
-//     }
-//   }
-// }
-// .swiper1 .selected {
-//   color: #333;
-//   border-bottom: 3px solid #302e2e;
-// }
+    }
+  }
+}
+.swiper1 .selected {
+  color: #333;
+  border-bottom: 3px solid #302e2e;
+}
 
 
 
@@ -180,6 +184,9 @@ export default {
 .swiper2 {
   width: 100%;
   height: 550px;
+  img{
+    height: 100%;
+  }
 }
 .swiper2 .swiper-slide {
   height: 550px;

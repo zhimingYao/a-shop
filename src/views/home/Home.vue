@@ -52,9 +52,9 @@
         <ul>
           <li></li>
         </ul>
-       <!--  <switch-page :itemlist="swipers">
+        <switch-page :tapimg="list.shopList.slice(0, 4)">
             1111
-          </switch-page>  -->
+          </switch-page> 
 
           
         <!-- <swiper-vue :shop="swipers" height="700px" type="card" width="900px" imgwidth="600px" marginLeft="300px"
@@ -179,6 +179,7 @@ console.log(this.$store.getters.id,'测试id')
     }
   }
 .shoplisttap{
+  margin-top: 50px;
   div{
      margin-bottom: 30px;
   }
