@@ -91,7 +91,12 @@
         <button type="button" class="back-btn" @click="changeflag()">
           <span>返 回</span>
         </button>
-        <button type="button" class="save-btn" v-if="(id==undefined?true:false)" @click="saveAddress">
+        <button
+          type="button"
+          class="save-btn"
+          v-if="id == undefined ? true : false"
+          @click="saveAddress"
+        >
           <span>保存地址</span>
         </button>
         <button type="button" class="save-btn" v-else @click="updateAddress">
@@ -104,7 +109,7 @@
 
 
 <script>
-import { addAddress,updateAddress } from "@/api/addAddress.js";
+import { addAddress, updateAddress } from "@/api/addAddress.js";
 import { addressData } from "../../../plugins/addressData/data.js";
 export default {
   name: "AddAddresses",
@@ -126,13 +131,13 @@ export default {
   },
   props: {
     flag: {
-      type:Boolean,
-      default:true,
+      type: Boolean,
+      default: true,
     }, //控制表单是否显示
-    id:{
-      type:Number,
-      default:undefined,
-    }
+    id: {
+      type: Number,
+      default: undefined,
+    },
   },
   methods: {
     provinceChange(value) {
@@ -146,7 +151,7 @@ export default {
     },
     saveAddress() {
       // 点击保存隐藏新增地址表单
-      this.changeflag()
+      this.changeflag();
       // 保存地址
       let provinceName = addressData[this.provinceCode].name;
       let cityName = addressData[this.provinceCode].child[this.cityCode].name;
@@ -154,30 +159,20 @@ export default {
       let name = this.name; //用户名
       let tel = this.tel; //电话
       let address = `${provinceName}${cityName}${this.areaCode}${this.detailAddress}`; //地址
-      let prime = this.isDefault?1:0;
-      let options = {customer_id, name, tel, address,prime};
+      let prime = this.isDefault ? 1 : 0;
+      let options = { customer_id, name, tel, address, prime };
       console.log(options);
       // 发送请求
       addAddress(options)
         .then((res) => {
           console.log(res);
           // 在此页面提示新增收货地址成功
-          if (res.status === 200) {
-            this.$message({
-              showClose: true,
-              message: "成功",
-              type: "success",
-            });
-            // console.log(res);
-          } else {
-            this.$message({
-              showClose: true,
-              message: "新增失败",
-              type: "error",
-            });
-            // console.log(res);
-          }
-          // 发送请求成功在主组件中重新发请求并渲染收货地址
+          this.$message({
+            showClose: true,
+            message: "成功",
+            type: "success",
+          });
+          this.changeflag()
         })
         .catch((error) => {
           // console.log(error);
@@ -188,10 +183,10 @@ export default {
           });
         });
     },
-    changeflag(){
-      this.$emit("changeflag",false)
+    changeflag() {
+      this.$emit("changeflag", false);
     },
-    updateAddress(){
+    updateAddress() {
       // 点击保存隐藏新增地址表单
       // 保存地址
       let provinceName = addressData[this.provinceCode].name;
@@ -202,16 +197,15 @@ export default {
       let tel = this.tel; //电话
       let address = `${provinceName}${cityName}${this.areaCode}${this.detailAddress}`; //地址
       // let prime = this.isDefault?1:0;
-      let data = {id, name, tel, address};
+      let data = { id, name, tel, address };
       console.log(data);
-      updateAddress(data).then((res)=>{
+      updateAddress(data).then((res) => {
         console.log(data);
-        this.changeflag()
-      })
-    }
+        this.changeflag();
+      });
+    },
   },
-  created() {
-  },
+  created() {},
 };
 </script>
 

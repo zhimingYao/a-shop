@@ -248,6 +248,7 @@ export default {
     },
     addAddress() {
       this.isshow = true;
+      this.getAddress();
     },
     async getOrder() {
       const res = await getUserOrder({

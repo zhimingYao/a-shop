@@ -60,7 +60,7 @@
 </template>
 
 <script>
-import { getShopCar } from "@/api/shopcar";
+import { getShopCar } from "@/api/shopCar";
 export default {
   name: "ShopCar",
   data() {
