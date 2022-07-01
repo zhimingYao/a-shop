@@ -155,7 +155,7 @@ export default {
         val.forEach((item) => {
           tod = tod + item.special_price * item.num;
         });
-        this.total = tod;
+        this.total = tod;   
         this.checkbox.length === this.shopcarlist.length && (this.isall = true);
       },
     },

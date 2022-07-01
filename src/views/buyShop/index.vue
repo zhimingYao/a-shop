@@ -27,7 +27,7 @@
               </li>
             </ul>
           </div>
-          <addAddresses v-show="flag"></addAddresses>
+          <addAddresses :flag="flag" :id="id"  @changeflag="changeflag"></addAddresses>
 
         </div>
         <!-- 商品明细 -->
@@ -139,7 +139,7 @@
 
 <script>
 import addAddresses from '@/views/my/addAddresses/index.vue'
-import { getDefaultAddress, getaddress, defaultAddress, payOrder } from '@/api/buyshop.js'
+import { getDefaultAddress, getaddress, defaultAddress, payOrder,deleteshopcar,addOrder } from '@/api/buyshop.js'
 
 export default {
   name: "buyShop",
@@ -160,6 +160,7 @@ export default {
       addresses: [],
       /* 编辑收货地址的显示隐藏 */
       dialogVisibles: false,
+      id:undefined,
     };
   },
   methods: {
@@ -194,7 +195,11 @@ export default {
       defaultAddress(data).then(data => {
         console.log(data)
         if (data.data.code == 200) {
+         /*  this.getAddress() */
+          this.dialogVisible=false
           this.$message.success('修改用户默认地址成功')
+          this.getAddress()
+         
         }
       })
     },
@@ -206,10 +211,33 @@ export default {
     /* 提交订单 */
     submit() {
       let outTradeNo = this.$store.getters.username + Date.now()
+      let code=this.$store.getters.username + Date.now()
       let totalAmount = this.total
+      let money=this.total
       let subject = '您提交的商品有' + this.buyShop[0].title + '....'
       let body = this.$store.getters.username + `is paying for ${this.total}....商品描述`
+      let store_id=1
+      let customer_id=this.$store.getters.id
+      let skus=JSON.stringify(this.buyShop)
+      /* 删除购物车 */
+      this.buyShop.forEach(item=>{
+         deleteshopcar(item.id).then(data=>{
+        console.log(data)
 
+      })   
+      /* 添加订单 */
+      let datas={
+        code,
+        store_id,
+        customer_id,
+        money,
+        skus
+      }
+      console.log(datas)
+      addOrder(datas).then(data=>{
+        console.log(data)
+      })
+      })
       let data = {
         outTradeNo,
         totalAmount,
@@ -225,8 +253,11 @@ export default {
           return err
         })
     },
-
-    
+        /* 地址栏的隐藏操作 */
+         changeflag(value) {
+      this.flag = value;
+      this.getAddress();
+    },
   },
   created() {
     this.getshoplist()

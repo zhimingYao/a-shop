@@ -62,3 +62,22 @@ export function payOrder(data) {
     })
   }
   
+  export function deleteshopcar(id){
+      return request({
+          url:'/shopCar/deleteShopCar',
+          method:'post',
+          data:{
+              id
+          }
+      })
+  }
+  /* 添加订单 */
+  export function addOrder(datas){
+      return request({
+          url:'/order/addOrder',
+          method:'post',
+          data:{
+              ...datas
+          }
+      })
+  }

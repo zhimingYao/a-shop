@@ -164,7 +164,7 @@ export default {
         .then((res) => {
           console.log(res);
           // 在此页面提示新增收货地址成功
-          if (res.data.code === 200) {
+          if (res.code === 200) {
             this.$message({
               showClose: true,
               message: "成功",

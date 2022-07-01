@@ -43,11 +43,12 @@ export default {
       let customer_id = this.$store.getters.id;
       console.log(customer_id);
       const data = {
-        customer_id: customer_id||7,
+        customer_id: customer_id,
       };
       return getUserOrder(data).then((res) => {
         console.log(res);
         this.orderData = res.data;
+        console.log(res,'订单列表')
       });
     },
     orderDetail(row, comuln, event) {

@@ -19,7 +19,7 @@
       <div class="details_introduction">
         <p class="ntroduction_one">{{ detailsshop[0].title }}</p>
         <p class="ntroduction_two">
-          ￥{{ 349 }}<span>￥{{ 399 }}</span>
+          ￥{{detailsshop[0].special_price}}<span>￥{{ detailsshop[0].price}}</span>
         </p>
         <div class="ntroduction_title">
           <p>官方商城全场包邮</p>
@@ -239,6 +239,7 @@ export default {
       let spu_id = this.$route.query.shopdetail;
       getdetailspu(spu_id).then((data) => {
         this.detailsshop = data.data;
+        console.log(data,'商品详情')
         // console.log(this.detailsshop);
         this.img = JSON.parse(data.data[0].imgs);
         this.param = JSON.parse(data.data[0].param);
