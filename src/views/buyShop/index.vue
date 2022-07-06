@@ -167,7 +167,7 @@ export default {
     getshoplist() {
       let shoplist = this.$store.getters.shopcarlist
       console.log(this.$store.getters.shopcarlist)
-      console.log(shoplist)
+      console.log(shoplist,111111)
       this.buyShop = shoplist
     },
     getaddress() {
@@ -357,6 +357,7 @@ export default {
           }
 
           .address_one {
+            
             padding-top: 10px;
             padding-bottom: 10px;
             padding-left: 50px;
@@ -616,5 +617,54 @@ export default {
     }
   }
 }
-
+.addAddresses{
+ /*  background-color: red; */
+  z-index: 9999999;
+  position: fixed;
+  top: 128px;
+  left: 400px;
+}
+.dialog{
+ width: 100%;
+ .Harvest_address{
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+             color:#999;
+             border-bottom: 1px solid black;
+          div{
+            text-align: left;
+          flex-grow: 1;
+          }
+          .address_one{
+            padding-top: 10px;
+            padding-bottom: 10px;
+            padding-left: 50px;
+            p{
+              margin: 5px 0;
+              font-size: 16px;
+            }
+          }
+          .address_two{
+            text-align: right;
+            padding-right: 50px;
+            p{
+              width: 70px;
+              color: white;
+              text-align: center;
+            position: absolute;
+            left: 220px;
+            margin-bottom: 2px;
+              position: relative;
+           
+              background-color: black;
+            }
+            span{
+              display: inline-block;
+              margin-right: 5px;
+            }
+          }
+        }
+}
 </style>

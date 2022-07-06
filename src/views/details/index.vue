@@ -63,7 +63,7 @@
         <!-- 按钮 -->
         <div class="details_btn">
           <button class="btnone" @click="addshopcar">加入购物车</button>
-          <button class="btntwo">立即购买</button>
+          <button class="btntwo" @click="buyshop">立即购买</button>
         </div>
       </div>
     </div>
@@ -247,6 +247,21 @@ export default {
         // console.log(this.img);
         // console.log(this.img);
       });
+    },
+    buyshop(){
+        this.detailsshop[0].customer_id=this.$store.getters.id
+       /*  let customer_id=2 */
+        console.log(this.detailsshop)
+      this.detailsshop[0].sku_id=this.detailsshop[0].id
+      //  console.log(this.detailsshop,customer_id)
+      this.detailsshop[0].num =this.num
+     /*  let pa=this.paramss
+      console.log(pa) */
+       this.detailsshop[0].params=JSON.stringify([this.paramss,this.value])
+       this.detailsshop[0].img=this.imgs
+       console.log(this.detailsshop);
+      this.$router.push('/buyShop')
+      this.$store.dispatch('shopcar/shopcarlist',this.detailsshop)
     },
     /* 放大镜效果 */
     setimg(img, index) {

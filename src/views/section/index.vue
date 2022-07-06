@@ -1,6 +1,6 @@
 <template>
 
-  <div class="section" :key="key">
+  <div class="section" >
     <h1>{{ $route.params.iten }}</h1>
     <p>Home / Secondary</p>
     <div class="section-top">
@@ -48,7 +48,7 @@ export default {
   computed:{
     key(){
       console.log(this.$router.path,11);
-      return this.$router.path+1
+      return this.$router.path
     },
   },
   methods: {
@@ -70,11 +70,12 @@ export default {
     },
   },
   components: { Classify },
+
   watch: {
  '$route': {
       deep: true,
       handler() {
-
+ this.list=[]
         this.getSpu(this.$route.params.iten)
       }
     },   

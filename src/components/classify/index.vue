@@ -1,5 +1,5 @@
 <template>
-  <div class="right">
+  <div class="right" >
     <el-select v-model="value1"
                placeholder="请选择">
       <el-option v-for="item in options"
