@@ -155,15 +155,17 @@ export default {
       // 保存地址
       let provinceName = addressData[this.provinceCode].name;
       let cityName = addressData[this.provinceCode].child[this.cityCode].name;
-      let customer_id = this.$store.getters.id; //用户id
-      let name = this.name; //用户名
+      let customer_id = this.$store.getters.id; //用户id 
+      
+       let name = this.name; //用户名 
+        
       let tel = this.tel; //电话
       let address = `${provinceName}${cityName}${this.areaCode}${this.detailAddress}`; //地址
       let prime = this.isDefault ? 1 : 0;
       let options = { customer_id, name, tel, address, prime };
       console.log(options);
       // 发送请求
-      addAddress(options)
+     addAddress(options)
         .then((res) => {
           console.log(res);
           // 在此页面提示新增收货地址成功
@@ -181,7 +183,7 @@ export default {
             message: "新增失败",
             type: "error",
           });
-        });
+        }); 
     },
     changeflag() {
       this.$emit("changeflag", false);

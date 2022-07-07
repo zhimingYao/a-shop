@@ -49,7 +49,7 @@ export default {
     async getImg_(parent_name, start, end) {
       const res = await getImg({ parent_name, start, end });
       // console.log(res,this.listMiddle);
-      if (this.listMiddle == "All" || "配件") {
+      if (this.listMiddle == "全部" || "配件") {
         this.imgMiddleList = res;
       } else {
         this.imgMiddleList = res;
@@ -61,7 +61,7 @@ export default {
     }
   },
   created() {
-    if (this.listMiddle == "All") {
+    if (this.listMiddle == "全部") {
       let arr = ["配件"];
       arr.forEach((item) => {
         this.getImg_(item, 4, 7, "price");
@@ -72,7 +72,7 @@ export default {
   },
   watch: {
     listMiddle() {
-      if (this.listMiddle == "All") {
+      if (this.listMiddle == "全部") {
         this.getImg_('配件', 4, 7, "price");
       } else {
         this.getImg_(this.listMiddle, 4, 7);

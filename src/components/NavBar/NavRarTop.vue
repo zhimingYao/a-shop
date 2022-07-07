@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav ref="nav" :class="{ navFixed: isFixed } ">
+    <nav ref="nav" :class="{ navFixed: isFixed }">
       <div class="nav">
         <img class="img" src="../../assets/image/s,k,r.png" alt="图片logo" v-show="isShow"
           @click="$router.push('/home')" />
@@ -28,17 +28,21 @@
           </li>
         </ul>
         <ul class="member" v-show="isShow">
-          <li>
-            <a href>搜索</a>
+          <li v-show="!inputshow">
+            <a @click="inputshow = true">搜索</a>
 
           </li>
-          <li>
+          <li v-show="!inputshow">
             <router-link to="/my">MY</router-link>
           </li>
-          <li>
+          <li v-show="!inputshow">
             <router-link to="/shopCars">购物车</router-link>
           </li>
-          <div></div>
+
+          <div v-show="inputshow"> <input type="text" name="s" class="text" placeholder="潮流,从搜索开始" v-model="parent_name"
+              @keyup.enter="search" @blur="inputshow = false" /></div>
+
+
         </ul>
       </div>
     </nav>
@@ -66,27 +70,35 @@ export default {
         "配件": [],
         "儿童专区": [],
       },
+      parent_name: '',
+      inputshow: false,
     };
 
   },
   methods: {
+    search() {
+      console.log(this.parent_name);
+      this.$router.push("/search?redirect=" + this.parent_name);
+    },
+
     getParentName() {
+
       getParentName().then(data => {
-        console.log(data)
+        // console.log(data)
         this.parentName = data.data
         this.parentlist = data.result
       })
     },
     getproduct(name) {
-      console.log({ name });
+      // console.log({ name });
       getproduct(name).then((data) => {
-        console.log(data.data);
+        // console.log(data.data);
         this.typeList[name] = data.res;
-        console.log(this.typeList);
+        // console.log(this.typeList);
       });
     },
     parentNamehandle(item) {
-      console.log(item)
+      // console.log(item)
       this.$router.push('/proimary?parentName=' + item)
     }
   },
@@ -129,7 +141,6 @@ li {
     font-size: 14px;
   }
 }
-
 
 nav {
   background-color: wheat;
@@ -178,7 +189,6 @@ nav {
 
       li:hover a {
         color: rgb(70, 163, 129);
-
       }
 
       li:hover div {
@@ -193,6 +203,14 @@ nav {
       top: 0px;
       right: 5%;
       float: left;
+
+      input {
+        width: 200px;
+        background-color: white;
+        height: 30px;
+        margin-top: 5px;
+        padding: 10px;
+      }
 
       li {
         width: 60px;

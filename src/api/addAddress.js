@@ -1,4 +1,4 @@
-import axios from "axios";
+
 import request from "@/utils/rquest.js"
 // 添加地址
 export function addAddress(data) {

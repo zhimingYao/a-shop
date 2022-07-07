@@ -48,8 +48,8 @@ export default {
 <style lang="scss" scoped>
 .shop_item {
   margin: 4px;
-  width: 176px;
-  height: 280px;
+  // width: 176px;
+  // height: 280px;
   border: 1px solid #ccc;
   background-color: #fff;
   cursor: pointer;
@@ -61,7 +61,7 @@ export default {
   }
   .shop_img{
     width: 100%;
-    height: 100%;
+    height:65%;
     img {
     width: 100%;
     min-height: 25vh;

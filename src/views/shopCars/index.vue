@@ -6,34 +6,38 @@
         我的购物车<span>共{{ length }}件</span>
       </h2>
       <div class="shopcar_one">
-        <input
-          type="checkbox"
-          v-model="isall"
-          @change="checkbox = isall ? shopcarlist : []"
-        />&nbsp;&nbsp;<span>全选</span>
+        <input type="checkbox"
+               v-model="isall"
+               @change="checkbox = isall ? shopcarlist : []" />&nbsp;&nbsp;<span>全选</span>
       </div>
-      <div class="shopcar_shop" v-for="item in shopcarlist" :key="item.id">
+      <div class="shopcar_shop"
+           v-for="item in shopcarlist"
+           :key="item.id">
         <div class="shop_one">
-          <input type="checkbox" :value="item" v-model="checkbox" />
+          <input type="checkbox"
+                 :value="item"
+                 v-model="checkbox" />
           <div class="one_img">
             <img :src="item.img" />
           </div>
           <div class="one_title">
             <p class="title_one">{{ item.title }}</p>
             <p class="title_two">
-              颜色:{{ JSON.parse(item.params)[0]
-              }}<span>尺寸:{{ JSON.parse(item.params)[1] }}</span>
+              颜色:{{ (getparams(item.params))[0]}}<span>尺寸:{{(getparams(item.params))[1]}}</span>
             </p>
             <span class="title_three">数量:</span>
-            <button class="title_thour" @click="even(item)">-</button>
+            <button class="title_thour"
+                    @click="even(item)">-</button>
             <span class="title_five">{{ item.num }}</span>
-            <button class="title_fix" @click="add(item)">+</button>
+            <button class="title_fix"
+                    @click="add(item)">+</button>
           </div>
         </div>
         <div class="shop_two">
           <p class="two_one">￥&nbsp;{{ item.special_price }}</p>
           <p class="two_two">￥&nbsp;{{ item.price }}</p>
-          <p class="two_three">删除</p>
+          <p class="two_three"
+             @click="del">删除</p>
         </div>
       </div>
     </div>
@@ -43,7 +47,7 @@
         <p class="one_total">￥{{ total }}</p>
       </div>
       <div class="footer_two">
-        <button>结算</button>
+        <button @click="submit">结算</button>
       </div>
     </div>
   </div>
@@ -51,12 +55,12 @@
 
  
 <script>
-import { getshopcar } from "@/api/Shopcars.js";
+import { getshopcar, detshopcar } from "@/api/Shopcars.js";
 import ButtomVue from "../home/buttom/ButtomVue.vue";
 export default {
   components: { ButtomVue },
   name: "ShopCars",
-  data() {
+  data () {
     return {
       shopcarlist: [],
       length: 0,
@@ -70,55 +74,110 @@ export default {
     };
   },
   methods: {
-    getshopcar() {
-        let customer_id = this.$store.getters.id;
-        console.log(customer_id);
-      getshopcar({customer_id}).then((res) => {
-        console.log(res);
-        this.shopcarlist = res.data;
+    getshopcar () {
+      let customer_id = this.$store.getters.id;
+      getshopcar({customer_id}).then((data) => {
+        console.log(data);
+        this.shopcarlist = data.data;
+        this.length = data.data.length;
+        console.log(this.shopcarlist);
       });
       this.length = this.shopcarlist.length;
     },
     /* 购物车数量加一 */
-    add(item) {
+    add (item) {
       item.num += 1;
 
       console.log(item.num);
     },
     /* 购物车减一 */
-    even(item) {
-      if (item.num == 1) {
+    even (item) {
+      if (item.num == 1)
+      {
         item = 1;
       }
       item.num -= 1;
     },
     /* 选中商品 */
-    state(e) {
+    state (e) {
       console.log(e);
       this.shopcarlist.some((item) => {
-        if ((item.id = e.id)) {
+        if ((item.id = e.id))
+        {
           e.target.checked = this.flag;
         }
       });
       console.log(e.target.checked);
     },
+    /* 删除购物车列表 */
+    async del () {
+      let result = await this.$confirm(
+        "此操作将永久删除该文件, 是否继续?",
+        "提示",
+        {
+          confirmButtonText: "确定",
+          cancelButtonText: "取消",
+          type: "warning",
+        }
+      ).catch((error) => {
+        console.log(error);
+      });
+      console.log(result);
+      if (result == "confirm")
+      {
+        let customer_id = this.$store.getters.id;
+        console.log(customer_id);
+        detshopcar({customer_id}).then((data) => {
+          console.log(data);
+        });
+        return this.$message.success("删除购物车商品成功");
+      } else
+      {
+        return this.$message.info("取消删除");
+      }
+    },
+    /* 提交订单 */
+    submit(){
+      this.$router.push('/buyShop')
+      this.$store.dispatch('shopcar/shopcarlist',this.checkbox)
+
+      console.log(this.$store.getters.shopcarlist)
+    }
   },
-  created() {
+  created () {
     this.getshopcar();
   },
   watch: {
     checkbox: {
       deep: true,
-      handler(val) {
+      handler (val) {
         let tod = 0;
         val.forEach((item) => {
           tod = tod + item.special_price * item.num;
         });
-        this.total = tod;
+        this.total = tod;   
         this.checkbox.length === this.shopcarlist.length && (this.isall = true);
       },
     },
   },
+  computed: {
+    getparams () {
+      return function (params) {
+        params = params.replace(/ /g, '')
+        console.log(params);
+        if (params)
+        {
+          return JSON.parse(params);
+        } else
+        {
+          return params
+        }
+      };
+    },
+  },
+  destroyed(){
+    this.getshopcar()
+  }
 };
 </script>
 
@@ -174,7 +233,7 @@ export default {
       }
       .one_title {
         text-align: left;
-        margin-left: -230px;
+        margin-left: -200px;
         .title_one {
           color: rgba(0, 0, 0, 0.85);
           font-weight: 500;

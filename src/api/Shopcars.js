@@ -7,3 +7,12 @@ export function getshopcar(data){
         data,
     })
 }
+export function detshopcar(customer_id){
+    return request({
+        url:'/shopcar/deleteShopCar',
+        method:'post',
+        data:{
+            customer_id            
+        }
+    })
+}

@@ -52,12 +52,16 @@
         <ul>
           <li></li>
         </ul>
-        <!-- <switch-page :itemlist="swipers">
-            
-          </switch-page> -->
-        <swiper-vue :shop="swipers" height="700px" type="card" width="900px" imgwidth="600px" marginLeft="300px"
-          :loop="false" :autoplay="false"> </swiper-vue>
+        <switch-page :tapimg="list.shopList.slice(0, 4)">
+            1111
+          </switch-page> 
 
+          
+        <!-- <swiper-vue :shop="swipers" height="700px" type="card" width="900px" imgwidth="600px" marginLeft="300px"
+          :loop="false" :autoplay="false"> </swiper-vue> -->
+
+    <!--   <SwitchPage :tapimg="swipers"></SwitchPage> -->
+  
       </div>
       <div class="shoplisttap clearfix">
         <div class="clearfix">
@@ -119,6 +123,7 @@ export default {
       getSwiper().then((data) => {
         console.log(data.res);
         this.swipers = data.res;
+        console.log(this.swipers)
       });
     },
     getSpu(name, list) {
@@ -174,6 +179,7 @@ console.log(this.$store.getters.id,'测试id')
     }
   }
 .shoplisttap{
+  margin-top: 50px;
   div{
      margin-bottom: 30px;
   }

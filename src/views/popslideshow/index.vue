@@ -61,15 +61,15 @@ export default {
 <style lang="scss" scoped>
 img {
   width: 105%;
-  height: 100%;
+  height: 700px;
 }
 .cube-container {
  width: 100vw;
-  height: 80vh;
+  height: 700px;
   position: relative;
   perspective: 2000px;
   // background: rgb(247, 241, 241);
-  background: #222;
+  // background: #222;
   overflow: hidden;
 }
 

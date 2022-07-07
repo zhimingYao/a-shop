@@ -1,5 +1,5 @@
 <template>
-  <div class="details">
+  <div class="details" :key="key">
     <div class="details_title">
       <span @click="$router.go(-1)"> Go back</span>
       <span> Go forward</span>
@@ -19,7 +19,7 @@
       <div class="details_introduction">
         <p class="ntroduction_one">{{ detailsshop[0].title }}</p>
         <p class="ntroduction_two">
-          ￥{{ 349 }}<span>￥{{ 399 }}</span>
+          ￥{{detailsshop[0].special_price}}<span>￥{{ detailsshop[0].price}}</span>
         </p>
         <div class="ntroduction_title">
           <p>官方商城全场包邮</p>
@@ -31,6 +31,7 @@
             v-for="(ig, index) in img"
             :key="index"
             @click="setimg(ig.small, index)"
+            :class="{bord:imgs==ig.small}"
           />
         </div>
         <!-- 尺码 -->
@@ -62,7 +63,7 @@
         <!-- 按钮 -->
         <div class="details_btn">
           <button class="btnone" @click="addshopcar">加入购物车</button>
-          <button class="btntwo">立即购买</button>
+          <button class="btntwo" @click="buyshop">立即购买</button>
         </div>
       </div>
     </div>
@@ -246,14 +247,29 @@ export default {
         // console.log(this.img);
       });
     },
+    buyshop(){
+        this.detailsshop[0].customer_id=this.$store.getters.id
+       /*  let customer_id=2 */
+        console.log(this.detailsshop)
+      this.detailsshop[0].sku_id=this.detailsshop[0].id
+      //  console.log(this.detailsshop,customer_id)
+      this.detailsshop[0].num =this.num
+     /*  let pa=this.paramss
+      console.log(pa) */
+       this.detailsshop[0].params=JSON.stringify([this.paramss,this.value])
+       this.detailsshop[0].img=this.imgs
+       console.log(this.detailsshop);
+      this.$router.push('/buyShop')
+      this.$store.dispatch('shopcar/shopcarlist',this.detailsshop)
+    },
     /* 放大镜效果 */
     setimg(img, index) {
       // console.log(img);
       this.imgs = img;
-      this.paramss = this.param[index];
-      /*  console.log(this.param[index]) */
-
-      /*   console.log(this.param[index]) */
+      this.paramss=this.param[index]
+      // console.log(this.param[index])
+     
+    /*   console.log(this.param[index]) */
     },
     /* 评论按钮切换 */
     getits(index) {
@@ -301,13 +317,18 @@ export default {
       },
     },
   },
+  computed:{
+    key(){
+      return this.$route.path+1
+    }
+  },
   destroyed() {
     this.getdetailspu();
   },
 };
 </script>
 
-<style lang='scss'>
+<style lang='scss' scoped>
 .details {
   width: 1200px;
   /*    background-color: red; */
@@ -378,6 +399,10 @@ export default {
           width: 63px;
           float: left;
           margin-right: 12px;
+          
+        }
+        .bord{
+          border: 1px solid #000;
         }
       }
     }

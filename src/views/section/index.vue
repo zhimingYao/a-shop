@@ -1,6 +1,6 @@
 <template>
 
-  <div class="section">
+  <div class="section" >
     <h1>{{ $route.params.iten }}</h1>
     <p>Home / Secondary</p>
     <div class="section-top">
@@ -14,7 +14,7 @@
       <div class="section-bot clearfix">
         <span class="left">共计{{ count }}件</span>
 
-        <Classify @getshoplist="getshoplist" :page="page" :lists="list" v-if="list.length>0"></Classify>
+        <Classify  @getshoplist="getshoplist" :page="page" :value1="value1" :lists="list" :value="value1" v-if="list.length>0" ></Classify>
 
       </div>
       <div class="clearfix">
@@ -41,29 +41,41 @@ export default {
       count: 0,
       page: 1,
       value1:10,
+      value:'默认',
+      Classifyshow:false,
     };
+  },
+  computed:{
+    key(){
+      console.log(this.$router.path,11);
+      return this.$router.path
+    },
   },
   methods: {
     getSpu(name) {
       console.log({ name });
       getSpu(name).then((data) => {
         console.log(data.data);
+        
         this.list = data.data;
         this.shoplist = this.list.slice(0, this.value1);
         this.count = this.list.length;
         console.log(this.list);
       });
     },
-    getshoplist(val,value1) {
+    getshoplist(val,value1,val1) {
       this.shoplist = val
       this.value1=value1
+      this.value=val1
     },
   },
   components: { Classify },
+
   watch: {
  '$route': {
       deep: true,
       handler() {
+ this.list=[]
         this.getSpu(this.$route.params.iten)
       }
     },   
@@ -80,6 +92,8 @@ export default {
     console.log(this.$route.params.iten, '......');
     this.getSpu(this.$route.params.iten)
   },
+
+
 }
 
 </script>

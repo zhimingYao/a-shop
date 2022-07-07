@@ -1,27 +1,27 @@
-const getseartotal=()=>{
-    return{
-        total:''
-    }
+const getseartotal = () => {
+  return {
+    total: '',
+  }
 }
-const state=getseartotal()
+const state = getseartotal()
 
-console.log(state)
+// console.log(state)
 
-const mutations={
-    SET_TOTAL:(state,total)=>{
-        state.total=total
-    }
-}
-
-const actions={
-    total({commit},total){
-        commit('SET_TOTAL',total)
-    }
+const mutations = {
+  SET_TOTAL: (state, total) => {
+    state.total = total
+  },
 }
 
-export default{
-    namespaced:true,
-    state,
-    mutations,
-    actions,
+const actions = {
+  total({ commit }, total) {
+    commit('SET_TOTAL', total)
+  },
+}
+
+export default {
+  namespaced: true,
+  state,
+  mutations,
+  actions,
 }
